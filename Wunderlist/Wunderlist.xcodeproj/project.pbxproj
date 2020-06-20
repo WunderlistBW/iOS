@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13A6E1FEDE42389E945A8270 /* Pods_Wunderlist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FD8FCC2B58933B0E1F333D /* Pods_Wunderlist.framework */; };
 		DB3EA15C249EABCD009B3BEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3EA15B249EABCD009B3BEA /* AppDelegate.swift */; };
 		DB3EA15E249EABCD009B3BEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3EA15D249EABCD009B3BEA /* SceneDelegate.swift */; };
 		DB3EA163249EABCD009B3BEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA161249EABCD009B3BEA /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2FA5D5110893E905758FF010 /* Pods-Wunderlist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.debug.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.debug.xcconfig"; sourceTree = "<group>"; };
+		71FD8FCC2B58933B0E1F333D /* Pods_Wunderlist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wunderlist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		992B96DDB70670EC02E9C30F /* Pods-Wunderlist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.release.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.release.xcconfig"; sourceTree = "<group>"; };
 		DB3EA158249EABCD009B3BEA /* Wunderlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wunderlist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB3EA15B249EABCD009B3BEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB3EA15D249EABCD009B3BEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -29,17 +33,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13A6E1FEDE42389E945A8270 /* Pods_Wunderlist.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B9E352786EF74677C055B15C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2FA5D5110893E905758FF010 /* Pods-Wunderlist.debug.xcconfig */,
+				992B96DDB70670EC02E9C30F /* Pods-Wunderlist.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		DB3EA14F249EABCD009B3BEA = {
 			isa = PBXGroup;
 			children = (
 				DB3EA15A249EABCD009B3BEA /* Wunderlist */,
 				DB3EA159249EABCD009B3BEA /* Products */,
+				B9E352786EF74677C055B15C /* Pods */,
+				F724FB830D5F47C886E74CD8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -120,6 +136,14 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
+		F724FB830D5F47C886E74CD8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				71FD8FCC2B58933B0E1F333D /* Pods_Wunderlist.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -127,9 +151,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DB3EA16C249EABD0009B3BEA /* Build configuration list for PBXNativeTarget "Wunderlist" */;
 			buildPhases = (
+				1E93AE2CC7B93574E32A4BDA /* [CP] Check Pods Manifest.lock */,
 				DB3EA154249EABCD009B3BEA /* Sources */,
 				DB3EA155249EABCD009B3BEA /* Frameworks */,
 				DB3EA156249EABCD009B3BEA /* Resources */,
+				DB3EA176249EADB3009B3BEA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -185,6 +211,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E93AE2CC7B93574E32A4BDA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Wunderlist-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB3EA176249EADB3009B3BEA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DB3EA154249EABCD009B3BEA /* Sources */ = {
@@ -334,6 +402,7 @@
 		};
 		DB3EA16D249EABD0009B3BEA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FA5D5110893E905758FF010 /* Pods-Wunderlist.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -351,6 +420,7 @@
 		};
 		DB3EA16E249EABD0009B3BEA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 992B96DDB70670EC02E9C30F /* Pods-Wunderlist.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
