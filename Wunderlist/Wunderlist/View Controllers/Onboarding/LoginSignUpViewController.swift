@@ -31,7 +31,33 @@ class LoginSignUpViewController: UIViewController {
     
     //MARK: - Actions -
     @IBAction func submit(_ sender: UIButton) {
-        
+        switch loggingIn {
+        case true:
+            statusLabel.text = "Logging Into Wunderlist, one moment..."
+            ///TODO access auth controller for LOGIN here, use guard
+            
+            ///TODO put this in closure of call to auth controller
+            //statusLabel.text = "Success!"
+            
+            ///TODO put this in else statement of guard
+            //statusLabel.textColor = .systemRed
+            //statusLabel.text = "Something went wrong."
+            //return
+            
+        case false:
+            statusLabel.text = "Joining Wunderlist, one moment..."
+            ///TODO access auth controller for SIGNUP here, use guard
+            
+            ///TODO put this in closure of call to auth controller
+            //statusLabel.text = "Success!"
+            
+            ///TODO put this in else statement of guard
+            //statusLabel.textColor = .systemRed
+            //statusLabel.text = "Something went wrong."
+            //return
+        }
+        UserDefaults.standard.set(true, forKey: .loggedInKey)
+        presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func rememberMe(_ sender: UIButton) {
@@ -47,6 +73,16 @@ class LoginSignUpViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         autoFill()
         checkRememberMe()
+        setUpViews()
+    }
+    
+    private func setUpViews() {
+        passwordTextField.isSecureTextEntry = true
+        submitButton.layer.cornerRadius = 5
+        anchorView.layer.cornerRadius = 5
+        anchorView.layer.shadowOpacity = 1
+        anchorView.layer.shadowOffset = .zero
+        anchorView.layer.shadowRadius = 10
         rememberMeButton.alpha = 0
         statusLabel.text = ""
     }
@@ -67,3 +103,7 @@ class LoginSignUpViewController: UIViewController {
         }
     }
 }
+
+
+
+
