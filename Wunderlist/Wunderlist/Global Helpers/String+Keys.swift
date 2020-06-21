@@ -6,7 +6,8 @@
 //  Copyright © 2020 Wunderlist. All rights reserved.
 //
 
-//Use this extension on the String type to hold all non-coding String keys for the project.
+///Use this extension on the String type to hold all non-coding String keys for the project.
+/// call these values by using .yourMagicString i.e .userKey
  
 
 import Foundation
@@ -20,6 +21,6 @@ extension String {
     
     
     //MARK: - Segues -
-    static let goToSignupSegue = "GoToSignup"
-    static let goToLoginSegue = "GoToLogin"
+    static let signupSegue = "Signup"
+    static let loginSegue = "Login"
 }

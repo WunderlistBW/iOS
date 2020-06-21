@@ -36,6 +36,9 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="9XI-7B-S3w" kind="showDetail" identifier="SIgnup" id="BhG-jN-X2m"/>
+                                        </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7At-ZE-Uk8">
                                         <rect key="frame" x="0.0" y="64" width="390" height="30"/>
@@ -51,6 +54,9 @@
                                                 <state key="normal" title="Login Here">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="9XI-7B-S3w" kind="showDetail" identifier="Login" id="cSg-Ca-Wi8"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -101,7 +107,7 @@
             <objects>
                 <viewController id="9XI-7B-S3w" customClass="LoginSignUpViewController" customModule="Wunderlist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xhS-dA-7bo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="4gF-Tf-XuY"/>
@@ -130,4 +136,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="49.553571428571423"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="cSg-Ca-Wi8"/>
+    </inferredMetricsTieBreakers>
 </document>
