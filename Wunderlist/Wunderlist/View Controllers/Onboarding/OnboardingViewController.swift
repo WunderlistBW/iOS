@@ -40,7 +40,8 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
     
     //MARK: - Actions -
     @IBAction func useAsGuest(_ sender: Any) {
-        
+        UserDefaults.standard.set(false, forKey: .loggedInKey)
+        dismiss(animated: true, completion: nil)
     }
     
     
