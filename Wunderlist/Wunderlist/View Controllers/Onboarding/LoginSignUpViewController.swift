@@ -26,6 +26,19 @@ class LoginSignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
+        createObservers()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIResponder.keyboardWillShowNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIResponder.keyboardWillHideNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIResponder.keyboardWillChangeFrameNotification,
+                                                  object: nil)
     }
     
     
@@ -90,17 +103,6 @@ class LoginSignUpViewController: UIViewController {
         setUpViews()
     }
     
-    private func setUpViews() {
-        passwordTextField.isSecureTextEntry = true
-        submitButton.layer.cornerRadius = 5
-        anchorView.layer.cornerRadius = 5
-        anchorView.layer.shadowOpacity = 1
-        anchorView.layer.shadowOffset = .zero
-        anchorView.layer.shadowRadius = 10
-        rememberMeButton.alpha = 0
-        statusLabel.text = ""
-    }
-    
     private func autoFill() {
         guard let user = UserDefaults.standard.object(forKey: .userKey) as? String,
             let password = UserDefaults.standard.object(forKey: .passKey) as? String else { return }
@@ -115,6 +117,37 @@ class LoginSignUpViewController: UIViewController {
         } else {
             rememberMeButton.setImage(UIImage(systemName: "square"), for: .normal)
         }
+    }
+    
+    private func setUpViews() {
+        passwordTextField.isSecureTextEntry = true
+        submitButton.layer.cornerRadius = 5
+        anchorView.layer.cornerRadius = 5
+        anchorView.layer.shadowOpacity = 1
+        anchorView.layer.shadowOffset = .zero
+        anchorView.layer.shadowRadius = 10
+        rememberMeButton.alpha = 0
+        statusLabel.text = ""
+    }
+    
+    func createObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillChange(notification:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillChange(notification:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillChange(notification:)),
+                                               name: UIResponder.keyboardWillChangeFrameNotification,
+                                               object: nil)
+    }
+    
+    @objc func keyboardWillChange(notification: Notification) {
+        print("Keyboard will show: \(notification.name.rawValue)")
+        view.frame.origin.y = -100
     }
 }
 
