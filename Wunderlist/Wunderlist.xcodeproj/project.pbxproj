@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		13A6E1FEDE42389E945A8270 /* Pods_Wunderlist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FD8FCC2B58933B0E1F333D /* Pods_Wunderlist.framework */; };
+		5E7B072F249EDB4F00F6664A /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E7B072E249EDB4F00F6664A /* Onboarding.storyboard */; };
+		5E7B0732249EDC0B00F6664A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */; };
+		5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */; };
 		DB3EA15C249EABCD009B3BEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3EA15B249EABCD009B3BEA /* AppDelegate.swift */; };
 		DB3EA15E249EABCD009B3BEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3EA15D249EABCD009B3BEA /* SceneDelegate.swift */; };
 		DB3EA163249EABCD009B3BEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA161249EABCD009B3BEA /* Main.storyboard */; };
@@ -17,6 +20,9 @@
 
 /* Begin PBXFileReference section */
 		2FA5D5110893E905758FF010 /* Pods-Wunderlist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.debug.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.debug.xcconfig"; sourceTree = "<group>"; };
+		5E7B072E249EDB4F00F6664A /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
 		71FD8FCC2B58933B0E1F333D /* Pods_Wunderlist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wunderlist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		992B96DDB70670EC02E9C30F /* Pods-Wunderlist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.release.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.release.xcconfig"; sourceTree = "<group>"; };
 		DB3EA158249EABCD009B3BEA /* Wunderlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wunderlist.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +46,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E7B0730249EDB8C00F6664A /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */,
+				5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		B9E352786EF74677C055B15C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +112,7 @@
 			children = (
 				DB3EA161249EABCD009B3BEA /* Main.storyboard */,
 				DB3EA166249EABD0009B3BEA /* LaunchScreen.storyboard */,
+				5E7B072E249EDB4F00F6664A /* Onboarding.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -118,6 +134,7 @@
 		DB3EA173249EAC0C009B3BEA /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5E7B0730249EDB8C00F6664A /* Onboarding */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -207,6 +224,7 @@
 				DB3EA168249EABD0009B3BEA /* LaunchScreen.storyboard in Resources */,
 				DB3EA165249EABD0009B3BEA /* Assets.xcassets in Resources */,
 				DB3EA163249EABCD009B3BEA /* Main.storyboard in Resources */,
+				5E7B072F249EDB4F00F6664A /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +277,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */,
 				DB3EA15C249EABCD009B3BEA /* AppDelegate.swift in Sources */,
+				5E7B0732249EDC0B00F6664A /* OnboardingViewController.swift in Sources */,
 				DB3EA15E249EABCD009B3BEA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

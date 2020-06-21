@@ -2,7 +2,7 @@
 //  OnboardingViewController.swift
 //  Wunderlist
 //
-//  Created by Bling Morley on 6/20/20.
+//  Created by Cody Morley on 6/20/20.
 //  Copyright © 2020 Wunderlist. All rights reserved.
 //
 
