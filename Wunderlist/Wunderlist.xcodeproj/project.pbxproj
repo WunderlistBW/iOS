@@ -11,6 +11,7 @@
 		5E7B072F249EDB4F00F6664A /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E7B072E249EDB4F00F6664A /* Onboarding.storyboard */; };
 		5E7B0732249EDC0B00F6664A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */; };
 		5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */; };
+		5E7B0737249F3FC700F6664A /* String+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0736249F3FC700F6664A /* String+Keys.swift */; };
 		DB3EA15C249EABCD009B3BEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3EA15B249EABCD009B3BEA /* AppDelegate.swift */; };
 		DB3EA15E249EABCD009B3BEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3EA15D249EABCD009B3BEA /* SceneDelegate.swift */; };
 		DB3EA163249EABCD009B3BEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA161249EABCD009B3BEA /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 		5E7B072E249EDB4F00F6664A /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
+		5E7B0736249F3FC700F6664A /* String+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Keys.swift"; sourceTree = "<group>"; };
 		71FD8FCC2B58933B0E1F333D /* Pods_Wunderlist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wunderlist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		992B96DDB70670EC02E9C30F /* Pods-Wunderlist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.release.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.release.xcconfig"; sourceTree = "<group>"; };
 		DB3EA158249EABCD009B3BEA /* Wunderlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wunderlist.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +55,14 @@
 				5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		5E7B0735249F3F9300F6664A /* Global Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5E7B0736249F3FC700F6664A /* String+Keys.swift */,
+			);
+			path = "Global Helpers";
 			sourceTree = "<group>";
 		};
 		B9E352786EF74677C055B15C /* Pods */ = {
@@ -92,6 +102,7 @@
 				DB3EA171249EABFF009B3BEA /* Model */,
 				DB3EA16F249EABD9009B3BEA /* Resources */,
 				DB3EA170249EABF1009B3BEA /* Storyboards */,
+				5E7B0735249F3F9300F6664A /* Global Helpers */,
 			);
 			path = Wunderlist;
 			sourceTree = "<group>";
@@ -280,6 +291,7 @@
 				5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */,
 				DB3EA15C249EABCD009B3BEA /* AppDelegate.swift in Sources */,
 				5E7B0732249EDC0B00F6664A /* OnboardingViewController.swift in Sources */,
+				5E7B0737249F3FC700F6664A /* String+Keys.swift in Sources */,
 				DB3EA15E249EABCD009B3BEA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
