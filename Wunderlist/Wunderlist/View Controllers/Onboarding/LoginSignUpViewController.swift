@@ -25,5 +25,37 @@ class LoginSignUpViewController: UIViewController {
     //MARK: - Life Cycles -
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateViews()
+    }
+    
+    
+    //MARK: - Actions -
+    
+    
+    
+    
+    //MARK: - Methods -
+    private func updateViews() {
+        navigationController?.navigationBar.isHidden = true
+        autoFill()
+        checkRememberMe()
+        rememberMeButton.alpha = 0
+        statusLabel.text = ""
+    }
+    
+    private func autoFill() {
+        guard let user = UserDefaults.standard.object(forKey: .userKey) as? String,
+            let password = UserDefaults.standard.object(forKey: .passKey) as? String else { return }
+        usernameTextField.text = user
+        passwordTextField.text = password
+    }
+    
+    private func checkRememberMe() {
+        if usernameTextField.text == UserDefaults.standard.object(forKey: .userKey) as? String &&
+            passwordTextField.text == UserDefaults.standard.object(forKey: .passKey) as? String {
+            rememberMeButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
+        } else {
+            rememberMeButton.setImage(UIImage(systemName: "square"), for: .normal)
+        }
     }
 }
