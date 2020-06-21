@@ -6,27 +6,6 @@
 //  Copyright © 2020 Wunderlist. All rights reserved.
 //
 
-/*
- TODO LIST
- //unfinished
-implement notification center?
- 
- 
- //finished
- properties list
- set scroll view delegate
- set up so photos in slideshow will snap into place with frames
- set button to use app without logging in (limit functionality? I don't know. Question for later.)
- set user defaults to easily capture login flow for future logins
- set segues to fork onboarding for login/signup
- Set up update views logic to use imageFrame to operate slideshow inside of scrollView view
- Get photos for welcome slideshow and add them to asset folder
- Give the photos a naming convention that makes them easy to add to the page control view
- finish slide show implementation
- */
-
-
-
 import UIKit
 
 class OnboardingViewController: UIViewController, UIScrollViewDelegate {
@@ -44,6 +23,7 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         scrollView.delegate = self
     }
+    
     
     //MARK: - Scroll View Delegate -
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

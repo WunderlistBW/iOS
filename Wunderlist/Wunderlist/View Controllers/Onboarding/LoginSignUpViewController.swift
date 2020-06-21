@@ -92,9 +92,6 @@ class LoginSignUpViewController: UIViewController {
     }
     
     
-    
-    
-    
     //MARK: - Methods -
     private func updateViews() {
         navigationController?.navigationBar.isHidden = true
