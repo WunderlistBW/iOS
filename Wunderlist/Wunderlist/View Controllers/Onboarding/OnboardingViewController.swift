@@ -26,8 +26,17 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == .signupSegue {
+            if let signupVC = segue.destination as? LoginSignUpViewController {
+                signupVC.loggingIn = false
+            }
+        } else if segue.identifier == .loginSegue {
+            if let loginVC = segue.destination as? LoginSignUpViewController {
+                loginVC.loggingIn = true
+            }
+        }
     }
+    
     
     //MARK: - Actions -
     @IBAction func useAsGuest(_ sender: Any) {
