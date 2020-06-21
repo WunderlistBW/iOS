@@ -187,6 +187,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4gF-Tf-XuY"/>
                     </view>
+                    <connections>
+                        <outlet property="anchorView" destination="L0y-W0-jw8" id="iRA-9T-m7o"/>
+                        <outlet property="logoView" destination="Ati-oA-ZQJ" id="exO-7g-4jU"/>
+                        <outlet property="passwordTextField" destination="LYl-Zr-UtX" id="5pe-ta-cRa"/>
+                        <outlet property="rememberMeButton" destination="EnE-nA-aRD" id="b64-Nw-JSb"/>
+                        <outlet property="statusLabel" destination="5yn-62-xwl" id="raI-YL-aRa"/>
+                        <outlet property="submitButton" destination="mDf-Vd-HGJ" id="BSK-Pz-cl1"/>
+                        <outlet property="usernameTextField" destination="vPQ-xA-Wy7" id="RUa-d1-WOc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NWj-mu-lsF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
