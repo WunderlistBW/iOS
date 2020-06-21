@@ -66,6 +66,20 @@ class LoginSignUpViewController: UIViewController {
         rememberMeButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
     }
     
+    @IBAction func textBeganEditing(_ sender: UITextField) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5,
+                                      execute: {
+            self.rememberMeButton.alpha = 1
+        })
+    }
+    
+    
+    @IBAction func textWasEdited(_ sender: UITextField) {
+        checkRememberMe()
+    }
+    
+    
+    
     
     
     //MARK: - Methods -
