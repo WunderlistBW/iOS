@@ -30,7 +30,15 @@ class LoginSignUpViewController: UIViewController {
     
     
     //MARK: - Actions -
+    @IBAction func submit(_ sender: UIButton) {
+        
+    }
     
+    @IBAction func rememberMe(_ sender: UIButton) {
+        UserDefaults.standard.set(usernameTextField.text, forKey: .userKey)
+        UserDefaults.standard.set(passwordTextField.text, forKey: .passKey)
+        rememberMeButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
+    }
     
     
     
