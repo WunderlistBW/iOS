@@ -43,7 +43,13 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
     }
     
-
+    //MARK: - Scroll View Delegate -
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
+        pageControl.currentPage = Int(pageNumber)
+    }
+    
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == .signupSegue {
@@ -83,10 +89,5 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
         }
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width * CGFloat(welcomeSlideShow.count),
                                         height: scrollView.frame.size.height)
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width
-        pageControl.currentPage = Int(pageNumber)
     }
 }
