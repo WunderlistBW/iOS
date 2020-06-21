@@ -9,8 +9,7 @@
 /*
  TODO LIST
  //unfinished
- Get photos for welcome slideshow and add them to asset folder
- Give the photos a naming convention that makes them easy to add to the page control view
+implement notification center?
  
  
  //finished
@@ -21,6 +20,9 @@
  set user defaults to easily capture login flow for future logins
  set segues to fork onboarding for login/signup
  Set up update views logic to use imageFrame to operate slideshow inside of scrollView view
+ Get photos for welcome slideshow and add them to asset folder
+ Give the photos a naming convention that makes them easy to add to the page control view
+ finish slide show implementation
  */
 
 
@@ -34,7 +36,7 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
     
     var imageFrame = CGRect(x: 0, y: 0,
                             width: 0, height: 0)
-    var welcomeSlideShow: [String] = [] //TODO: ADD PHOTOS TO ASSET FOLDER AND ADD IDs HERE
+    var welcomeSlideShow: [String] = ["0", "1", "2", "3"]
     
     
     //MARK: - Life Cycles -
@@ -81,8 +83,7 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
             imageFrame.origin.x = scrollView.frame.size.width * CGFloat(slide)
             
             let slideImage = UIImageView(frame: imageFrame)
-            ///TODO: need to set image on the next line
-            //slideImage.image = UIImage(named: "")
+            slideImage.image = UIImage(named: welcomeSlideShow[slide])
             slideImage.layer.masksToBounds = true
             slideImage.contentMode = .scaleAspectFill
             self.scrollView.addSubview(slideImage)
