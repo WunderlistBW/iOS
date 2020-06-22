@@ -10,6 +10,21 @@ import Foundation
 import CoreData
 
 extension ListEntry: Persistable {
+    convenience init?(
+        name: String,
+        body: String,
+        context: PersistentContext,
+        timestamp: Date = Date(),
+        identifier: UUID = UUID()
+    ) {
+        guard let context = context as? NSManagedObjectContext
+            else { return nil }
+        self.init(context: context)
+        self.name = name
+        self.body = body
+        self.timestamp = timestamp
+        self.identifier = identifier
+    }
     static let dateFormatter: DateFormatter = {
         var formatter = DateFormatter()
         formatter.calendar = .autoupdatingCurrent
