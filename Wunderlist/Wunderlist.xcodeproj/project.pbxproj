@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		13A6E1FEDE42389E945A8270 /* Pods_Wunderlist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FD8FCC2B58933B0E1F333D /* Pods_Wunderlist.framework */; };
 		27D818F224A136D200564B68 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D818F124A136D200564B68 /* HTTPMethod.swift */; };
+		27D818F424A137F200564B68 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D818F324A137F200564B68 /* APIController.swift */; };
+		27D818F624A13A3500564B68 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D818F524A13A3500564B68 /* NetworkError.swift */; };
 		5E7B072F249EDB4F00F6664A /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E7B072E249EDB4F00F6664A /* Onboarding.storyboard */; };
 		5E7B0732249EDC0B00F6664A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */; };
 		5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */; };
@@ -26,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		27D818F124A136D200564B68 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		27D818F324A137F200564B68 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIController.swift; path = "Wunderlist/Global Helpers/APIController.swift"; sourceTree = SOURCE_ROOT; };
+		27D818F524A13A3500564B68 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		2FA5D5110893E905758FF010 /* Pods-Wunderlist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.debug.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.debug.xcconfig"; sourceTree = "<group>"; };
 		5E7B072E249EDB4F00F6664A /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +76,7 @@
 			children = (
 				5E7B0736249F3FC700F6664A /* String+Keys.swift */,
 				27D818F124A136D200564B68 /* HTTPMethod.swift */,
+				27D818F524A13A3500564B68 /* NetworkError.swift */,
 			);
 			path = "Global Helpers";
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 		DB3EA174249EAC11009B3BEA /* Networking_API */ = {
 			isa = PBXGroup;
 			children = (
+				27D818F324A137F200564B68 /* APIController.swift */,
 			);
 			path = Networking_API;
 			sourceTree = "<group>";
@@ -303,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27D818F424A137F200564B68 /* APIController.swift in Sources */,
 				DB15110824A104730007858E /* CoreDataStack.swift in Sources */,
 				5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */,
 				DB15110C24A104810007858E /* PersistenceProtocol.swift in Sources */,
@@ -311,6 +318,7 @@
 				5E7B0737249F3FC700F6664A /* String+Keys.swift in Sources */,
 				DB15110A24A1047A0007858E /* List+Convenience.swift in Sources */,
 				DB15110624A104620007858E /* Wunderlist.xcdatamodeld in Sources */,
+				27D818F624A13A3500564B68 /* NetworkError.swift in Sources */,
 				27D818F224A136D200564B68 /* HTTPMethod.swift in Sources */,
 				DB3EA15E249EABCD009B3BEA /* SceneDelegate.swift in Sources */,
 			);

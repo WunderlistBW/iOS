@@ -46,7 +46,6 @@ class CoreDataStack: NSObject, PersistentStoreController {
             sectionNameKeyPath: nil,
             cacheName: nil)
         frc.delegate = self.delegate
-        
         do {
             try frc.performFetch()
         } catch {
