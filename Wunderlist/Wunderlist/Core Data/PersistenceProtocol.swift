@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import CoreData
 
-protocol PersistentContext {}
+protocol PersistentContext: NSManagedObjectContext {}
 
 protocol Persistable {}
 

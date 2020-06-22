@@ -27,15 +27,16 @@ class ListEntryController: NSObject {
         }
     }
     // MARK: - Methods
-    func createEntry(withName name: String, body: String,
-                     context: PersistentContext?, timestamp: Date? = Date(),
-                     identifier: UUID? = UUID()) throws {
+    func createEntry(withName name: String, isRecurring: Bool?,
+                     context: PersistentContext?, dueDate: Date? = Date(),
+                     taskId: Int64?, dayOfWeek: Int64?) throws {
         let context = persistentStoreController.mainContext
-        guard let timestamp = timestamp,
-            let identifier = identifier else { return }
-        guard let entry = ListEntry(name: name, body: body,
-                                    context: context, timestamp: timestamp,
-                                    identifier: identifier)
+        guard let dueDate = dueDate, let isRecurring = isRecurring,
+            let taskId = taskId,
+            let dayOfWeek = dayOfWeek else { return }
+        guard let entry = ListEntry(name: name, listId: Int64(taskId),
+                                    dueDate: dueDate, isRecurring: isRecurring,
+                                    dayOfWeek: Int64(dayOfWeek), context: context)
             else { throw NSError() }
         try persistentStoreController.create(item: entry, in: context)
     }

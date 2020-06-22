@@ -12,18 +12,21 @@ import CoreData
 extension ListEntry: Persistable {
     convenience init?(
         name: String,
-        body: String,
-        context: PersistentContext,
-        timestamp: Date = Date(),
-        identifier: UUID = UUID()
+        listId: Int64,
+        dueDate: Date = Date(),
+        isRecurring: Bool?,
+        dayOfWeek: Int64,
+        context: PersistentContext
     ) {
-        guard let context = context as? NSManagedObjectContext
+        guard let context = context as? NSManagedObjectContext,
+        let isRecurring = isRecurring
             else { return nil }
         self.init(context: context)
         self.name = name
-        self.body = body
-        self.timestamp = timestamp
-        self.identifier = identifier
+        self.id = Int64(listId)
+        self.dueDate = dueDate
+        self.isRecurring = isRecurring
+        self.dayOfWeek = Int64(dayOfWeek)
     }
     static let dateFormatter: DateFormatter = {
         var formatter = DateFormatter()
@@ -33,4 +36,21 @@ extension ListEntry: Persistable {
         formatter.timeStyle = .short
         return formatter
     }()
+    @discardableResult convenience init?(listRepresentation: ListRepresentation, context: PersistentContext) {
+        guard let listKey = listRepresentation.listId,
+            let dayOfWeek = listRepresentation.dayOfWeek else { return nil }
+        let name = listRepresentation.name
+        let dueDate = listRepresentation.dueDate
+        let isRecurring = listRepresentation.isRecurring
+        self.init(name: name, listId: Int64(listKey),
+                  dueDate: dueDate, isRecurring: isRecurring,
+                  dayOfWeek: Int64(dayOfWeek), context: context)
+    }
+    var listRepresentation: ListRepresentation? {
+        guard let name = name,
+        let dueDate = dueDate else { return nil }
+        return ListRepresentation(name: name, dayOfWeek: Int(dayOfWeek),
+                                  listId: Int(id), isRecurring: isRecurring,
+                                  dueDate: dueDate)
+    }
 }
