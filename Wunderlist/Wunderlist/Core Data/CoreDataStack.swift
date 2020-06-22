@@ -14,6 +14,7 @@ import CoreData
     extension NSManagedObjectContext: PersistentContext {}
     class CoreDataStack: NSObject, PersistentStoreController {
         // MARK: - Properties
+        static let shared = CoreDataStack()
         weak var delegate: PersistentStoreControllerDelegate?
         lazy var container = setUpContainer()
         lazy var fetchedResultsController = setUpResultsController()
@@ -39,7 +40,7 @@ import CoreData
             let fetchRequest: NSFetchRequest<ListEntry> = ListEntry.fetchRequest()
             fetchRequest.sortDescriptors = [
                 //sort by key here
-                NSSortDescriptor(key: "timestamp", ascending: false)]
+                NSSortDescriptor(key: "id", ascending: false)]
             let frc = NSFetchedResultsController(
                 fetchRequest: fetchRequest,
                 managedObjectContext: moc,

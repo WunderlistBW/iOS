@@ -21,6 +21,14 @@
 		DB3EA163249EABCD009B3BEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA161249EABCD009B3BEA /* Main.storyboard */; };
 		DB3EA165249EABD0009B3BEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA164249EABD0009B3BEA /* Assets.xcassets */; };
 		DB3EA168249EABD0009B3BEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA166249EABD0009B3BEA /* LaunchScreen.storyboard */; };
+		DBACA3B824A106D100F4872D /* PDMListEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3B724A106D100F4872D /* PDMListEntryController.swift */; };
+		DBACA3BA24A1198600F4872D /* PDMListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3B924A1198600F4872D /* PDMListController.swift */; };
+		DBACA3BC24A119AB00F4872D /* PDMListRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3BB24A119AB00F4872D /* PDMListRepresentation.swift */; };
+		DBACA3BE24A11A5F00F4872D /* PDMUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3BD24A11A5F00F4872D /* PDMUserController.swift */; };
+		DBACA3C024A11A9200F4872D /* PDMUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3BF24A11A9200F4872D /* PDMUser.swift */; };
+		DBACA3C224A11AA200F4872D /* PDMBearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3C124A11AA200F4872D /* PDMBearer.swift */; };
+		DBACA3C424A11AB700F4872D /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3C324A11AB700F4872D /* HTTPMethods.swift */; };
+		DBACA3C624A11AC600F4872D /* NetworkErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3C524A11AC600F4872D /* NetworkErrors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +50,14 @@
 		DB3EA164249EABD0009B3BEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB3EA167249EABD0009B3BEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB3EA169249EABD0009B3BEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBACA3B724A106D100F4872D /* PDMListEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMListEntryController.swift; sourceTree = "<group>"; };
+		DBACA3B924A1198600F4872D /* PDMListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMListController.swift; sourceTree = "<group>"; };
+		DBACA3BB24A119AB00F4872D /* PDMListRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMListRepresentation.swift; sourceTree = "<group>"; };
+		DBACA3BD24A11A5F00F4872D /* PDMUserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMUserController.swift; sourceTree = "<group>"; };
+		DBACA3BF24A11A9200F4872D /* PDMUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMUser.swift; sourceTree = "<group>"; };
+		DBACA3C124A11AA200F4872D /* PDMBearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMBearer.swift; sourceTree = "<group>"; };
+		DBACA3C324A11AB700F4872D /* HTTPMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
+		DBACA3C524A11AC600F4872D /* NetworkErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				5E7B0736249F3FC700F6664A /* String+Keys.swift */,
+				DBACA3C324A11AB700F4872D /* HTTPMethods.swift */,
+				DBACA3C524A11AC600F4872D /* NetworkErrors.swift */,
 			);
 			path = "Global Helpers";
 			sourceTree = "<group>";
@@ -139,6 +157,9 @@
 		DB3EA171249EABFF009B3BEA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DBACA3BB24A119AB00F4872D /* PDMListRepresentation.swift */,
+				DBACA3BF24A11A9200F4872D /* PDMUser.swift */,
+				DBACA3C124A11AA200F4872D /* PDMBearer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -146,6 +167,7 @@
 		DB3EA172249EAC05009B3BEA /* Model Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DBACA3B724A106D100F4872D /* PDMListEntryController.swift */,
 			);
 			path = "Model Controller";
 			sourceTree = "<group>";
@@ -161,6 +183,8 @@
 		DB3EA174249EAC11009B3BEA /* Networking_API */ = {
 			isa = PBXGroup;
 			children = (
+				DBACA3B924A1198600F4872D /* PDMListController.swift */,
+				DBACA3BD24A11A5F00F4872D /* PDMUserController.swift */,
 			);
 			path = Networking_API;
 			sourceTree = "<group>";
@@ -300,14 +324,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBACA3C424A11AB700F4872D /* HTTPMethods.swift in Sources */,
+				DBACA3B824A106D100F4872D /* PDMListEntryController.swift in Sources */,
 				DB15110824A104730007858E /* CoreDataStack.swift in Sources */,
+				DBACA3BC24A119AB00F4872D /* PDMListRepresentation.swift in Sources */,
 				5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */,
 				DB15110C24A104810007858E /* PersistenceProtocol.swift in Sources */,
+				DBACA3C624A11AC600F4872D /* NetworkErrors.swift in Sources */,
+				DBACA3C224A11AA200F4872D /* PDMBearer.swift in Sources */,
+				DBACA3BE24A11A5F00F4872D /* PDMUserController.swift in Sources */,
+				DBACA3C024A11A9200F4872D /* PDMUser.swift in Sources */,
 				DB3EA15C249EABCD009B3BEA /* AppDelegate.swift in Sources */,
 				5E7B0732249EDC0B00F6664A /* OnboardingViewController.swift in Sources */,
 				5E7B0737249F3FC700F6664A /* String+Keys.swift in Sources */,
 				DB15110A24A1047A0007858E /* List+Convenience.swift in Sources */,
 				DB15110624A104620007858E /* Wunderlist.xcdatamodeld in Sources */,
+				DBACA3BA24A1198600F4872D /* PDMListController.swift in Sources */,
 				DB3EA15E249EABCD009B3BEA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
