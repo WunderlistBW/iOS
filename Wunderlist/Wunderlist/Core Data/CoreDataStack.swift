@@ -16,6 +16,7 @@ extension NSManagedObjectContext: PersistentContext {}
 class CoreDataStack: NSObject, PersistentStoreController {
     // MARK: - Properties
     weak var delegate: PersistentStoreControllerDelegate?
+    static let shared = CoreDataStack()
     lazy var container = setUpContainer()
     lazy var fetchedResultsController = setUpResultsController()
     private var rootContext: NSManagedObjectContext { container.viewContext }
