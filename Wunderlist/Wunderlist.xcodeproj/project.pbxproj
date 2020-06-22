@@ -12,6 +12,10 @@
 		5E7B0732249EDC0B00F6664A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */; };
 		5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */; };
 		5E7B0737249F3FC700F6664A /* String+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0736249F3FC700F6664A /* String+Keys.swift */; };
+		DB15110624A104620007858E /* Wunderlist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB15110424A104620007858E /* Wunderlist.xcdatamodeld */; };
+		DB15110824A104730007858E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15110724A104730007858E /* CoreDataStack.swift */; };
+		DB15110A24A1047A0007858E /* List+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15110924A1047A0007858E /* List+Convenience.swift */; };
+		DB15110C24A104810007858E /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15110B24A104810007858E /* PersistenceProtocol.swift */; };
 		DB3EA15C249EABCD009B3BEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3EA15B249EABCD009B3BEA /* AppDelegate.swift */; };
 		DB3EA15E249EABCD009B3BEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3EA15D249EABCD009B3BEA /* SceneDelegate.swift */; };
 		DB3EA163249EABCD009B3BEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA161249EABCD009B3BEA /* Main.storyboard */; };
@@ -27,6 +31,10 @@
 		5E7B0736249F3FC700F6664A /* String+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Keys.swift"; sourceTree = "<group>"; };
 		71FD8FCC2B58933B0E1F333D /* Pods_Wunderlist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wunderlist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		992B96DDB70670EC02E9C30F /* Pods-Wunderlist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.release.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.release.xcconfig"; sourceTree = "<group>"; };
+		DB15110524A104620007858E /* Wunderlist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wunderlist.xcdatamodel; sourceTree = "<group>"; };
+		DB15110724A104730007858E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		DB15110924A1047A0007858E /* List+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Convenience.swift"; sourceTree = "<group>"; };
+		DB15110B24A104810007858E /* PersistenceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceProtocol.swift; sourceTree = "<group>"; };
 		DB3EA158249EABCD009B3BEA /* Wunderlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wunderlist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB3EA15B249EABCD009B3BEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB3EA15D249EABCD009B3BEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +168,10 @@
 		DB3EA175249EAC23009B3BEA /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				DB15110424A104620007858E /* Wunderlist.xcdatamodeld */,
+				DB15110724A104730007858E /* CoreDataStack.swift */,
+				DB15110924A1047A0007858E /* List+Convenience.swift */,
+				DB15110B24A104810007858E /* PersistenceProtocol.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -288,10 +300,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB15110824A104730007858E /* CoreDataStack.swift in Sources */,
 				5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */,
+				DB15110C24A104810007858E /* PersistenceProtocol.swift in Sources */,
 				DB3EA15C249EABCD009B3BEA /* AppDelegate.swift in Sources */,
 				5E7B0732249EDC0B00F6664A /* OnboardingViewController.swift in Sources */,
 				5E7B0737249F3FC700F6664A /* String+Keys.swift in Sources */,
+				DB15110A24A1047A0007858E /* List+Convenience.swift in Sources */,
+				DB15110624A104620007858E /* Wunderlist.xcdatamodeld in Sources */,
 				DB3EA15E249EABCD009B3BEA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,6 +506,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DB15110424A104620007858E /* Wunderlist.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DB15110524A104620007858E /* Wunderlist.xcdatamodel */,
+			);
+			currentVersion = DB15110524A104620007858E /* Wunderlist.xcdatamodel */;
+			path = Wunderlist.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DB3EA150249EABCD009B3BEA /* Project object */;
 }
