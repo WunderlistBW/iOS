@@ -10,9 +10,7 @@ import Foundation
 import CoreData
 
 class ListEntryController: NSObject {
-    
     // MARK: - Properties
-    
     var persistentStoreController: PersistentStoreController = CoreDataStack()
     var entryCount: Int {
         persistentStoreController.itemCount
@@ -44,7 +42,6 @@ class ListEntryController: NSObject {
     func getEntry(at indexPath: IndexPath) -> ListEntry? {
         return persistentStoreController.fetchItem(at: indexPath) as? ListEntry
     }
-    
     func deleteEntry(at indexPath: IndexPath) throws {
         guard let thisEntry = getEntry(at: indexPath) else { throw NSError() }
         try persistentStoreController.delete(thisEntry, in: nil)
