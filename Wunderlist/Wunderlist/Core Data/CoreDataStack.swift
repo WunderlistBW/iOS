@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+
 // MARK: - Protocols
 protocol PersistentStoreControllerDelegate: NSFetchedResultsControllerDelegate {}
 extension NSManagedObjectContext: PersistentContext {}
@@ -29,6 +30,7 @@ class CoreDataStack: NSObject, PersistentStoreController {
                 fatalError("Failed to load persistent stores: \(error)")
             }
         }
+
         container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }
