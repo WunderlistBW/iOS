@@ -36,6 +36,7 @@
 		5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
 		5E7B0736249F3FC700F6664A /* String+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Keys.swift"; sourceTree = "<group>"; };
 		71FD8FCC2B58933B0E1F333D /* Pods_Wunderlist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wunderlist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F8DCDAA0B717719598C5BAB /* Pods-Wunderlist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wunderlist/Pods-Wunderlist.debug.xcconfig"; sourceTree = "<group>"; };
 		992B96DDB70670EC02E9C30F /* Pods-Wunderlist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.release.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.release.xcconfig"; sourceTree = "<group>"; };
 		DB15110524A104620007858E /* Wunderlist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wunderlist.xcdatamodel; sourceTree = "<group>"; };
 		DB15110724A104730007858E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -48,6 +49,7 @@
 		DB3EA164249EABD0009B3BEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB3EA167249EABD0009B3BEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB3EA169249EABD0009B3BEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F485D1A929BE2D5E081E4B61 /* Pods-Wunderlist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wunderlist/Pods-Wunderlist.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,8 @@
 			children = (
 				2FA5D5110893E905758FF010 /* Pods-Wunderlist.debug.xcconfig */,
 				992B96DDB70670EC02E9C30F /* Pods-Wunderlist.release.xcconfig */,
+				8F8DCDAA0B717719598C5BAB /* Pods-Wunderlist.debug.xcconfig */,
+				F485D1A929BE2D5E081E4B61 /* Pods-Wunderlist.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -268,15 +272,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Wunderlist-checkManifestLockResult.txt",
 			);
@@ -290,11 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-			);
-			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
