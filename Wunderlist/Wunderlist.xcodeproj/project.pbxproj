@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		13A6E1FEDE42389E945A8270 /* Pods_Wunderlist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FD8FCC2B58933B0E1F333D /* Pods_Wunderlist.framework */; };
+		5E7B072F249EDB4F00F6664A /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E7B072E249EDB4F00F6664A /* Onboarding.storyboard */; };
+		5E7B0732249EDC0B00F6664A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */; };
+		5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */; };
+		5E7B0737249F3FC700F6664A /* String+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0736249F3FC700F6664A /* String+Keys.swift */; };
+		DB15110624A104620007858E /* Wunderlist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB15110424A104620007858E /* Wunderlist.xcdatamodeld */; };
+		DB15110824A104730007858E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15110724A104730007858E /* CoreDataStack.swift */; };
+		DB15110A24A1047A0007858E /* List+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15110924A1047A0007858E /* List+Convenience.swift */; };
+		DB15110C24A104810007858E /* PersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15110B24A104810007858E /* PersistenceProtocol.swift */; };
 		DB3EA15C249EABCD009B3BEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3EA15B249EABCD009B3BEA /* AppDelegate.swift */; };
 		DB3EA15E249EABCD009B3BEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3EA15D249EABCD009B3BEA /* SceneDelegate.swift */; };
 		DB3EA163249EABCD009B3BEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA161249EABCD009B3BEA /* Main.storyboard */; };
@@ -17,8 +25,16 @@
 
 /* Begin PBXFileReference section */
 		2FA5D5110893E905758FF010 /* Pods-Wunderlist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.debug.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.debug.xcconfig"; sourceTree = "<group>"; };
+		5E7B072E249EDB4F00F6664A /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
+		5E7B0736249F3FC700F6664A /* String+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Keys.swift"; sourceTree = "<group>"; };
 		71FD8FCC2B58933B0E1F333D /* Pods_Wunderlist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wunderlist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		992B96DDB70670EC02E9C30F /* Pods-Wunderlist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.release.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.release.xcconfig"; sourceTree = "<group>"; };
+		DB15110524A104620007858E /* Wunderlist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wunderlist.xcdatamodel; sourceTree = "<group>"; };
+		DB15110724A104730007858E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		DB15110924A1047A0007858E /* List+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Convenience.swift"; sourceTree = "<group>"; };
+		DB15110B24A104810007858E /* PersistenceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceProtocol.swift; sourceTree = "<group>"; };
 		DB3EA158249EABCD009B3BEA /* Wunderlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wunderlist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB3EA15B249EABCD009B3BEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB3EA15D249EABCD009B3BEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +56,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E7B0730249EDB8C00F6664A /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */,
+				5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		5E7B0735249F3F9300F6664A /* Global Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5E7B0736249F3FC700F6664A /* String+Keys.swift */,
+			);
+			path = "Global Helpers";
+			sourceTree = "<group>";
+		};
 		B9E352786EF74677C055B15C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +110,7 @@
 				DB3EA171249EABFF009B3BEA /* Model */,
 				DB3EA16F249EABD9009B3BEA /* Resources */,
 				DB3EA170249EABF1009B3BEA /* Storyboards */,
+				5E7B0735249F3F9300F6664A /* Global Helpers */,
 			);
 			path = Wunderlist;
 			sourceTree = "<group>";
@@ -97,6 +131,7 @@
 			children = (
 				DB3EA161249EABCD009B3BEA /* Main.storyboard */,
 				DB3EA166249EABD0009B3BEA /* LaunchScreen.storyboard */,
+				5E7B072E249EDB4F00F6664A /* Onboarding.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -118,6 +153,7 @@
 		DB3EA173249EAC0C009B3BEA /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5E7B0730249EDB8C00F6664A /* Onboarding */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -132,6 +168,10 @@
 		DB3EA175249EAC23009B3BEA /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				DB15110424A104620007858E /* Wunderlist.xcdatamodeld */,
+				DB15110724A104730007858E /* CoreDataStack.swift */,
+				DB15110924A1047A0007858E /* List+Convenience.swift */,
+				DB15110B24A104810007858E /* PersistenceProtocol.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -207,6 +247,7 @@
 				DB3EA168249EABD0009B3BEA /* LaunchScreen.storyboard in Resources */,
 				DB3EA165249EABD0009B3BEA /* Assets.xcassets in Resources */,
 				DB3EA163249EABCD009B3BEA /* Main.storyboard in Resources */,
+				5E7B072F249EDB4F00F6664A /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +300,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB15110824A104730007858E /* CoreDataStack.swift in Sources */,
+				5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */,
+				DB15110C24A104810007858E /* PersistenceProtocol.swift in Sources */,
 				DB3EA15C249EABCD009B3BEA /* AppDelegate.swift in Sources */,
+				5E7B0732249EDC0B00F6664A /* OnboardingViewController.swift in Sources */,
+				5E7B0737249F3FC700F6664A /* String+Keys.swift in Sources */,
+				DB15110A24A1047A0007858E /* List+Convenience.swift in Sources */,
+				DB15110624A104620007858E /* Wunderlist.xcdatamodeld in Sources */,
 				DB3EA15E249EABCD009B3BEA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,6 +506,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DB15110424A104620007858E /* Wunderlist.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DB15110524A104620007858E /* Wunderlist.xcdatamodel */,
+			);
+			currentVersion = DB15110524A104620007858E /* Wunderlist.xcdatamodel */;
+			path = Wunderlist.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DB3EA150249EABCD009B3BEA /* Project object */;
 }
