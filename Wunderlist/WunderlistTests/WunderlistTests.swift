@@ -13,7 +13,6 @@ class WunderlistTests: XCTestCase {
     func testSignUp() {
         let login = UserController()
         let user = User(username: "Chris", password: "12345")
-        
         let expectation = self.expectation(description: "Waiting for signing up to complete")
         login.signUp(with: user) { error in
             if let error = error {
@@ -24,11 +23,9 @@ class WunderlistTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 10)
     }
-    
     func testSignIn() {
         let login = UserController()
         let user = User(username: "Chris", password: "12345")
-        
         let expectation = self.expectation(description: "Waiting to be signed in")
         login.signIn(with: user) { error in
             if let error = error {
