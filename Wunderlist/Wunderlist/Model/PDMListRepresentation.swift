@@ -14,6 +14,7 @@ struct ListRepresentation: Equatable, Codable {
     var listId: Int?
     var isRecurring: Bool?
     var dueDate: Date
+    var isComplete: Bool?
 }
 
 struct ListRepresentations: Codable {

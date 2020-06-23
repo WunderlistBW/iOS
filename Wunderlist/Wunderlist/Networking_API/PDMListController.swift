@@ -136,12 +136,12 @@ private func update(listEntry: ListEntry, with representation: ListRepresentatio
     listEntry.dayOfWeek = Int64(representation.dayOfWeek ?? 0)
 }
     func createListEntry(with name: String, listId: Int64, dueDate: Date? = Date(),
-                         isRecurring: Bool? = false, dayOfWeek: Int64) throws {
+                         isRecurring: Bool? = false, isComplete: Bool? = false, dayOfWeek: Int64) throws {
     let context = persistentStoreController.mainContext
         guard  let list = ListEntry(name: name, listId: listId,
                                     dueDate: dueDate ?? Date(),
                                     isRecurring: isRecurring,
-                                    dayOfWeek: dayOfWeek,
+                                    dayOfWeek: dayOfWeek, isComplete: isComplete,
                                     context: context) else { return }
     putListToServer(list: list)
     do {
