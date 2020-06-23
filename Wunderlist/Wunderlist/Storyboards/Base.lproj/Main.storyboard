@@ -77,8 +77,15 @@
                                 <segment title="Upcoming"/>
                                 <segment title="Completed"/>
                             </segments>
+                            <connections>
+                                <action selector="entryStatusTapped:" destination="KpC-u5-G76" eventType="valueChanged" id="3Du-LV-TZO"/>
+                            </connections>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="sOs-e6-NWA"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="sOs-e6-NWA">
+                            <connections>
+                                <segue destination="Kl6-h0-fbO" kind="show" identifier="CreateSegue" id="XTg-ck-EW8"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="lOV-Hi-60G" kind="presentation" identifier="ListSegue" id="MHQ-o1-2lS"/>
@@ -163,6 +170,9 @@
             <point key="canvasLocation" x="2111.594202898551" y="87.723214285714278"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Izu-iw-29q"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="alarm" catalog="system" width="124" height="128"/>
     </resources>
