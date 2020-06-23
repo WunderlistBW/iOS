@@ -25,12 +25,9 @@ class NEUserController{
         var username: String
         var email: String
     }
-    
-    
     enum NetworkError: Error {
         case failedSignUp, failedSignIn, noData, badData, noToken, failedLogOut, otherError, failedUpdate
     }
-    
     // MARK: - Properties
     
     static let shared = NEUserController()
@@ -41,26 +38,21 @@ class NEUserController{
     
     private init () {
     }
-    
     private let baseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com")!
     private lazy var signUpURL = baseURL.appendingPathComponent("api/auth/register")
     private lazy var signInURL = baseURL.appendingPathComponent("api/auth/login")
     private lazy var editUserURL = baseURL.appendingPathComponent("api/users/")
     private lazy var fetchUserURL = baseURL.appendingPathComponent("api/users/")
-    
     private lazy var jsonEncoder = JSONEncoder()
     private lazy var jsonDecoder = JSONDecoder()
     
     func signUp(with username: String, password: String, email: String?, name: String?, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
-        
         let user = NEUser(username: username, password: password, email: email, name: name)
         print("\(String(describing: loggedInUser))🧚🏿‍♀️")
         print("signUpURL = \(signUpURL.absoluteString)")
-        
         var request = URLRequest(url: signUpURL)
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
         do {
             let jsonData = try jsonEncoder.encode(user)
             request.httpBody = jsonData
@@ -85,7 +77,6 @@ class NEUserController{
         }
     }
     func signIn(with username: String, password: String, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
-        
         print("signInURL = \(signInURL.absoluteString)")
         var request = URLRequest(url: signInURL)
         request.httpMethod = HTTPMethod.post.rawValue
@@ -96,7 +87,6 @@ class NEUserController{
             print(signInDictionary)
             let jsonData = try jsonEncoder.encode(signInDictionary)
             request.httpBody = jsonData
-            
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     NSLog("Sign in failed with error: \(error)⚠️⚠️⚠️")
@@ -118,7 +108,6 @@ class NEUserController{
                     self.bearer = try self.jsonDecoder.decode(NEBearer.self, from: data)
                     self.currentUserID = try self.jsonDecoder.decode(NEUserID.self, from: data)
                     print("\(String(describing: self.currentUserID))")
-                    
                     guard let userID = self.currentUserID else { return }
                     self.fetchUserFromServer(with: userID) { result in
                         switch result {
@@ -141,9 +130,7 @@ class NEUserController{
             completion(.failure(.failedSignIn))
         }
     }
-    
     func fetchUserFromServer(with userID: NEUserID, completion: @escaping (Result<APIUser, NetworkError>) -> Void = { _ in }) {
-        
         let requestURL = fetchUserURL.appendingPathComponent("\(userID.id)")
         print("\(userID)")
         print("fetchUserURL: \(requestURL)")
@@ -152,14 +139,12 @@ class NEUserController{
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         guard let token = self.bearer?.token else { return }
         request.setValue(token, forHTTPHeaderField: "Authorization")
-        
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 NSLog("Error fetching user: \(error)⚠️⚠️⚠️")
                 completion(.failure(.otherError))
                 return
             }
-            
             guard let data = data else {
                 NSLog("No data returned from server (fetching user).⚠️⚠️⚠️")
                 completion(.failure(.noData))
@@ -174,28 +159,20 @@ class NEUserController{
             }
         }.resume()
     }
-    
     func updateUser(with username: String, email: String, completion: @escaping (Result<Bool, NetworkError>) -> Void = { _ in }) {
-        
         guard let userID = currentUserID else { return }
-        
         let requestURL = editUserURL.appendingPathComponent("\(userID.id)")
         print("editUserURL = \(requestURL.absoluteString)")
-        
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.put.rawValue
-        
         guard let token = self.bearer?.token else { return }
         request.setValue(token, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
         do {
             let editDictionary = ["username": username, "email": email]
             print(editDictionary)
-            
             let jsonData = try jsonEncoder.encode(editDictionary)
             request.httpBody = jsonData
-            
             let task = URLSession.shared.dataTask(with: request) { _, response, error in
                 if let error = error {
                     NSLog("Updating user failed: \(error)⚠️⚠️⚠️")

@@ -18,15 +18,13 @@ class LoginSignUpViewController: UIViewController {
     @IBOutlet weak var rememberMeButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var anchorView: UIView!
-    var loggingIn: Bool = true
-    
+    var loggingIn: Bool?
     // MARK: - Life Cycles -
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
         createObservers()
     }
-    
     deinit {
         NotificationCenter.default.removeObserver(self,
                                                   name: UIResponder.keyboardWillShowNotification,
@@ -38,15 +36,12 @@ class LoginSignUpViewController: UIViewController {
                                                   name: UIResponder.keyboardWillChangeFrameNotification,
                                                   object: nil)
     }
-    
-    
     // MARK: - Actions -
     @IBAction func submit(_ sender: UIButton) {
         guard let username = usernameTextField.text,
             let password = passwordTextField.text,
             !username.isEmpty,
             !password.isEmpty else { return }
-        
         switch loggingIn {
         case true:
             statusLabel.text = "Logging Into Wunderlist, one moment..."
@@ -68,7 +63,6 @@ class LoginSignUpViewController: UIViewController {
                                                 return
                                             }
             }
-            
         case false:
             statusLabel.text = "Joining Wunderlist, one moment..."
             let userWithOptions = presentOptions(for: username, with: password)
@@ -90,6 +84,8 @@ class LoginSignUpViewController: UIViewController {
                                                 return
                                             }
             }
+        @unknown default:
+            print("Error with the loggin in boolean")
         }
         UserDefaults.standard.set(true, forKey: .loggedInKey)
         presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
@@ -100,19 +96,15 @@ class LoginSignUpViewController: UIViewController {
         UserDefaults.standard.set(passwordTextField.text, forKey: .passKey)
         rememberMeButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
     }
-    
     @IBAction func textBeganEditing(_ sender: UITextField) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5,
                                       execute: {
-            self.rememberMeButton.alpha = 1
+                                        self.rememberMeButton.alpha = 1
         })
     }
-    
     @IBAction func textWasEdited(_ sender: UITextField) {
         checkRememberMe()
     }
-    
-    
     // MARK: - Methods -
     private func updateViews() {
         navigationController?.navigationBar.isHidden = true
@@ -120,7 +112,6 @@ class LoginSignUpViewController: UIViewController {
         checkRememberMe()
         setUpViews()
     }
-    
     private func autoFill() {
         guard let user = UserDefaults.standard.object(forKey: .userKey) as? String,
             let password = UserDefaults.standard.object(forKey: .passKey) as? String else { return }
@@ -136,7 +127,6 @@ class LoginSignUpViewController: UIViewController {
             rememberMeButton.setImage(UIImage(systemName: "square"), for: .normal)
         }
     }
-    
     private func setUpViews() {
         passwordTextField.isSecureTextEntry = true
         submitButton.layer.cornerRadius = 5
@@ -147,8 +137,8 @@ class LoginSignUpViewController: UIViewController {
         rememberMeButton.alpha = 0
         statusLabel.text = ""
     }
-    
-    private func presentOptions(for username: String, with password: String) -> NEUser {
+    private func presentOptions(for username: String,
+                                with password: String) -> NEUser {
         var returnValue: NEUser?
         var unwrappedReturn: NEUser
         let options = UIAlertController(title: "Welcome!",
@@ -159,13 +149,11 @@ class LoginSignUpViewController: UIViewController {
             name = textfield
             name.placeholder = "Name"
         }
-        
         var email: UITextField!
         options.addTextField { textfield in
             email = textfield
             email.placeholder = "Email Address"
         }
-        
         options.addAction(UIAlertAction(title: "Get Started!",
                                         style: .default,
                                         handler: { _ in
@@ -219,7 +207,6 @@ class LoginSignUpViewController: UIViewController {
                                                name: UIResponder.keyboardWillChangeFrameNotification,
                                                object: nil)
     }
-    
     @objc func keyboardWillChange(notification: Notification) {
         print("Keyboard will show: \(notification.name.rawValue)")
         view.frame.origin.y = -100
