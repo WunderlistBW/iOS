@@ -55,6 +55,7 @@ class LoginSignUpViewController: UIViewController {
                               password: password)
             NEUserController.shared.signIn(with: user.username,
                                            password: user.password) { result in
+<<<<<<< HEAD
                                             
                                             do {
                                                 let loginResult = try result.get()
@@ -69,6 +70,22 @@ class LoginSignUpViewController: UIViewController {
                                                 NSLog("Error. Something horrific happened while trying to log you in. Here's some info about what happened \(error) \(error.localizedDescription)")
                                                 return
                                             }
+=======
+                
+                do {
+                    let loginResult = try result.get()
+                    if loginResult == true {
+                        self.statusLabel.textColor = .white
+                        self.statusLabel.text = "Success!"
+                    } else {
+                        self.statusLabel.textColor = .systemRed
+                        self.statusLabel.text = "Something went wrong."
+                    }
+                } catch {
+                    NSLog("Error. Something horrific happened while trying to log you in. Here's some info about what happened \(error) \(error.localizedDescription)")
+                    return
+                }
+>>>>>>> Cody_Main
             }
             
         case false:
@@ -79,6 +96,7 @@ class LoginSignUpViewController: UIViewController {
                                            password: userWithOptions.password,
                                            email: userWithOptions.email,
                                            name: userWithOptions.name) { result in
+<<<<<<< HEAD
                                             do {
                                                 let loginResult = try result.get()
                                                 if loginResult == true {
@@ -93,6 +111,16 @@ class LoginSignUpViewController: UIViewController {
                                                 return
                                             }
             }
+=======
+                <#code#>
+            }
+            ///TODO put this in closure of call to auth controller
+            //statusLabel.text = "Success!"
+            ///TODO put this in else statement of guard
+            //statusLabel.textColor = .systemRed
+            //statusLabel.text = "Something went wrong."
+            //return
+>>>>>>> Cody_Main
         }
         UserDefaults.standard.set(true, forKey: .loggedInKey)
         presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
@@ -152,9 +180,13 @@ class LoginSignUpViewController: UIViewController {
     }
     
     private func presentOptions(for username: String, with password: String) -> NEUser {
+<<<<<<< HEAD
         var returnValue: NEUser?
         var unwrappedReturn: NEUser
         
+=======
+        var returnValue: NEUser
+>>>>>>> Cody_Main
         let options = UIAlertController(title: "Welcome!",
                                         message: "If you'd like you can help Wunderlist give you all the best featues by providing a little bit of optional info below:",
                                         preferredStyle: .alert)
@@ -205,8 +237,12 @@ class LoginSignUpViewController: UIViewController {
                                             }
         }))
         present(options, animated: true, completion: nil)
+<<<<<<< HEAD
         unwrappedReturn = returnValue!
         return unwrappedReturn
+=======
+        return returnValue
+>>>>>>> Cody_Main
     }
     
     func createObservers() {
