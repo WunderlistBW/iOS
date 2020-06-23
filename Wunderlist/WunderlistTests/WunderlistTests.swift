@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Wunderlist
 
 class WunderlistTests: XCTestCase {
 
