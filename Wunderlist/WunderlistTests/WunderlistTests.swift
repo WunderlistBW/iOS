@@ -20,11 +20,35 @@ class WunderlistTests: XCTestCase {
     }
     
     func testCreateListEntryObject() {
-        
+        let testDataStack = CoreDataStack()
+        let dueDate = Date(timeIntervalSinceNow: 100)
+        let newListEntry = ListEntry(name: "newEntry",
+                                     listId: Int64.random(in: 0...1000),
+                                     dueDate: dueDate,
+                                     isRecurring: false,
+                                     dayOfWeek: 2,
+                                     isComplete: false,
+                                     context: testDataStack.mainContext)
+        XCTAssertNotNil(newListEntry)
     }
     
     func testSaveAndLoadListEntryObject() {
-        
+        let testDataStack = CoreDataStack()
+        let testFRC = testDataStack.fetchedResultsController
+        XCTAssertNil(testFRC.fetchedObjects)
+        let dueDate = Date(timeIntervalSinceNow: 100)
+        let newListEntry = ListEntry(name: "newEntry",
+                                     listId: Int64.random(in: 0...1000),
+                                     dueDate: dueDate,
+                                     isRecurring: false,
+                                     dayOfWeek: 2,
+                                     isComplete: false,
+                                     context: testDataStack.mainContext)
+        XCTAssertNotNil(newListEntry)
+        XCTAssertNoThrow(try testDataStack.mainContext.save())
+        XCTAssertNotNil(testFRC.fetchedObjects)
+        XCTAssertEqual(testFRC.fetchedObjects?.count, 1)
+        XCTAssertEqual(testFRC.fetchedObjects?[0].name, "newEntry")
     }
     
     func testDeleteListEntryObject() {
