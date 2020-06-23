@@ -31,13 +31,10 @@ class ListEntryController: NSObject {
                      context: PersistentContext?, dueDate: Date? = Date(),
                      taskId: Int64?, isComplete: Bool? = false, dayOfWeek: Int64?) throws {
         let context = persistentStoreController.mainContext
-        guard let dueDate = dueDate, let isRecurring = isRecurring,
-            let taskId = taskId,
-            let dayOfWeek = dayOfWeek,
+        guard let dueDate = dueDate, let taskId = taskId,
             let isComplete = isComplete else { return }
         guard let entry = ListEntry(name: name, listId: Int64(taskId),
-                                    dueDate: dueDate, isRecurring: isRecurring,
-                                    dayOfWeek: Int64(dayOfWeek), isComplete: isComplete, context: context)
+                                    dueDate: dueDate, isComplete: isComplete, context: context)
             else { throw NSError() }
         try persistentStoreController.create(item: entry, in: context)
     }
