@@ -51,6 +51,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDO-sz-hHp">
                                                     <rect key="frame" x="355" y="0.0" width="19" height="22"/>
                                                     <state key="normal" image="alarm" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="reminderTapped:" destination="ysd-TE-AxP" eventType="touchUpInside" id="5Qh-Sq-yzV"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -151,7 +154,7 @@
                     <navigationItem key="navigationItem" id="6ja-Uu-J93">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="j25-xe-lp3">
                             <connections>
-                                <action selector="saveButtonTapped:" destination="Kl6-h0-fbO" id="i0w-77-Q3y"/>
+                                <action selector="save:" destination="Kl6-h0-fbO" id="d2a-3z-RNq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -159,6 +162,7 @@
                         <outlet property="entryDatePicker" destination="U9W-JV-897" id="jhd-1s-sZL"/>
                         <outlet property="entryTextView" destination="eJ9-nR-yzS" id="u8G-kr-bD9"/>
                         <outlet property="entryTitleField" destination="maF-99-Qd0" id="atC-kr-hoT"/>
+                        <outlet property="nameTextField" destination="maF-99-Qd0" id="JYt-j2-s8F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h49-BV-WV6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

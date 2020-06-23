@@ -9,6 +9,11 @@
 import Foundation
 import CoreData
 
+enum ListStatus: String, CaseIterable {
+    case completedStatus
+    case upcomingStatus
+}
+
 extension ListEntry: Persistable {
     convenience init?(name: String, listId: Int64?, dueDate: Date? = Date(),
                       isRecurring: Bool?, dayOfWeek: Int64?, isComplete: Bool?,
