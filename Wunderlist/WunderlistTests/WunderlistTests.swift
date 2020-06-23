@@ -73,7 +73,21 @@ class WunderlistTests: XCTestCase {
     }
     
     func testListEntryCompletes() {
-        
+        let testDataStack = CoreDataStack()
+        let interval: TimeInterval = 30
+        let dueDate = Date(timeIntervalSinceNow: interval)
+        let letComplete = expectation(description: "Wait for ListEntry to complete.")
+        let newListEntry = ListEntry(name: "newEntry",
+                                     listId: Int64.random(in: 0...1000),
+                                     dueDate: dueDate,
+                                     isRecurring: false,
+                                     dayOfWeek: 2,
+                                     isComplete: false,
+                                     context: testDataStack.mainContext)
+        XCTAssertNotNil(newListEntry)
+        XCTAssertEqual(newListEntry?.isComplete, false)
+        wait(for: [letComplete], timeout: 40)
+        XCTAssertEqual(newListEntry?.isComplete, true)
     }
     
     func testSortListEntryObjectsByDate() {
