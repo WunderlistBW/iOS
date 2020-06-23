@@ -46,8 +46,8 @@ class NEUserController{
     private lazy var jsonEncoder = JSONEncoder()
     private lazy var jsonDecoder = JSONDecoder()
     
-    func signUp(with username: String, password: String, email: String?, name: String?, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
-        let user = NEUser(username: username, password: password, email: email, name: name)
+    func signUp(with username: String, password: String, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+        let user = NEUser(username: username, password: password)
         print("\(String(describing: loggedInUser))🧚🏿‍♀️")
         print("signUpURL = \(signUpURL.absoluteString)")
         var request = URLRequest(url: signUpURL)
@@ -83,9 +83,9 @@ class NEUserController{
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
-            let signInDictionary = ["username": username, "password": password]
-            print(signInDictionary)
-            let jsonData = try jsonEncoder.encode(signInDictionary)
+            let signInUser = NEUser(username: username, password: password)
+            print(signInUser)
+            let jsonData = try jsonEncoder.encode(signInUser)
             request.httpBody = jsonData
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
@@ -106,8 +106,8 @@ class NEUserController{
                 }
                 do {
                     self.bearer = try self.jsonDecoder.decode(NEBearer.self, from: data)
-                    self.currentUserID = try self.jsonDecoder.decode(NEUserID.self, from: data)
-                    print("\(String(describing: self.currentUserID))")
+//                    self.currentUserID = try self.jsonDecoder.decode(NEUserID.self, from: data)
+//                    print("\(String(describing: self.currentUserID))")
                     guard let userID = self.currentUserID else { return }
                     self.fetchUserFromServer(with: userID) { result in
                         switch result {
@@ -131,7 +131,7 @@ class NEUserController{
         }
     }
     func fetchUserFromServer(with userID: NEUserID, completion: @escaping (Result<APIUser, NetworkError>) -> Void = { _ in }) {
-        let requestURL = fetchUserURL.appendingPathComponent("\(userID.id)")
+        let requestURL = fetchUserURL.appendingPathComponent("\(userID.userId)")
         print("\(userID)")
         print("fetchUserURL: \(requestURL)")
         var request = URLRequest(url: requestURL)
@@ -161,7 +161,7 @@ class NEUserController{
     }
     func updateUser(with username: String, email: String, completion: @escaping (Result<Bool, NetworkError>) -> Void = { _ in }) {
         guard let userID = currentUserID else { return }
-        let requestURL = editUserURL.appendingPathComponent("\(userID.id)")
+        let requestURL = editUserURL.appendingPathComponent("\(userID.userId)")
         print("editUserURL = \(requestURL.absoluteString)")
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.put.rawValue
