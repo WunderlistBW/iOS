@@ -8,8 +8,6 @@
 
 import Foundation
 import CoreData
-
-
 // MARK: - Protocols
 protocol PersistentStoreControllerDelegate: NSFetchedResultsControllerDelegate {}
 extension NSManagedObjectContext: PersistentContext {}
@@ -71,7 +69,6 @@ class CoreDataStack: NSObject, PersistentStoreController {
     }
     func delete(_ item: Persistable?, in context: PersistentContext?) throws {
         let thisContext = fetchContext(context)
-        
         guard let entry = item as? ListEntry else { throw NSError() }
         thisContext.delete(entry)
         try save(in: thisContext)
