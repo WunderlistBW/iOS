@@ -31,7 +31,7 @@ class ListController {
     typealias CompletionHandler = (Error?) -> Void
     static let sharedInstance = ListController()
     private let databaseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com/")! // set up database URL
-    
+
     func putListToServer(list: ListEntry, completion: @escaping CompletionHandler = { _ in }) {
        // guard let userId = UserController.sharedInstance.userID else { return }
         let requestURL = databaseURL.appendingPathComponent("api/tasks") // set up endpoint for putToServer

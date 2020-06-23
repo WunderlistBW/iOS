@@ -10,34 +10,33 @@ import XCTest
 @testable import Wunderlist
 
 class WunderlistTests: XCTestCase {
-    func testSignUp() {
-        let login = UserController()
-        let user = User(username: "Chris", password: "12345")
-        let expectation = self.expectation(description: "Waiting for signing up to complete")
-        login.signUp(with: user) { error in
-            if let error = error {
+    func testNESignUp() {
+        let login = NEUserController()
+        let expectation = self.expectation(description: "Waiting for signing up to be completed")
+        login.signUp(with: "Chris", password: "12345", email: "chris@gmail.com", name: "Chris") { error in
+            guard error == error else {
                 NSLog("Error signing up: \(error)")
+                return
             }
             XCTAssertNoThrow(error)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 10)
     }
-    func testSignIn() {
-        let login = UserController()
-        let user = User(username: "Chris", password: "12345")
-        let expectation = self.expectation(description: "Waiting to be signed in")
-        login.signIn(with: user) { error in
-            if let error = error {
-                NSLog("Error signing in: \(error)")
+    func testNESignIn() {
+        let login = NEUserController()
+        let expectation = self.expectation(description: "Waiting for signing in to be completed")
+        login.signIn(with: "Chris", password: "12345") { (error) in
+            guard error == error else {
+                NSLog("Error signing in :\(error)")
+                return
             }
-            XCTAssertNoThrow(error)
+            XCTAssertNotNil(error)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 10)
         XCTAssertNotNil(login.bearer)
     }
-    
     func testCreateListEntryObject() {
         let testDataStack = CoreDataStack()
         let dueDate = Date(timeIntervalSinceNow: 100)
@@ -50,7 +49,6 @@ class WunderlistTests: XCTestCase {
                                      context: testDataStack.mainContext)
         XCTAssertNotNil(newListEntry)
     }
-    
     func testSaveAndLoadListEntryObject() {
         let testDataStack = CoreDataStack()
         let testFRC = testDataStack.fetchedResultsController
@@ -69,7 +67,6 @@ class WunderlistTests: XCTestCase {
         XCTAssertEqual(testFRC.fetchedObjects?.count, 1)
         XCTAssertEqual(testFRC.fetchedObjects?[0].name, "newEntry")
     }
-    
     func testDeleteListEntryObject() {
         let testDataStack = CoreDataStack()
         let testFRC = testDataStack.fetchedResultsController
@@ -90,7 +87,6 @@ class WunderlistTests: XCTestCase {
         XCTAssertNoThrow(try testDataStack.mainContext.save())
         XCTAssertNil(testFRC.fetchedObjects)
     }
-    
     func testListEntryCompletes() {
         let testDataStack = CoreDataStack()
         let interval: TimeInterval = 30
@@ -108,15 +104,8 @@ class WunderlistTests: XCTestCase {
         wait(for: [letComplete], timeout: 40)
         XCTAssertEqual(newListEntry?.isComplete, true)
     }
-    
     func testSortListEntryObjectsByDate() {
-        
     }
-    
     func testSortListEntryObjectsByCompleted() {
-        
     }
-    
-
-
 }
