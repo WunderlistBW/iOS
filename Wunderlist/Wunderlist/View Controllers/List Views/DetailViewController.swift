@@ -13,7 +13,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var entryTitleField: UITextField!
     @IBOutlet weak var entryTextView: UITextView!
     @IBOutlet weak var entryDatePicker: UIDatePicker!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
@@ -35,7 +34,6 @@ class DetailViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         if wasEdited {
             guard let entryTitle = entryTitleField.text,
                 !entryTitle.isEmpty,
@@ -44,7 +42,7 @@ class DetailViewController: UIViewController {
                 let listEntry = listEntry else { return }
             let name = entryTitleField.text
             listEntry.name = name
-            // TODO:
+            // TO DO:
 //            ListController.updateList(<#ListController#>)
 //
 //            do {
@@ -62,7 +60,6 @@ class DetailViewController: UIViewController {
         entryDatePicker.isUserInteractionEnabled = editing
         navigationItem.hidesBackButton = editing
     }
-    
     private func updateViews() {
         guard let listEntry = listEntry else { return }
         entryTitleField.text = listEntry.name
@@ -71,7 +68,6 @@ class DetailViewController: UIViewController {
         #warning("Bad unwrapping")
         entryDatePicker.date = listEntry.dueDate!
         entryDatePicker.isUserInteractionEnabled = isEditing
-        
     }
     /*
     // MARK: - Navigation
