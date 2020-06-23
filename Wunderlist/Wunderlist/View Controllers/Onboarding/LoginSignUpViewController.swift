@@ -19,12 +19,14 @@ class LoginSignUpViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var anchorView: UIView!
     var loggingIn: Bool = true
+    
     // MARK: - Life Cycles -
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
         createObservers()
     }
+    
     deinit {
         NotificationCenter.default.removeObserver(self,
                                                   name: UIResponder.keyboardWillShowNotification,
@@ -36,18 +38,39 @@ class LoginSignUpViewController: UIViewController {
                                                   name: UIResponder.keyboardWillChangeFrameNotification,
                                                   object: nil)
     }
+    
+    
     // MARK: - Actions -
     @IBAction func submit(_ sender: UIButton) {
+        guard let username = usernameTextField.text,
+            let password = passwordTextField.text,
+            !username.isEmpty,
+            !password.isEmpty else { return }
+        
         switch loggingIn {
         case true:
+            
             statusLabel.text = "Logging Into Wunderlist, one moment..."
+            let user = NEUser(username: username,
+                              password: password)
             ///TODO access auth controller for LOGIN here, use guard
-            ///TODO put this in closure of call to auth controller
-            //statusLabel.text = "Success!"
-            ///TODO put this in else statement of guard
-            //statusLabel.textColor = .systemRed
-            //statusLabel.text = "Something went wrong."
-            //return
+            NEUserController.shared.signIn(with: user.username, password: user.password) { result in
+                
+                do {
+                    let loginResult = try result.get()
+                    if loginResult == true {
+                        self.statusLabel.textColor = .white
+                        self.statusLabel.text = "Success!"
+                    } else {
+                        self.statusLabel.textColor = .systemRed
+                        self.statusLabel.text = "Something went wrong."
+                    }
+                } catch {
+                    NSLog("Error. Something horrific happened while trying to log you in. Here's some info about what happened \(error) \(error.localizedDescription)")
+                    return
+                }
+            }
+             
         case false:
             statusLabel.text = "Joining Wunderlist, one moment..."
             ///TODO access auth controller for SIGNUP here, use guard
@@ -61,20 +84,25 @@ class LoginSignUpViewController: UIViewController {
         UserDefaults.standard.set(true, forKey: .loggedInKey)
         presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func rememberMe(_ sender: UIButton) {
         UserDefaults.standard.set(usernameTextField.text, forKey: .userKey)
         UserDefaults.standard.set(passwordTextField.text, forKey: .passKey)
         rememberMeButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
     }
+    
     @IBAction func textBeganEditing(_ sender: UITextField) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5,
                                       execute: {
             self.rememberMeButton.alpha = 1
         })
     }
+    
     @IBAction func textWasEdited(_ sender: UITextField) {
         checkRememberMe()
     }
+    
+    
     // MARK: - Methods -
     private func updateViews() {
         navigationController?.navigationBar.isHidden = true
@@ -82,12 +110,14 @@ class LoginSignUpViewController: UIViewController {
         checkRememberMe()
         setUpViews()
     }
+    
     private func autoFill() {
         guard let user = UserDefaults.standard.object(forKey: .userKey) as? String,
             let password = UserDefaults.standard.object(forKey: .passKey) as? String else { return }
         usernameTextField.text = user
         passwordTextField.text = password
     }
+    
     private func checkRememberMe() {
         if usernameTextField.text == UserDefaults.standard.object(forKey: .userKey) as? String &&
             passwordTextField.text == UserDefaults.standard.object(forKey: .passKey) as? String {
@@ -96,6 +126,7 @@ class LoginSignUpViewController: UIViewController {
             rememberMeButton.setImage(UIImage(systemName: "square"), for: .normal)
         }
     }
+    
     private func setUpViews() {
         passwordTextField.isSecureTextEntry = true
         submitButton.layer.cornerRadius = 5
@@ -106,6 +137,7 @@ class LoginSignUpViewController: UIViewController {
         rememberMeButton.alpha = 0
         statusLabel.text = ""
     }
+    
     func createObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillChange(notification:)),
@@ -120,6 +152,7 @@ class LoginSignUpViewController: UIViewController {
                                                name: UIResponder.keyboardWillChangeFrameNotification,
                                                object: nil)
     }
+    
     @objc func keyboardWillChange(notification: Notification) {
         print("Keyboard will show: \(notification.name.rawValue)")
         view.frame.origin.y = -100
