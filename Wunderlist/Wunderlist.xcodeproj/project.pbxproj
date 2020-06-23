@@ -14,6 +14,8 @@
 		5E7B0732249EDC0B00F6664A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */; };
 		5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */; };
 		5E7B0737249F3FC700F6664A /* String+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0736249F3FC700F6664A /* String+Keys.swift */; };
+		5E7B073F24A186D100F6664A /* WunderlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B073E24A186D100F6664A /* WunderlistTests.swift */; };
+		5E7B074D24A1870800F6664A /* WunderlistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B074C24A1870800F6664A /* WunderlistUITests.swift */; };
 		B4194F9D24A1393800B3BB5E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4194F9C24A1393800B3BB5E /* User.swift */; };
 		B4194F9F24A13A7F00B3BB5E /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4194F9E24A13A7F00B3BB5E /* UserController.swift */; };
 		B4194FA124A13A9100B3BB5E /* NetworkDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4194FA024A13A9100B3BB5E /* NetworkDataLoader.swift */; };
@@ -36,6 +38,23 @@
 		DBACA3C224A11AA200F4872D /* PDMBearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3C124A11AA200F4872D /* PDMBearer.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5E7B074124A186D100F6664A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB3EA150249EABCD009B3BEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB3EA157249EABCD009B3BEA;
+			remoteInfo = Wunderlist;
+		};
+		5E7B074F24A1870800F6664A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB3EA150249EABCD009B3BEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB3EA157249EABCD009B3BEA;
+			remoteInfo = Wunderlist;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		27D818F124A136D200564B68 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		27D818F524A13A3500564B68 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -44,6 +63,12 @@
 		5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
 		5E7B0736249F3FC700F6664A /* String+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Keys.swift"; sourceTree = "<group>"; };
+		5E7B073C24A186D100F6664A /* WunderlistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WunderlistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E7B073E24A186D100F6664A /* WunderlistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WunderlistTests.swift; sourceTree = "<group>"; };
+		5E7B074024A186D100F6664A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E7B074A24A1870800F6664A /* WunderlistUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WunderlistUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E7B074C24A1870800F6664A /* WunderlistUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WunderlistUITests.swift; sourceTree = "<group>"; };
+		5E7B074E24A1870800F6664A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71FD8FCC2B58933B0E1F333D /* Pods_Wunderlist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wunderlist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F8DCDAA0B717719598C5BAB /* Pods-Wunderlist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wunderlist/Pods-Wunderlist.debug.xcconfig"; sourceTree = "<group>"; };
 		992B96DDB70670EC02E9C30F /* Pods-Wunderlist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.release.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.release.xcconfig"; sourceTree = "<group>"; };
@@ -73,6 +98,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5E7B073924A186D100F6664A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E7B074724A1870800F6664A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB3EA155249EABCD009B3BEA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -103,6 +142,24 @@
 			path = "Global Helpers";
 			sourceTree = "<group>";
 		};
+		5E7B073D24A186D100F6664A /* WunderlistTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E7B073E24A186D100F6664A /* WunderlistTests.swift */,
+				5E7B074024A186D100F6664A /* Info.plist */,
+			);
+			path = WunderlistTests;
+			sourceTree = "<group>";
+		};
+		5E7B074B24A1870800F6664A /* WunderlistUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5E7B074C24A1870800F6664A /* WunderlistUITests.swift */,
+				5E7B074E24A1870800F6664A /* Info.plist */,
+			);
+			path = WunderlistUITests;
+			sourceTree = "<group>";
+		};
 		B9E352786EF74677C055B15C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +175,8 @@
 			isa = PBXGroup;
 			children = (
 				DB3EA15A249EABCD009B3BEA /* Wunderlist */,
+				5E7B073D24A186D100F6664A /* WunderlistTests */,
+				5E7B074B24A1870800F6664A /* WunderlistUITests */,
 				DB3EA159249EABCD009B3BEA /* Products */,
 				B9E352786EF74677C055B15C /* Pods */,
 				F724FB830D5F47C886E74CD8 /* Frameworks */,
@@ -128,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				DB3EA158249EABCD009B3BEA /* Wunderlist.app */,
+				5E7B073C24A186D100F6664A /* WunderlistTests.xctest */,
+				5E7B074A24A1870800F6664A /* WunderlistUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -230,6 +291,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5E7B073B24A186D100F6664A /* WunderlistTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E7B074524A186D100F6664A /* Build configuration list for PBXNativeTarget "WunderlistTests" */;
+			buildPhases = (
+				5E7B073824A186D100F6664A /* Sources */,
+				5E7B073924A186D100F6664A /* Frameworks */,
+				5E7B073A24A186D100F6664A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5E7B074224A186D100F6664A /* PBXTargetDependency */,
+			);
+			name = WunderlistTests;
+			productName = WunderlistTests;
+			productReference = 5E7B073C24A186D100F6664A /* WunderlistTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5E7B074924A1870800F6664A /* WunderlistUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E7B075124A1870800F6664A /* Build configuration list for PBXNativeTarget "WunderlistUITests" */;
+			buildPhases = (
+				5E7B074624A1870800F6664A /* Sources */,
+				5E7B074724A1870800F6664A /* Frameworks */,
+				5E7B074824A1870800F6664A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5E7B075024A1870800F6664A /* PBXTargetDependency */,
+			);
+			name = WunderlistUITests;
+			productName = WunderlistUITests;
+			productReference = 5E7B074A24A1870800F6664A /* WunderlistUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		DB3EA157249EABCD009B3BEA /* Wunderlist */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DB3EA16C249EABD0009B3BEA /* Build configuration list for PBXNativeTarget "Wunderlist" */;
@@ -259,6 +356,14 @@
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = Wunderlist;
 				TargetAttributes = {
+					5E7B073B24A186D100F6664A = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = DB3EA157249EABCD009B3BEA;
+					};
+					5E7B074924A1870800F6664A = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = DB3EA157249EABCD009B3BEA;
+					};
 					DB3EA157249EABCD009B3BEA = {
 						CreatedOnToolsVersion = 11.5;
 					};
@@ -278,11 +383,27 @@
 			projectRoot = "";
 			targets = (
 				DB3EA157249EABCD009B3BEA /* Wunderlist */,
+				5E7B073B24A186D100F6664A /* WunderlistTests */,
+				5E7B074924A1870800F6664A /* WunderlistUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5E7B073A24A186D100F6664A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E7B074824A1870800F6664A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB3EA156249EABCD009B3BEA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -331,6 +452,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5E7B073824A186D100F6664A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E7B073F24A186D100F6664A /* WunderlistTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E7B074624A1870800F6664A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E7B074D24A1870800F6664A /* WunderlistUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB3EA154249EABCD009B3BEA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -362,6 +499,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		5E7B074224A186D100F6664A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB3EA157249EABCD009B3BEA /* Wunderlist */;
+			targetProxy = 5E7B074124A186D100F6664A /* PBXContainerItemProxy */;
+		};
+		5E7B075024A1870800F6664A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB3EA157249EABCD009B3BEA /* Wunderlist */;
+			targetProxy = 5E7B074F24A1870800F6664A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		DB3EA161249EABCD009B3BEA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -382,6 +532,84 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5E7B074324A186D100F6664A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H627294WQZ;
+				INFOPLIST_FILE = WunderlistTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = CodyMorley.WunderlistTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wunderlist.app/Wunderlist";
+			};
+			name = Debug;
+		};
+		5E7B074424A186D100F6664A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H627294WQZ;
+				INFOPLIST_FILE = WunderlistTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = CodyMorley.WunderlistTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wunderlist.app/Wunderlist";
+			};
+			name = Release;
+		};
+		5E7B075224A1870800F6664A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H627294WQZ;
+				INFOPLIST_FILE = WunderlistUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = CodyMorley.WunderlistUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Wunderlist;
+			};
+			name = Debug;
+		};
+		5E7B075324A1870800F6664A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H627294WQZ;
+				INFOPLIST_FILE = WunderlistUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = CodyMorley.WunderlistUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Wunderlist;
+			};
+			name = Release;
+		};
 		DB3EA16A249EABD0009B3BEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -537,6 +765,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5E7B074524A186D100F6664A /* Build configuration list for PBXNativeTarget "WunderlistTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E7B074324A186D100F6664A /* Debug */,
+				5E7B074424A186D100F6664A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E7B075124A1870800F6664A /* Build configuration list for PBXNativeTarget "WunderlistUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E7B075224A1870800F6664A /* Debug */,
+				5E7B075324A1870800F6664A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DB3EA153249EABCD009B3BEA /* Build configuration list for PBXProject "Wunderlist" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
