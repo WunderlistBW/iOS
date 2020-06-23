@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		13A6E1FEDE42389E945A8270 /* Pods_Wunderlist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FD8FCC2B58933B0E1F333D /* Pods_Wunderlist.framework */; };
+		279FEA4E24A14B7700D30D99 /* WunderlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279FEA4D24A14B7700D30D99 /* WunderlistTests.swift */; };
 		27D818F224A136D200564B68 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D818F124A136D200564B68 /* HTTPMethod.swift */; };
 		27D818F624A13A3500564B68 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D818F524A13A3500564B68 /* NetworkError.swift */; };
 		5E7B072F249EDB4F00F6664A /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E7B072E249EDB4F00F6664A /* Onboarding.storyboard */; };
@@ -59,6 +60,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		279FEA4B24A14B7700D30D99 /* WunderlistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WunderlistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		279FEA4D24A14B7700D30D99 /* WunderlistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WunderlistTests.swift; sourceTree = "<group>"; };
+		279FEA4F24A14B7700D30D99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27D818F124A136D200564B68 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		27D818F524A13A3500564B68 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		2FA5D5110893E905758FF010 /* Pods-Wunderlist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.debug.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.debug.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +133,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		279FEA4C24A14B7700D30D99 /* WunderlistTests */ = {
+			isa = PBXGroup;
+			children = (
+				279FEA4D24A14B7700D30D99 /* WunderlistTests.swift */,
+				279FEA4F24A14B7700D30D99 /* Info.plist */,
+			);
+			path = WunderlistTests;
+			sourceTree = "<group>";
+		};
 		5E7B0730249EDB8C00F6664A /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
