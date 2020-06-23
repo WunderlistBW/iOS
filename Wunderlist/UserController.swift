@@ -42,7 +42,7 @@ class NEUserController{
     private init () {
     }
     
-    private let baseURL = URL(string: "")!
+    private let baseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com")!
     private lazy var signUpURL = baseURL.appendingPathComponent("api/auth/register")
     private lazy var signInURL = baseURL.appendingPathComponent("api/auth/login")
     private lazy var editUserURL = baseURL.appendingPathComponent("api/users/")
