@@ -21,6 +21,8 @@
 		B4194FA124A13A9100B3BB5E /* NetworkDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4194FA024A13A9100B3BB5E /* NetworkDataLoader.swift */; };
 		B4194FA324A13AC600B3BB5E /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4194FA224A13AC600B3BB5E /* Bearer.swift */; };
 		B4194FA524A13B1C00B3BB5E /* UserID.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4194FA424A13B1C00B3BB5E /* UserID.swift */; };
+		B4FEBEC724A267B500640C75 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FEBEC624A267B500640C75 /* ListTableViewController.swift */; };
+		B4FEBECA24A26DE600640C75 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FEBEC924A26DE600640C75 /* ListCell.swift */; };
 		DB15110624A104620007858E /* Wunderlist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB15110424A104620007858E /* Wunderlist.xcdatamodeld */; };
 		DB15110824A104730007858E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15110724A104730007858E /* CoreDataStack.swift */; };
 		DB15110A24A1047A0007858E /* List+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB15110924A1047A0007858E /* List+Convenience.swift */; };
@@ -77,6 +79,8 @@
 		B4194FA024A13A9100B3BB5E /* NetworkDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataLoader.swift; sourceTree = SOURCE_ROOT; };
 		B4194FA224A13AC600B3BB5E /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Bearer.swift; path = Wunderlist/Model/Bearer.swift; sourceTree = SOURCE_ROOT; };
 		B4194FA424A13B1C00B3BB5E /* UserID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserID.swift; sourceTree = "<group>"; };
+		B4FEBEC624A267B500640C75 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
+		B4FEBEC924A26DE600640C75 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		DB15110524A104620007858E /* Wunderlist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wunderlist.xcdatamodel; sourceTree = "<group>"; };
 		DB15110724A104730007858E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		DB15110924A1047A0007858E /* List+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Convenience.swift"; sourceTree = "<group>"; };
@@ -158,6 +162,15 @@
 				5E7B074E24A1870800F6664A /* Info.plist */,
 			);
 			path = WunderlistUITests;
+			sourceTree = "<group>";
+		};
+		B4FEBEC824A26DAD00640C75 /* List Views */ = {
+			isa = PBXGroup;
+			children = (
+				B4FEBEC624A267B500640C75 /* ListTableViewController.swift */,
+				B4FEBEC924A26DE600640C75 /* ListCell.swift */,
+			);
+			path = "List Views";
 			sourceTree = "<group>";
 		};
 		B9E352786EF74677C055B15C /* Pods */ = {
@@ -255,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				5E7B0730249EDB8C00F6664A /* Onboarding */,
+				B4FEBEC824A26DAD00640C75 /* List Views */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -476,6 +490,7 @@
 				DB15110824A104730007858E /* CoreDataStack.swift in Sources */,
 				B4194FA524A13B1C00B3BB5E /* UserID.swift in Sources */,
 				DBACA3BC24A119AB00F4872D /* PDMListRepresentation.swift in Sources */,
+				B4FEBEC724A267B500640C75 /* ListTableViewController.swift in Sources */,
 				5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */,
 				DB15110C24A104810007858E /* PersistenceProtocol.swift in Sources */,
 				B4194F9F24A13A7F00B3BB5E /* UserController.swift in Sources */,
@@ -492,6 +507,7 @@
 				B4194F9D24A1393800B3BB5E /* User.swift in Sources */,
 				27D818F624A13A3500564B68 /* NetworkError.swift in Sources */,
 				27D818F224A136D200564B68 /* HTTPMethod.swift in Sources */,
+				B4FEBECA24A26DE600640C75 /* ListCell.swift in Sources */,
 				DBACA3BA24A1198600F4872D /* PDMListController.swift in Sources */,
 				DB3EA15E249EABCD009B3BEA /* SceneDelegate.swift in Sources */,
 			);
