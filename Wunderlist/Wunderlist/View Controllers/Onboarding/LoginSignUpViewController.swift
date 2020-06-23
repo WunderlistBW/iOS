@@ -49,13 +49,11 @@ class LoginSignUpViewController: UIViewController {
         
         switch loggingIn {
         case true:
-            
             statusLabel.text = "Logging Into Wunderlist, one moment..."
             let user = NEUser(username: username,
                               password: password)
             NEUserController.shared.signIn(with: user.username,
                                            password: user.password) { result in
-                                            
                                             do {
                                                 let loginResult = try result.get()
                                                 if loginResult == true {
@@ -69,20 +67,6 @@ class LoginSignUpViewController: UIViewController {
                                                 NSLog("Error. Something horrific happened while trying to log you in. Here's some info about what happened \(error) \(error.localizedDescription)")
                                                 return
                                             }
-                
-                do {
-                    let loginResult = try result.get()
-                    if loginResult == true {
-                        self.statusLabel.textColor = .white
-                        self.statusLabel.text = "Success!"
-                    } else {
-                        self.statusLabel.textColor = .systemRed
-                        self.statusLabel.text = "Something went wrong."
-                    }
-                } catch {
-                    NSLog("Error. Something horrific happened while trying to log you in. Here's some info about what happened \(error) \(error.localizedDescription)")
-                    return
-                }
             }
             
         case false:
