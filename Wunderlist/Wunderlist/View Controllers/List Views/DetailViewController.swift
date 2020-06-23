@@ -9,24 +9,18 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-    
     // MARK: - OUTLETS
-    
     @IBOutlet weak var entryTitleField: UITextField!
     @IBOutlet weak var entryTextView: UITextView!
     @IBOutlet weak var entryDatePicker: UIDatePicker!
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     // MARK: - ACTIONS
-    
     @IBAction func saveButtonTapped(_ sender: Any) {
     }
-    
     /*
     // MARK: - Navigation
 
