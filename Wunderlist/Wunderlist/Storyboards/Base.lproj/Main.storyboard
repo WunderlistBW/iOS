@@ -27,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ysd-TE-AxP">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ysd-TE-AxP" customClass="ListCell" customModule="Wunderlist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ysd-TE-AxP" id="TY3-pp-NPQ">
@@ -57,6 +57,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="reminderButton" destination="PDO-sz-hHp" id="9mb-dG-e55"/>
+                                    <outlet property="reminderName" destination="eiW-W9-D13" id="ZuO-Tu-cJM"/>
                                     <segue destination="Kl6-h0-fbO" kind="show" identifier="CellSegue" id="Izu-iw-29q"/>
                                 </connections>
                             </tableViewCell>
@@ -86,10 +88,10 @@
             </objects>
             <point key="canvasLocation" x="3021.739130434783" y="88.392857142857139"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="pYT-AD-K8y">
             <objects>
-                <viewController id="Kl6-h0-fbO" sceneMemberID="viewController">
+                <viewController id="Kl6-h0-fbO" customClass="DetailViewController" customModule="Wunderlist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s6J-r4-VI0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -126,8 +128,17 @@
                         <viewLayoutGuide key="safeArea" id="W79-Am-1mB"/>
                     </view>
                     <navigationItem key="navigationItem" id="6ja-Uu-J93">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="j25-xe-lp3"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="j25-xe-lp3">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="Kl6-h0-fbO" id="i0w-77-Q3y"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="entryDatePicker" destination="U9W-JV-897" id="jhd-1s-sZL"/>
+                        <outlet property="entryTextView" destination="eJ9-nR-yzS" id="u8G-kr-bD9"/>
+                        <outlet property="entryTitleField" destination="maF-99-Qd0" id="atC-kr-hoT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h49-BV-WV6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
