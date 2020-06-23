@@ -12,6 +12,7 @@ class ListTableViewController: UITableViewController {
     
     var neUserController = NEUserController()
 
+   
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,6 +24,9 @@ class ListTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    @IBAction func entryStatusTapped(_ sender: Any) {
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Transition to log in view if conditions are met
