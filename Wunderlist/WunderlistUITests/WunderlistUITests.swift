@@ -12,4 +12,32 @@ import XCTest
 class WunderlistUITests: XCTestCase {
 
     
+    
+    
+    func testNewUserSignup() {
+        
+    }
+    
+    func testUserLogin() {
+        
+    }
+    
+    func testPasswordIncorrect() {
+        
+    }
+    
+    func testCreateListEntry() {
+        
+    }
+    
+    func testDeleteListEntry() {
+        
+    }
+    
+    func testCheckUserListEntries() {
+        
+    }
+    
+    
+    
 }

@@ -10,6 +10,39 @@ import XCTest
 @testable import Wunderlist
 
 class WunderlistTests: XCTestCase {
+    
+    func testLoginWithoutUserDefaults() {
+        
+    }
+    
+    func testLoginUsingUserDefaults() {
+        
+    }
+    
+    func testCreateListEntryObject() {
+        
+    }
+    
+    func testSaveAndLoadListEntryObject() {
+        
+    }
+    
+    func testDeleteListEntryObject() {
+        
+    }
+    
+    func testListEntryCompletes() {
+        
+    }
+    
+    func testSortListEntryObjectsByDate() {
+        
+    }
+    
+    func testSortListEntryObjectsByCompleted() {
+        
+    }
+    
 
 
 }
