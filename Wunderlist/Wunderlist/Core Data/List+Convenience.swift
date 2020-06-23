@@ -10,24 +10,16 @@ import Foundation
 import CoreData
 
 extension ListEntry: Persistable {
-    convenience init?(
-        name: String,
-        listId: Int64?,
-        dueDate: Date? = Date(),
-        isRecurring: Bool?,
-        dayOfWeek: Int64?,
-        isComplete: Bool?,
-        context: PersistentContext
+    convenience init?(name: String, listId: Int64?, dueDate: Date? = Date(),
+                      isRecurring: Bool?, dayOfWeek: Int64?, isComplete: Bool?,
+                      context: PersistentContext
     ) {
-        guard let context = context as? NSManagedObjectContext,
-        let isRecurring = isRecurring,
-        let listId = listId,
-        let dayOfWeek = dayOfWeek,
-        let isComplete = isComplete
+        guard let context = context as? NSManagedObjectContext, let isRecurring = isRecurring,
+        let listId = listId, let dayOfWeek = dayOfWeek, let isComplete = isComplete
             else { return nil }
         self.init(context: context)
         self.name = name
-        self.id = Int64(listId)
+        self.listId = Int64(listId)
         self.dueDate = dueDate
         self.isRecurring = isRecurring
         self.dayOfWeek = Int64(dayOfWeek)
@@ -56,7 +48,7 @@ extension ListEntry: Persistable {
         guard let name = name,
         let dueDate = dueDate else { return nil }
         return ListRepresentation(name: name, dayOfWeek: Int(dayOfWeek),
-                                  listId: Int(id), isRecurring: isRecurring,
-                                  dueDate: dueDate)
+                                  listId: Int(listId), isRecurring: isRecurring,
+                                  dueDate: dueDate, isComplete: isComplete)
     }
 }
