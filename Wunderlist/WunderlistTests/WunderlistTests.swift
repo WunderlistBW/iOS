@@ -52,7 +52,24 @@ class WunderlistTests: XCTestCase {
     }
     
     func testDeleteListEntryObject() {
-        
+        let testDataStack = CoreDataStack()
+        let testFRC = testDataStack.fetchedResultsController
+        XCTAssertNil(testFRC.fetchedObjects)
+        let dueDate = Date(timeIntervalSinceNow: 100)
+        let newListEntry = ListEntry(name: "newEntry",
+                                     listId: Int64.random(in: 0...1000),
+                                     dueDate: dueDate,
+                                     isRecurring: false,
+                                     dayOfWeek: 2,
+                                     isComplete: false,
+                                     context: testDataStack.mainContext)
+        XCTAssertNotNil(newListEntry)
+        XCTAssertNoThrow(try testDataStack.mainContext.save())
+        XCTAssertNotNil(testFRC.fetchedObjects)
+        XCTAssertEqual(testFRC.fetchedObjects?.count, 1)
+        testDataStack.mainContext.delete(newListEntry!)
+        XCTAssertNoThrow(try testDataStack.mainContext.save())
+        XCTAssertNil(testFRC.fetchedObjects)
     }
     
     func testListEntryCompletes() {
