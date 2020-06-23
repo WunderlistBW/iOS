@@ -10,9 +10,7 @@ import Foundation
 
 struct ListRepresentation: Equatable, Codable {
     var name: String
-    var dayOfWeek: Int?
     var listId: Int?
-    var isRecurring: Bool?
     var dueDate: Date
     var isComplete: Bool?
 }
