@@ -108,15 +108,15 @@ class NEUserController{
                     self.bearer = try self.jsonDecoder.decode(NEBearer.self, from: data)
 //                    self.currentUserID = try self.jsonDecoder.decode(NEUserID.self, from: data)
 //                    print("\(String(describing: self.currentUserID))")
-                    guard let userID = self.currentUserID else { return }
-                    self.fetchUserFromServer(with: userID) { result in
-                        switch result {
-                        case .success(let apiUser):
-                            self.loggedInUser = apiUser
-                        case .failure(let error):
-                            NSLog("Error: \(error)")
-                        }
-                    }
+//                    guard let userID = self.currentUserID else { return }
+//                    self.fetchUserFromServer(with: userID) { result in
+//                        switch result {
+//                        case .success(let apiUser):
+//                            self.loggedInUser = apiUser
+//                        case .failure(let error):
+//                            NSLog("Error: \(error)")
+//                        }
+//                    }
                 } catch {
                     NSLog("Error decoding bearer object: \(error)⚠️⚠️⚠️")
                     completion(.failure(.noToken))
