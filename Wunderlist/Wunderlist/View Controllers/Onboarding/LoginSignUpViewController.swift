@@ -53,8 +53,8 @@ class LoginSignUpViewController: UIViewController {
             statusLabel.text = "Logging Into Wunderlist, one moment..."
             let user = NEUser(username: username,
                               password: password)
-            ///TODO access auth controller for LOGIN here, use guard
-            NEUserController.shared.signIn(with: user.username, password: user.password) { result in
+            NEUserController.shared.signIn(with: user.username,
+                                           password: user.password) { result in
                 
                 do {
                     let loginResult = try result.get()
@@ -73,7 +73,14 @@ class LoginSignUpViewController: UIViewController {
              
         case false:
             statusLabel.text = "Joining Wunderlist, one moment..."
+            let userWithOptions = presentOptions(for: username, with: password)
             ///TODO access auth controller for SIGNUP here, use guard
+            NEUserController.shared.signUp(with: userWithOptions.username,
+                                           password: userWithOptions.password,
+                                           email: userWithOptions.email,
+                                           name: userWithOptions.name) { result in
+                <#code#>
+            }
             ///TODO put this in closure of call to auth controller
             //statusLabel.text = "Success!"
             ///TODO put this in else statement of guard
@@ -136,6 +143,61 @@ class LoginSignUpViewController: UIViewController {
         anchorView.layer.shadowRadius = 10
         rememberMeButton.alpha = 0
         statusLabel.text = ""
+    }
+    
+    private func presentOptions(for username: String, with password: String) -> NEUser {
+        var returnValue: NEUser
+        let options = UIAlertController(title: "Welcome!",
+                                        message: "If you'd like you can help Wunderlist give you all the best featues by providing a little bit of optional info below:",
+                                        preferredStyle: .alert)
+        var name: UITextField!
+        options.addTextField { textfield in
+            name = textfield
+            name.placeholder = "Name"
+        }
+        
+        var email: UITextField!
+        options.addTextField { textfield in
+            email = textfield
+            email.placeholder = "Email Address"
+        }
+        
+        options.addAction(UIAlertAction(title: "Get Started!",
+                                        style: .default,
+                                        handler: { _ in
+                                            switch name.text!.isEmpty {
+                                            case true:
+                                                switch email.text!.isEmpty {
+                                                case true:
+                                                    returnValue = NEUser(username: username,
+                                                                         password: password)
+                                                case false:
+                                                    if let emailString = email.text {
+                                                        returnValue = NEUser(username: username,
+                                                                             password: password,
+                                                                             email: emailString)
+                                                    }
+                                                }
+                                            case false:
+                                                if let nameString = name.text {
+                                                    switch email.text!.isEmpty {
+                                                    case true:
+                                                        returnValue = NEUser(username: username,
+                                                                             password: password,
+                                                                             name: nameString)
+                                                    case false:
+                                                        if let emailString = email.text {
+                                                            returnValue = NEUser(username: username,
+                                                                                 password: password,
+                                                                                 email: emailString,
+                                                                                 name: nameString)
+                                                        }
+                                                    }
+                                                }
+                                            }
+        }))
+        present(options, animated: true, completion: nil)
+        return returnValue
     }
     
     func createObservers() {
