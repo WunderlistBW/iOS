@@ -46,7 +46,8 @@ class ListController {
             completion(error)
             return
         }
-        URLSession.shared.dataTask(with: request) { data, _, error in // need to assign ID's of the returned successful post
+        URLSession.shared.dataTask(with: request) { _, _, error in
+            // need to assign ID's of the returned successful post
             if let error = error {
                 print("Error fetching entries: \(error.localizedDescription)")
                 DispatchQueue.main.async {
@@ -93,7 +94,6 @@ class ListController {
             }
         }.resume()
     }
-    
     private func updateList(with representation: [ListRepresentation]) throws {
         let entriesWithId = representation.filter { $0.listId != nil }
         let identifiersToFetch = entriesWithId.compactMap { $0.listId! }
@@ -126,17 +126,13 @@ class ListController {
     private func update(listEntry: ListEntry, with representation: ListRepresentation) {
         listEntry.name = representation.name
         listEntry.dueDate = representation.dueDate
-        listEntry.isRecurring = representation.isRecurring ?? false
-        listEntry.dayOfWeek = Int64(representation.dayOfWeek ?? 0)
         listEntry.isComplete = representation.isComplete ?? false
     }
-    func createListEntry(with name: String, listId: Int64, dueDate: Date? = Date(),
-                         isRecurring: Bool? = false, isComplete: Bool? = false, dayOfWeek: Int64) throws {
+    func createListEntry(with name: String, listId: Int64, dueDate: Date? = Date(), isComplete: Bool? = false) throws {
         let context = persistentStoreController.mainContext
         guard  let list = ListEntry(name: name, listId: listId,
                                     dueDate: dueDate ?? Date(),
-                                    isRecurring: isRecurring,
-                                    dayOfWeek: dayOfWeek, isComplete: isComplete,
+                                     isComplete: isComplete,
                                     context: context) else { return }
         putListToServer(list: list)
         do {
