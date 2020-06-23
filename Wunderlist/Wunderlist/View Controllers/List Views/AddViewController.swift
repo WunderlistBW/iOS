@@ -9,11 +9,18 @@
 import UIKit
 
 class AddViewController: UIViewController {
-
+    // MARK: - OUTLETS
+        @IBOutlet weak var nameTextField: UITextField!
+   @IBOutlet weak var isCompleteControl: UISegmentedControl!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    // MARK: - ACTIONS
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        navigationController?.dismiss(animated: true, completion: nil)
+        //this dismisses the nav controller and goes back to the table view
     }
     
 
