@@ -37,7 +37,7 @@
                                             <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="9XI-7B-S3w" kind="showDetail" identifier="SIgnup" id="BhG-jN-X2m"/>
+                                            <segue destination="9XI-7B-S3w" kind="showDetail" identifier="Signup" id="BhG-jN-X2m"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7At-ZE-Uk8">
@@ -235,7 +235,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="cSg-Ca-Wi8"/>
+        <segue reference="BhG-jN-X2m"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark.square" catalog="system" width="128" height="114"/>
