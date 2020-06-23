@@ -54,7 +54,6 @@ class LoginSignUpViewController: UIViewController {
                               password: password)
             NEUserController.shared.signIn(with: user.username,
                                            password: user.password) { result in
-                                            
                                             do {
                                                 let loginResult = try result.get()
                                                 if loginResult == true {
