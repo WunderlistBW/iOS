@@ -14,9 +14,196 @@
             filePath = "UserController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "signIn(with:password:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D71B7FA1-8D1F-46D2-898D-3F9186FC2916"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wunderlist/View Controllers/List Views/ListCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "listEntry"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "D71B7FA1-8D1F-46D2-898D-3F9186FC2916 - c1f2254c4774a476"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wunderlist.ListCell.listEntry.getter : Swift.Optional&lt;Wunderlist.ListEntry&gt;"
+                  moduleName = "Wunderlist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/patrickmillet/Documents/Development/Wunderlist_BW/Wunderlist/Wunderlist/View%20Controllers/List%20Views/ListCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "126">
+               </Location>
+               <Location
+                  uuid = "D71B7FA1-8D1F-46D2-898D-3F9186FC2916 - 1db72e20ba291782"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wunderlist.ListCell.listEntry.setter : Swift.Optional&lt;Wunderlist.ListEntry&gt;"
+                  moduleName = "Wunderlist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/patrickmillet/Documents/Development/Wunderlist_BW/Wunderlist/Wunderlist/View%20Controllers/List%20Views/ListCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "308">
+               </Location>
+               <Location
+                  uuid = "D71B7FA1-8D1F-46D2-898D-3F9186FC2916 - 631f5c537c6f1071"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wunderlist.ListCell.listEntry.modify : Swift.Optional&lt;Wunderlist.ListEntry&gt;"
+                  moduleName = "Wunderlist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/patrickmillet/Documents/Development/Wunderlist_BW/Wunderlist/Wunderlist/View%20Controllers/List%20Views/ListCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  uuid = "D71B7FA1-8D1F-46D2-898D-3F9186FC2916 - dbb253b238dbd4ea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wunderlist.ListCell.listEntry.modify : Swift.Optional&lt;Wunderlist.ListEntry&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Wunderlist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/patrickmillet/Documents/Development/Wunderlist_BW/Wunderlist/Wunderlist/View%20Controllers/List%20Views/ListCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  uuid = "D71B7FA1-8D1F-46D2-898D-3F9186FC2916 - a9adfbf867769a33"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wunderlist.ListCell.init(style: __C.UITableViewCellStyle, reuseIdentifier: Swift.Optional&lt;Swift.String&gt;) -&gt; Wunderlist.ListCell"
+                  moduleName = "Wunderlist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/patrickmillet/Documents/Development/Wunderlist_BW/Wunderlist/Wunderlist/View%20Controllers/List%20Views/ListCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "888">
+               </Location>
+               <Location
+                  uuid = "D71B7FA1-8D1F-46D2-898D-3F9186FC2916 - 1181182ce637c0cd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wunderlist.ListCell.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Wunderlist.ListCell&gt;"
+                  moduleName = "Wunderlist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/patrickmillet/Documents/Development/Wunderlist_BW/Wunderlist/Wunderlist/View%20Controllers/List%20Views/ListCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "823">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5CEDF803-8336-4FFA-9DAD-96C7C7695370"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wunderlist/Networking_API/PDMListController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "createListEntry(with:dueDate:isComplete:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5CEDF803-8336-4FFA-9DAD-96C7C7695370 - bb59eef4a11f2309"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 1 of Wunderlist.ListController.createListEntry(with: Swift.String, dueDate: Swift.Optional&lt;Foundation.Date&gt;, isComplete: Swift.Optional&lt;Swift.Bool&gt;) throws -&gt; ()"
+                  moduleName = "Wunderlist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/patrickmillet/Documents/Development/Wunderlist_BW/Wunderlist/Wunderlist/Networking_API/PDMListController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "5CEDF803-8336-4FFA-9DAD-96C7C7695370 - 46dfb6e811a09108"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 2 of Wunderlist.ListController.createListEntry(with: Swift.String, dueDate: Swift.Optional&lt;Foundation.Date&gt;, isComplete: Swift.Optional&lt;Swift.Bool&gt;) throws -&gt; ()"
+                  moduleName = "Wunderlist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/patrickmillet/Documents/Development/Wunderlist_BW/Wunderlist/Wunderlist/Networking_API/PDMListController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "6">
+               </Location>
+               <Location
+                  uuid = "5CEDF803-8336-4FFA-9DAD-96C7C7695370 - 35cead8faf594fed"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wunderlist.ListController.createListEntry(with: Swift.String, dueDate: Swift.Optional&lt;Foundation.Date&gt;, isComplete: Swift.Optional&lt;Swift.Bool&gt;) throws -&gt; ()"
+                  moduleName = "Wunderlist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/patrickmillet/Documents/Development/Wunderlist_BW/Wunderlist/Wunderlist/Networking_API/PDMListController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "281">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6CAF646A-17AB-4449-A5FD-E8F64167081E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wunderlist/View Controllers/List Views/AddViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "save(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

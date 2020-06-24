@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ListRepresentation: Equatable, Codable {
+struct ListRepresentation: Equatable, Codable, Persistable {
     var name: String
     var listId: Int?
     var dueDate: Date
