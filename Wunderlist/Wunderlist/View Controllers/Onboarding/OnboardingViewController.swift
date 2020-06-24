@@ -14,18 +14,11 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var pageControl: UIPageControl!
     var imageFrame = CGRect.zero
     var welcomeSlideShow: [String] = ["0", "1", "2", "3"]
-    var imageView = UIImageView()
     // MARK: - Life Cycles -
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
         updateViews()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.imageView.frame = scrollView.bounds
     }
     // MARK: - Scroll View Delegate -
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -58,10 +51,8 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
             imageFrame.origin.x = scrollView.frame.size.width * CGFloat(slide)
             let slideImage = UIImageView(frame: imageFrame)
             slideImage.image = UIImage(named: welcomeSlideShow[slide])
-            slideImage.invalidateIntrinsicContentSize()
             slideImage.layer.masksToBounds = true
             slideImage.contentMode = .scaleAspectFit
-            self.imageView = slideImage
             self.scrollView.addSubview(slideImage)
         }
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width * CGFloat(welcomeSlideShow.count),
