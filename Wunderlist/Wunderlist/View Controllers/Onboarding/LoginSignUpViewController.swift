@@ -52,8 +52,10 @@ class LoginSignUpViewController: UIViewController {
                                             do {
                                                 let loginResult = try result.get()
                                                 if loginResult == true {
+                                                    DispatchQueue.main.async {
                                                     self.statusLabel.textColor = .white
                                                     self.statusLabel.text = "Success!"
+                                                    }
                                                 } else {
                                                     self.statusLabel.textColor = .systemRed
                                                     self.statusLabel.text = "Something went wrong."

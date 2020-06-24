@@ -11,7 +11,7 @@ import UIKit
 class AddViewController: UIViewController {
     // MARK: - PROPERTIES
     var listController: ListController?
-    var listEntry = ListEntry()
+    var listEntry: ListEntry?
     var listEntryController: ListEntryController?
     // MARK: - OUTLETS
     @IBOutlet weak var nameTextField: UITextField!

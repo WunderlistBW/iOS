@@ -12,14 +12,11 @@ protocol UserStateDelegate {
     func userLoggedIn()
 }
 
-class NEUserController{
-    
+class NEUserController {
     var dataLoader: NetworkDataLoader?
-    
     init(dataLoader: NetworkDataLoader = URLSession.shared) {
         self.dataLoader = dataLoader
     }
-    
     struct APIUser: Codable {
         var id: Int
         var username: String
@@ -29,7 +26,6 @@ class NEUserController{
         case failedSignUp, failedSignIn, noData, badData, noToken, failedLogOut, otherError, failedUpdate
     }
     // MARK: - Properties
-    
     static let shared = NEUserController()
     var loggedInUser: APIUser?
     var delegate: UserStateDelegate?
@@ -56,7 +52,7 @@ class NEUserController{
         do {
             let jsonData = try jsonEncoder.encode(user)
             request.httpBody = jsonData
-            let task = URLSession.shared.dataTask(with: request) { _, response, error in
+            let task = URLSession.shared.dataTask(with: request) { _, response, error in //TODO: Decode userID?
                 if let error = error {
                     NSLog("Sign up failed with error: \(error)⚠️⚠️⚠️")
                     completion(.failure(.failedSignUp))
@@ -106,17 +102,7 @@ class NEUserController{
                 }
                 do {
                     self.bearer = try self.jsonDecoder.decode(NEBearer.self, from: data)
-//                    self.currentUserID = try self.jsonDecoder.decode(NEUserID.self, from: data)
-//                    print("\(String(describing: self.currentUserID))")
-//                    guard let userID = self.currentUserID else { return }
-//                    self.fetchUserFromServer(with: userID) { result in
-//                        switch result {
-//                        case .success(let apiUser):
-//                            self.loggedInUser = apiUser
-//                        case .failure(let error):
-//                            NSLog("Error: \(error)")
-//                        }
-//                    }
+                    print("\(self.bearer)")
                 } catch {
                     NSLog("Error decoding bearer object: \(error)⚠️⚠️⚠️")
                     completion(.failure(.noToken))
