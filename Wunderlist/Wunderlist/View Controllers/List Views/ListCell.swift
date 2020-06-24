@@ -14,7 +14,6 @@ class ListCell: UITableViewCell {
     
     // MARK: OUTLETS
     @IBOutlet weak var reminderName: UILabel!
-    @IBOutlet weak var reminderButton: UIButton!
     @IBOutlet weak var isCompleteButton: UIButton!
     var listEntry: ListEntry? {
         didSet {
@@ -22,8 +21,7 @@ class ListCell: UITableViewCell {
         }
     }
     func updateViews() {
-         guard let task = listEntry else { return }
-         reminderName.text = task.name
+         guard let _ = listEntry else { return }
         isCompleteButton.setBackgroundImage(UIImage(named: "alarm"), for: .normal)
      }
     // MARK: - ACTIONS

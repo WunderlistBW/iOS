@@ -65,7 +65,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="reminderButton" destination="PDO-sz-hHp" id="9mb-dG-e55"/>
+                                    <outlet property="isCompleteButton" destination="PDO-sz-hHp" id="iKh-dV-f7J"/>
                                     <outlet property="reminderName" destination="eiW-W9-D13" id="ZuO-Tu-cJM"/>
                                     <segue destination="JdF-3B-QMV" kind="show" identifier="DetailSegue" id="SPO-Xe-lfc"/>
                                 </connections>
