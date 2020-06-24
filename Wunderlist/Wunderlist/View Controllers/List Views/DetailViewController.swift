@@ -19,11 +19,6 @@ class DetailViewController: UIViewController {
         updateViews()
         navigationItem.rightBarButtonItem = editButtonItem
     }
-//    private init() {
-//    }
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
     // MARK: - PROPERTIES
     var listController: ListController?
     var wasEdited = false

@@ -52,26 +52,34 @@ class ListTableViewController: UITableViewController {
         return cell
     }
     // MARK: - DELETE LIST ITEM FROM SERVER & TABLE VIEW (uncomment after delete func done)
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            // Delete the row from the data source
-//            let task = fetchedResultsController.object(at: indexPath)
-//            listController.deleteListFromServer(task) { result in
-//                guard let _ = try? result.get() else {
-//                    return
-//                }
-//                DispatchQueue.main.async {
-//                    let context = CoreDataStack.shared.mainContext
-//                    context.delete(task)
-//                    do {
-//                        try context.save()
-//                    } catch {
-//                        context.reset()
-//                        NSLog("Error saving managed object context (delete task): \(error)")
-//                    }
-//                }}
-//        }
-//    }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            let task = fetchedResultsController.object(at: indexPath)
+            listController.deleteListFromServer(task) { result in
+                guard let _ = try? result.get() else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    let context = CoreDataStack.shared.mainContext
+                    context.delete(task)
+                    do {
+                        try context.save()
+                    } catch {
+                        context.reset()
+                        NSLog("Error saving managed object context (delete task): \(error)")
+                    }
+                }}
+        }
+    }
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    }
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
     // MARK: - Navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CreateSegue" {

@@ -15,7 +15,6 @@ class ListCell: UITableViewCell {
     
     // MARK: OUTLETS
     @IBOutlet weak var reminderName: UILabel!
-    @IBOutlet weak var reminderButton: UIButton!
     @IBOutlet weak var isCompleteButton: UIButton!
     var listEntry: ListEntry? {
         didSet {
