@@ -31,7 +31,6 @@ class NEUserController {
     var delegate: UserStateDelegate?
     var bearer: NEBearer?
     var currentUserID: NEUserID?
-    
     private init () {
     }
     private let baseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com")!
@@ -41,7 +40,6 @@ class NEUserController {
     private lazy var fetchUserURL = baseURL.appendingPathComponent("api/users/")
     private lazy var jsonEncoder = JSONEncoder()
     private lazy var jsonDecoder = JSONDecoder()
-    
     func signUp(with username: String, password: String, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         let user = NEUser(username: username, password: password)
         print("\(String(describing: loggedInUser))🧚🏿‍♀️")
@@ -77,7 +75,6 @@ class NEUserController {
         var request = URLRequest(url: signInURL)
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
         do {
             let signInUser = NEUser(username: username, password: password)
             print(signInUser)
@@ -102,7 +99,7 @@ class NEUserController {
                 }
                 do {
                     self.bearer = try self.jsonDecoder.decode(NEBearer.self, from: data)
-                    print("\(self.bearer)")
+                    print("\(self.bearer)" ?? "No Bearer")
                 } catch {
                     NSLog("Error decoding bearer object: \(error)⚠️⚠️⚠️")
                     completion(.failure(.noToken))
