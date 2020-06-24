@@ -90,6 +90,9 @@ class LoginSignUpViewController: UIViewController {
             print("Error with the loggin in boolean")
         }
         UserDefaults.standard.set(true, forKey: .loggedInKey)
+        
+        NEUserController.shared.signIn(with: username, password: password) { _ in }
+        
         presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
