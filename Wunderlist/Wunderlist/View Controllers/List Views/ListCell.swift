@@ -15,11 +15,17 @@ class ListCell: UITableViewCell {
     // MARK: OUTLETS
     @IBOutlet weak var reminderName: UILabel!
     @IBOutlet weak var reminderButton: UIButton!
+    @IBOutlet weak var isCompleteButton: UIButton!
     var listEntry: ListEntry? {
         didSet {
-            // To do
+            updateViews()
         }
     }
+    func updateViews() {
+         guard let task = listEntry else { return }
+         reminderName.text = task.name
+        isCompleteButton.setBackgroundImage(UIImage(named: "alarm"), for: .normal)
+     }
     // MARK: - ACTIONS
     @IBAction func reminderTapped(_ sender: UIButton) {
         guard let listEntry = listEntry else { return }

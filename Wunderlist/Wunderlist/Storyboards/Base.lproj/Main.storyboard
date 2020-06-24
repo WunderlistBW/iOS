@@ -32,7 +32,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ysd-TE-AxP" customClass="ListCell" customModule="Wunderlist" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListCell" id="ysd-TE-AxP" customClass="ListCell" customModule="Wunderlist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ysd-TE-AxP" id="TY3-pp-NPQ">
@@ -67,7 +67,7 @@
                                 <connections>
                                     <outlet property="reminderButton" destination="PDO-sz-hHp" id="9mb-dG-e55"/>
                                     <outlet property="reminderName" destination="eiW-W9-D13" id="ZuO-Tu-cJM"/>
-                                    <segue destination="JdF-3B-QMV" kind="show" identifier="ListCell" id="SPO-Xe-lfc"/>
+                                    <segue destination="JdF-3B-QMV" kind="show" identifier="DetailSegue" id="SPO-Xe-lfc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
