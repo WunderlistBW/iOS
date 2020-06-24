@@ -7,42 +7,58 @@
 //
 
 import UIKit
-
+// TODO - ADD COMPLETED CONTROL ON SCREEN VC? - OUTLET FOR IT BELOW
 class AddViewController: UIViewController {
     // MARK: - PROPERTIES
+    let context = CoreDataStack.shared.mainContext
     var listController: ListController?
     var listEntry: ListEntry?
     var listEntryController: ListEntryController?
+    // DATE FORMATTER
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.dateFormat = "YYYY-MM-DD HH:MM:SS:SSS"
+        return formatter
+    }()
     // MARK: - OUTLETS
     @IBOutlet weak var nameTextField: UITextField!
     // In case we want to add that segmented complete control
     @IBOutlet weak var isCompleteControl: UISegmentedControl!
+    @IBOutlet weak var addDatePicker: UIDatePicker!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     // MARK: - ACTIONS
     // TO DO - ADD CANCEL BUTTON ON VC
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         navigationController?.dismiss(animated: true, completion: nil)
-        //this dismisses the nav controller and goes back to the table view
     }
+    // TO SAVE A CREATED LIST ENTRY
     @IBAction func save(_ sender: UIBarButtonItem) {
-//        guard let name = nameTextField.text, !name.isEmpty else { return }
-//        //TO DO - FIX
-//        let listStatus = isCompleteControl.selectedSegmentIndex
-//        let status = ListStatus.allCases[listStatus]
-//        //TO DO - FIXXXXX
-//        guard let listEntry = ListEntry(name: name, listId: _,
-//        dueDate: _, isRecurring: _, dayOfWeek: _, isComplete: _, context: _) else { }
-//        listEntryController?.getEntry(name: name)
-//        do {
-//            try CoreDataStack.shared.mainContext.save()
-//            navigationController?.dismiss(animated: true, completion: nil)
-//        } catch {
-//            NSLog("Error saving managed object context: \(error)")
-//        }
+        let dateString = dateFormatter.string(from: addDatePicker.date)
+        // HELP
+        guard let name = nameTextField.text, !name.isEmpty else { return }
+        let dueDate = addDatePicker.date
+        if let listEntry = listEntry {
+            listEntry.name = name
+            listEntry.dueDate = dueDate
+        } else {
+            do {
+                try listController?.createListEntry(with: name, dueDate: dueDate)
+            } catch {
+                print("Error creating entry from Add Entry VC")
+            }
+        }
+        let alert = UIAlertController(title: "Saved", message: "Your list entry has been saved!",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Finished",
+                                      style: .default) { (UIAlertAction) -> Void in
+                                        self.navigationController?.dismiss(animated: true, completion: nil)
+        })
+        present(alert, animated: true, completion: nil)
     }
+} // EOC
     /*
      // MARK: - Navigation
      
@@ -52,4 +68,4 @@ class AddViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
-} // EOD
+

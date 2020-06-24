@@ -4,3 +4,5 @@ Wunderlist/.DS_Store
 *.xcuserstate
 
 .DS_Store
+
+Wunderlist/Pods/Pods.xcodeproj/xcuserdata/nonye.xcuserdatad/xcschemes/xcschememanagement.plist

@@ -15,7 +15,7 @@ enum ListStatus: String, CaseIterable {
 }
 
 extension ListEntry: Persistable {
-    convenience init?(name: String, dueDate: Date? = Date(), isComplete: Bool?,
+    convenience init?(name: String, dueDate: Date? = Date(), isComplete: Bool? = false,
                       context: PersistentContext
     ) {
         guard let context = context as? NSManagedObjectContext, let isComplete = isComplete
