@@ -11,6 +11,6 @@ import Foundation
 struct NEUserID: Codable {
     var userId: Int
     enum CodingKeys: String, CodingKey {
-        case userId = "id"
+        case userId = "user_id"
     }
 }

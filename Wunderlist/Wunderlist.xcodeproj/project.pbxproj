@@ -34,6 +34,7 @@
 		DB3EA163249EABCD009B3BEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA161249EABCD009B3BEA /* Main.storyboard */; };
 		DB3EA165249EABD0009B3BEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA164249EABD0009B3BEA /* Assets.xcassets */; };
 		DB3EA168249EABD0009B3BEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA166249EABD0009B3BEA /* LaunchScreen.storyboard */; };
+		DBACA3B824A106D100F4872D /* PDMListEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3B724A106D100F4872D /* PDMListEntryController.swift */; };
 		DBACA3BA24A1198600F4872D /* PDMListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3B924A1198600F4872D /* PDMListController.swift */; };
 		DBACA3BC24A119AB00F4872D /* PDMListRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3BB24A119AB00F4872D /* PDMListRepresentation.swift */; };
 /* End PBXBuildFile section */
@@ -92,6 +93,7 @@
 		DB3EA164249EABD0009B3BEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB3EA167249EABD0009B3BEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB3EA169249EABD0009B3BEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBACA3B724A106D100F4872D /* PDMListEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMListEntryController.swift; sourceTree = "<group>"; };
 		DBACA3B924A1198600F4872D /* PDMListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMListController.swift; sourceTree = "<group>"; };
 		DBACA3BB24A119AB00F4872D /* PDMListRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMListRepresentation.swift; sourceTree = "<group>"; };
 		F485D1A929BE2D5E081E4B61 /* Pods-Wunderlist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wunderlist/Pods-Wunderlist.release.xcconfig"; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				B4194F9E24A13A7F00B3BB5E /* UserController.swift */,
+				DBACA3B724A106D100F4872D /* PDMListEntryController.swift */,
 			);
 			path = "Model Controller";
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBACA3B824A106D100F4872D /* PDMListEntryController.swift in Sources */,
 				DB15110824A104730007858E /* CoreDataStack.swift in Sources */,
 				B4FEBECC24A2707200640C75 /* DetailViewController.swift in Sources */,
 				B4194FA524A13B1C00B3BB5E /* UserID.swift in Sources */,

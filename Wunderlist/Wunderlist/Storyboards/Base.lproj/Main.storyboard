@@ -32,14 +32,14 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListCell" rowHeight="43.5" id="ysd-TE-AxP" customClass="ListCell" customModule="Wunderlist" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListCell" id="ysd-TE-AxP" customClass="ListCell" customModule="Wunderlist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ysd-TE-AxP" id="TY3-pp-NPQ">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hq3-TM-Mh5">
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="313" translatesAutoresizingMaskIntoConstraints="NO" id="Hq3-TM-Mh5">
                                             <rect key="frame" x="20" y="11" width="374" height="22"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eiW-W9-D13">
@@ -49,7 +49,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDO-sz-hHp">
-                                                    <rect key="frame" x="50" y="0.0" width="324" height="22"/>
+                                                    <rect key="frame" x="355" y="0.0" width="19" height="22"/>
                                                     <state key="normal" image="alarm" catalog="system"/>
                                                     <connections>
                                                         <action selector="reminderTapped:" destination="ysd-TE-AxP" eventType="touchUpInside" id="5Qh-Sq-yzV"/>
@@ -91,7 +91,7 @@
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="sOs-e6-NWA">
                             <connections>
-                                <segue destination="Kl6-h0-fbO" kind="show" identifier="CreateSegue" id="9QC-A9-zRH"/>
+                                <segue destination="CxZ-lL-JFR" kind="show" identifier="CreateSegue" id="XTg-ck-EW8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -236,6 +236,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Eg-Ru-ePc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2111.594202898551" y="87.723214285714278"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Axe-vm-mIS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CxZ-lL-JFR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="GQ6-Je-Vnf"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mYy-OF-7mn">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Kl6-h0-fbO" kind="relationship" relationship="rootViewController" id="JuP-w2-4gy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ABX-yv-VhD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3960.8695652173915" y="-512.27678571428567"/>
         </scene>
     </scenes>
     <resources>
