@@ -99,7 +99,7 @@ class NEUserController {
                 }
                 do {
                     self.bearer = try self.jsonDecoder.decode(NEBearer.self, from: data)
-                    print("\(self.bearer)" ?? "No Bearer")
+                    print("\(String(describing: self.bearer))")
                 } catch {
                     NSLog("Error decoding bearer object: \(error)⚠️⚠️⚠️")
                     completion(.failure(.noToken))
