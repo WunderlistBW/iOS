@@ -9,7 +9,6 @@
 import UIKit
 
 class ListCell: UITableViewCell {
-    
     var listEntryController = ListEntryController()
     var isCompleted: Bool = false
     
@@ -35,5 +34,3 @@ class ListCell: UITableViewCell {
         }
     }
 }
-
-

@@ -40,7 +40,7 @@ class CoreDataStack: NSObject, PersistentStoreController {
         let fetchRequest: NSFetchRequest<ListEntry> = ListEntry.fetchRequest()
         fetchRequest.sortDescriptors = [
             //sort by key here
-            NSSortDescriptor(key: "timestamp", ascending: false)]
+            NSSortDescriptor(key: "dueDate", ascending: false)]
         let frc = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: moc,

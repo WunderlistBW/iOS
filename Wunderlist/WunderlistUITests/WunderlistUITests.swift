@@ -11,11 +11,8 @@ import XCTest
 
 class WunderlistUITests: XCTestCase {
 
-    
-    
-    
     func testNewUserSignup() {
-        
+                
     }
     
     func testUserLogin() {

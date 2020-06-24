@@ -67,14 +67,14 @@ class LoginSignUpViewController: UIViewController {
             statusLabel.text = "Joining Wunderlist, one moment..."
             let userWithOptions = presentOptions(for: username, with: password)
             NEUserController.shared.signUp(with: userWithOptions.username,
-                                           password: userWithOptions.password,
-                                           email: userWithOptions.email,
-                                           name: userWithOptions.name) { result in
+                                           password: userWithOptions.password) { result in
                                             do {
                                                 let loginResult = try result.get()
                                                 if loginResult == true {
-                                                    self.statusLabel.textColor = .white
-                                                    self.statusLabel.text = "Welcome to Wunderlist!"
+                                                    DispatchQueue.main.async {
+                                                        self.statusLabel.textColor = .white
+                                                        self.statusLabel.text = "Welcome to Wunderlist!"
+                                                    }
                                                 } else {
                                                     self.statusLabel.textColor = .systemRed
                                                     self.statusLabel.text = "Something went wrong."
@@ -118,7 +118,6 @@ class LoginSignUpViewController: UIViewController {
         usernameTextField.text = user
         passwordTextField.text = password
     }
-    
     private func checkRememberMe() {
         if usernameTextField.text == UserDefaults.standard.object(forKey: .userKey) as? String &&
             passwordTextField.text == UserDefaults.standard.object(forKey: .passKey) as? String {
@@ -140,59 +139,26 @@ class LoginSignUpViewController: UIViewController {
     private func presentOptions(for username: String,
                                 with password: String) -> NEUser {
         var returnValue: NEUser?
-        var unwrappedReturn: NEUser
         let options = UIAlertController(title: "Welcome!",
-                                        message: "If you'd like you can help Wunderlist give you all the best featues by providing a little bit of optional info below:",
+                                        message: "If you'd like you can help Wunderlist give you all the best featues by providing a little bit of info below:",
                                         preferredStyle: .alert)
-        var name: UITextField!
-        options.addTextField { textfield in
-            name = textfield
-            name.placeholder = "Name"
-        }
-        var email: UITextField!
-        options.addTextField { textfield in
-            email = textfield
-            email.placeholder = "Email Address"
-        }
         options.addAction(UIAlertAction(title: "Get Started!",
                                         style: .default,
                                         handler: { _ in
-                                            switch name.text!.isEmpty {
+                                            switch self.usernameTextField.text!.isEmpty && self.passwordTextField.text!.isEmpty {
                                             case true:
-                                                switch email.text!.isEmpty {
-                                                case true:
-                                                    returnValue = NEUser(username: username,
-                                                                         password: password)
-                                                case false:
-                                                    if let emailString = email.text {
-                                                        returnValue = NEUser(username: username,
-                                                                             password: password,
-                                                                             email: emailString)
-                                                    }
-                                                }
+                                                returnValue = NEUser(username: username,
+                                                                     password: password)
                                             case false:
-                                                if let nameString = name.text {
-                                                    switch email.text!.isEmpty {
-                                                    case true:
-                                                        returnValue = NEUser(username: username,
-                                                                             password: password,
-                                                                             name: nameString)
-                                                    case false:
-                                                        if let emailString = email.text {
-                                                            returnValue = NEUser(username: username,
-                                                                                 password: password,
-                                                                                 email: emailString,
-                                                                                 name: nameString)
-                                                        }
-                                                    }
-                                                }
+                                                print("Text field empty")
                                             }
         }))
         present(options, animated: true, completion: nil)
-        unwrappedReturn = returnValue!
-        return unwrappedReturn
+        if let username = usernameTextField.text, let password = passwordTextField.text{
+         returnValue = NEUser(username: username, password: password)
+        }
+        return returnValue! //TODO: Fix implicit unwrap
     }
-    
     func createObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillChange(notification:)),
