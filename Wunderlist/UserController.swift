@@ -50,10 +50,7 @@ class NEUserController {
         do {
             let jsonData = try jsonEncoder.encode(user)
             request.httpBody = jsonData
-        } catch {
-            print("Error encoding user from userController")
-        }
-        _ = URLSession.shared.dataTask(with: request) { data, response, error in
+            let task = URLSession.shared.dataTask(with: request) { _, response, error in //TODO: Decode userID?
                 if let error = error {
                     NSLog("Sign up failed with error: \(error)⚠️⚠️⚠️")
                     completion(.failure(.failedSignUp))
@@ -65,17 +62,13 @@ class NEUserController {
                     completion(.failure(.failedSignIn))
                     return
                 }
-                if let data = data {
-                    do {
-                        try self.currentUserID = self.jsonDecoder.decode(NEUserID.self, from: data)
-                        print("\(self.currentUserID)")
-                    } catch {
-                        print("Error decoding userID object")
-                        completion(.failure(.failedSignUp))
-                    }
-                }
                 completion(.success(true))
-        }.resume()
+            }
+            task.resume()
+        } catch {
+            NSLog("Error encoding user: \(error)")
+            completion(.failure(.failedSignUp))
+        }
     }
     func signIn(with username: String, password: String, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         print("signInURL = \(signInURL.absoluteString)")
