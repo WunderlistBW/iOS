@@ -128,9 +128,9 @@ class ListController {
         listEntry.dueDate = representation.dueDate
         listEntry.isComplete = representation.isComplete ?? false
     }
-    func createListEntry(with name: String, listId: Int64, dueDate: Date? = Date(), isComplete: Bool? = false) throws {
+    func createListEntry(with name: String, dueDate: Date? = Date(), isComplete: Bool? = false) throws {
         let context = persistentStoreController.mainContext
-        guard  let list = ListEntry(name: name, listId: listId,
+        guard  let list = ListEntry(name: name,
                                     dueDate: dueDate ?? Date(),
                                      isComplete: isComplete,
                                     context: context) else { return }
