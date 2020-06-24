@@ -25,14 +25,6 @@ extension ListEntry: Persistable {
         self.dueDate = dueDate
         self.isComplete = isComplete
     }
-    static let dateFormatter: DateFormatter = {
-        var formatter = DateFormatter()
-        formatter.calendar = .autoupdatingCurrent
-        formatter.timeZone = .autoupdatingCurrent
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter
-    }()
     @discardableResult convenience init?(listRepresentation: ListRepresentation, context: PersistentContext) {
         guard let isComplete = listRepresentation.isComplete else { return nil }
         let name = listRepresentation.name

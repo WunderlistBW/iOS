@@ -11,7 +11,6 @@ import CoreData
 
 class ListController {
     // MARK: - Properties
-    
     var searchedListEntry: [ListRepresentation] = []
     var persistentStoreController: PersistentStoreController = CoreDataStack()
     var listCount: Int {
@@ -29,12 +28,9 @@ class ListController {
         }
     }
     typealias CompletionHandler = (Error?) -> Void
-    static let sharedInstance = ListController()
-    private let databaseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com/")! // set up database URL
-
+    private let databaseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com/")!
     func putListToServer(list: ListEntry, completion: @escaping CompletionHandler = { _ in }) {
-       // guard let userId = UserController.sharedInstance.userID else { return }
-        let requestURL = databaseURL.appendingPathComponent("api/tasks") // set up endpoint for putToServer
+        let requestURL = databaseURL.appendingPathComponent("api/tasks")
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.post.rawValue
         do {
@@ -47,7 +43,6 @@ class ListController {
             return
         }
         URLSession.shared.dataTask(with: request) { _, _, error in
-            // need to assign ID's of the returned successful post
             if let error = error {
                 print("Error fetching entries: \(error.localizedDescription)")
                 DispatchQueue.main.async {
@@ -60,8 +55,8 @@ class ListController {
     func fetchListFromServer(completion: @escaping (Error?) -> Void = { _ in }) {
         guard let bearer = NEUserController.shared.bearer else { return }
         print(bearer)
-      //  guard let userID = UserController.sharedInstance.userID else { return }
-        let requestURL = databaseURL.appendingPathExtension("api/tasks") // set endpoint for fetch
+       guard let userID = NEUserController.shared.currentUserID else { return }
+        let requestURL = databaseURL.appendingPathExtension("api/tasks/\(userID)")
         var request = URLRequest(url: requestURL)
         request.httpMethod = "GET"
         request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
