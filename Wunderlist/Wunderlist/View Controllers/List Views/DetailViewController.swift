@@ -26,7 +26,6 @@ class DetailViewController: UIViewController {
 //    }
     // MARK: - PROPERTIES
     var listController: ListController?
-    var listEntryController = ListEntryController()
     var wasEdited = false
     var listEntry: ListEntry?
     // MARK: - ACTIONS
