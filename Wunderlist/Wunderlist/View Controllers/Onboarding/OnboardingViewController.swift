@@ -8,7 +8,8 @@
 
 import UIKit
 
-// TODO: After signing up, sign the user in with the credentials. That should resolve the login bug that kicks user back to signup/signin flow.
+// TODO: After signing up, sign the user in with the credentials.
+// That should resolve the login bug that kicks user back to signup/signin flow.
 
 class OnboardingViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - Properties -

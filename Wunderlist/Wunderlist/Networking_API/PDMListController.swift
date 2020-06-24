@@ -11,7 +11,6 @@ import CoreData
 
 class ListController {
     // MARK: - Properties
-    
     var searchedListEntry: [ListRepresentation] = []
     var persistentStoreController: PersistentStoreController = CoreDataStack()
     var listCount: Int {
