@@ -96,7 +96,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="lOV-Hi-60G" kind="presentation" identifier="ListSegue" id="MHQ-o1-2lS"/>
+                        <segue destination="lOV-Hi-60G" kind="presentation" identifier="ListSegue" modalPresentationStyle="fullScreen" id="MHQ-o1-2lS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AXK-LO-cQy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -159,9 +159,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="entryDatePicker" destination="U9W-JV-897" id="jhd-1s-sZL"/>
-                        <outlet property="entryTextView" destination="eJ9-nR-yzS" id="u8G-kr-bD9"/>
-                        <outlet property="entryTitleField" destination="maF-99-Qd0" id="atC-kr-hoT"/>
                         <outlet property="nameTextField" destination="maF-99-Qd0" id="JYt-j2-s8F"/>
                     </connections>
                 </viewController>

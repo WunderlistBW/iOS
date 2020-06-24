@@ -10,15 +10,13 @@ import UIKit
 
 class ListTableViewController: UITableViewController {
     // MARK: - Properties
-    var neUserController = NEUserController()
+    var neUserController = NEUserController.shared
     var listController = ListController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     @IBAction func entryStatusTapped(_ sender: Any) {
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -34,6 +32,7 @@ class ListTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
+        // TODO: Populate table view by leveraging isComplete boolean.
         return 0
     }
 

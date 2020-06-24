@@ -12,14 +12,11 @@ protocol UserStateDelegate {
     func userLoggedIn()
 }
 
-class NEUserController{
-    
+class NEUserController {
     var dataLoader: NetworkDataLoader?
-    
     init(dataLoader: NetworkDataLoader = URLSession.shared) {
         self.dataLoader = dataLoader
     }
-    
     struct APIUser: Codable {
         var id: Int
         var username: String
@@ -29,13 +26,11 @@ class NEUserController{
         case failedSignUp, failedSignIn, noData, badData, noToken, failedLogOut, otherError, failedUpdate
     }
     // MARK: - Properties
-    
     static let shared = NEUserController()
     var loggedInUser: APIUser?
     var delegate: UserStateDelegate?
     var bearer: NEBearer?
     var currentUserID: NEUserID?
-    
     private init () {
     }
     private let baseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com")!
@@ -45,7 +40,6 @@ class NEUserController{
     private lazy var fetchUserURL = baseURL.appendingPathComponent("api/users/")
     private lazy var jsonEncoder = JSONEncoder()
     private lazy var jsonDecoder = JSONDecoder()
-    
     func signUp(with username: String, password: String, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         let user = NEUser(username: username, password: password)
         print("\(String(describing: loggedInUser))🧚🏿‍♀️")
@@ -56,7 +50,7 @@ class NEUserController{
         do {
             let jsonData = try jsonEncoder.encode(user)
             request.httpBody = jsonData
-            let task = URLSession.shared.dataTask(with: request) { _, response, error in
+            let task = URLSession.shared.dataTask(with: request) { _, response, error in //TODO: Decode userID?
                 if let error = error {
                     NSLog("Sign up failed with error: \(error)⚠️⚠️⚠️")
                     completion(.failure(.failedSignUp))
@@ -81,7 +75,6 @@ class NEUserController{
         var request = URLRequest(url: signInURL)
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
         do {
             let signInUser = NEUser(username: username, password: password)
             print(signInUser)
@@ -106,17 +99,7 @@ class NEUserController{
                 }
                 do {
                     self.bearer = try self.jsonDecoder.decode(NEBearer.self, from: data)
-//                    self.currentUserID = try self.jsonDecoder.decode(NEUserID.self, from: data)
-//                    print("\(String(describing: self.currentUserID))")
-//                    guard let userID = self.currentUserID else { return }
-//                    self.fetchUserFromServer(with: userID) { result in
-//                        switch result {
-//                        case .success(let apiUser):
-//                            self.loggedInUser = apiUser
-//                        case .failure(let error):
-//                            NSLog("Error: \(error)")
-//                        }
-//                    }
+                    print("\(self.bearer)" ?? "No Bearer")
                 } catch {
                     NSLog("Error decoding bearer object: \(error)⚠️⚠️⚠️")
                     completion(.failure(.noToken))

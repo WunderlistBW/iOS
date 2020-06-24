@@ -8,17 +8,19 @@
 
 import UIKit
 
+// TODO: After signing up, sign the user in with the credentials. That should resolve the login bug that kicks user back to signup/signin flow.
+
 class OnboardingViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - Properties -
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
-    var imageFrame = CGRect(x: 0, y: 0,
-                            width: 0, height: 0)
+    var imageFrame = CGRect.zero
     var welcomeSlideShow: [String] = ["0", "1", "2", "3"]
     // MARK: - Life Cycles -
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
+        updateViews()
     }
     // MARK: - Scroll View Delegate -
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -47,12 +49,12 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
         navigationController?.isNavigationBarHidden = true
         pageControl.numberOfPages = welcomeSlideShow.count
         for slide in 0..<welcomeSlideShow.count {
-            imageFrame.size = scrollView.frame.size
+            imageFrame.size = scrollView.bounds.size
             imageFrame.origin.x = scrollView.frame.size.width * CGFloat(slide)
             let slideImage = UIImageView(frame: imageFrame)
             slideImage.image = UIImage(named: welcomeSlideShow[slide])
             slideImage.layer.masksToBounds = true
-            slideImage.contentMode = .scaleAspectFill
+            slideImage.contentMode = .scaleAspectFit
             self.scrollView.addSubview(slideImage)
         }
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width * CGFloat(welcomeSlideShow.count),
