@@ -96,7 +96,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="lOV-Hi-60G" kind="presentation" identifier="ListSegue" id="MHQ-o1-2lS"/>
+                        <segue destination="lOV-Hi-60G" kind="presentation" identifier="ListSegue" modalPresentationStyle="fullScreen" id="MHQ-o1-2lS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AXK-LO-cQy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
