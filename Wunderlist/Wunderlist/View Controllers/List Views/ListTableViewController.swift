@@ -12,7 +12,7 @@ import CoreData
 class ListTableViewController: UITableViewController {
 
     // MARK: - Properties
-    weak var neUserController = NEUserController.shared
+    var neUserController = NEUserController.shared
     var listController = ListController()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +27,13 @@ class ListTableViewController: UITableViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Transition to log in view if conditions are met
-        #warning("Fixme before pushing")
-//        let bearer = neUserController.bearer
-//        guard bearer != nil else {
-//            performSegue(withIdentifier: "ListSegue", sender: self)
-//            return
-//        }
+        listController.fetchListFromServer()
+         // Transition to log in view if conditions are met
+        let bearer = neUserController.bearer
+        guard bearer != nil else {
+            performSegue(withIdentifier: "ListSegue", sender: self)
+            return
+        }
         tableView.reloadData()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -52,26 +52,26 @@ class ListTableViewController: UITableViewController {
         return cell
     }
     // MARK: - DELETE LIST ITEM FROM SERVER & TABLE VIEW (uncomment after delete func done)
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            let task = fetchedResultsController.object(at: indexPath)
-            listController.deleteListFromServer(task) { result in
-                guard let _ = try? result.get() else {
-                    return
-                }
-                DispatchQueue.main.async {
-                    let context = CoreDataStack.shared.mainContext
-                    context.delete(task)
-                    do {
-                        try context.save()
-                    } catch {
-                        context.reset()
-                        NSLog("Error saving managed object context (delete task): \(error)")
-                    }
-                }}
-        }
-    }
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            // Delete the row from the data source
+//            let task = fetchedResultsController.object(at: indexPath)
+//            listController.deleteListFromServer(task) { result in
+//                guard let _ = try? result.get() else {
+//                    return
+//                }
+//                DispatchQueue.main.async {
+//                    let context = CoreDataStack.shared.mainContext
+//                    context.delete(task)
+//                    do {
+//                        try context.save()
+//                    } catch {
+//                        context.reset()
+//                        NSLog("Error saving managed object context (delete task): \(error)")
+//                    }
+//                }}
+//        }
+//    }
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
     }

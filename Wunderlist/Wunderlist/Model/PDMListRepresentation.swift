@@ -13,6 +13,11 @@ struct ListRepresentation: Equatable, Codable, Persistable {
     var listId: Int?
     var dueDate: Date
     var isComplete: Bool?
+    
+    enum ListCodingKeys: String, CodingKey {
+       case listId = "id"
+        case isComplete = "completed"
+    }
 }
 
 struct ListRepresentations: Codable {

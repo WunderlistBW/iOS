@@ -27,7 +27,7 @@ class ListController {
             persistentStoreController.delegate = newDelegate
         }
     }
-    typealias CompletionHandler = (Error?) -> Void
+    typealias CompletionHandler = (Result<Bool, NetworkError>) -> Void
     private let databaseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com/")!
     func putListToServer(list: ListEntry, completion: @escaping CompletionHandler = { _ in }) {
         let requestURL = databaseURL.appendingPathComponent("api/tasks")
@@ -36,7 +36,7 @@ class ListController {
         do {
             request.httpBody = try JSONEncoder().encode(list.listRepresentation)
             let putString = String.init(data: request.httpBody!, encoding: .utf8)
-            print(putString!)
+            print(putString!) // TODO: Fix formatting with codingKeys
         } catch {
             NSLog("Error encoding Entry: \(error)")
             completion(.failure(.badAuth))
@@ -55,9 +55,9 @@ class ListController {
     func fetchListFromServer(completion: @escaping (Error?) -> Void = { _ in }) {
         guard let bearer = NEUserController.shared.bearer else { return }
         print(bearer)
-        //  guard let userID = UserController.sharedInstance.userID else { return }
-        let requestURL = databaseURL.appendingPathExtension("api/tasks") // set endpoint for fetch
+        let requestURL = databaseURL.appendingPathExtension("api/tasks")
         var request = URLRequest(url: requestURL)
+        print("\(requestURL)")
         request.httpMethod = "GET"
         request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, _, error in
@@ -75,6 +75,8 @@ class ListController {
                 }
                 return
             }
+            print(String.init(data: data, encoding: .utf8))
+
             do {
                 let listRepresentations =
                     Array(try JSONDecoder().decode([String: ListRepresentation].self, from: data).values)
@@ -83,7 +85,7 @@ class ListController {
                     completion(nil)
                 }
             } catch {
-                print("Error decoding plant representation: \(error)")
+                print("Error decoding list representation: \(error)")
                 completion(error)
                 return
             }
