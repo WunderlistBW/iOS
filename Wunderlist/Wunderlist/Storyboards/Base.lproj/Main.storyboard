@@ -70,7 +70,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="mdX-aL-PgR">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Jm4-Mc-8Ge">
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Jm4-Mc-8Ge">
                             <rect key="frame" x="120.5" y="5.5" width="173" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
@@ -88,7 +88,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="lOV-Hi-60G" kind="presentation" identifier="ListSegue" id="MHQ-o1-2lS"/>
+                        <segue destination="lOV-Hi-60G" kind="presentation" identifier="ListSegue" modalPresentationStyle="fullScreen" id="MHQ-o1-2lS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AXK-LO-cQy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
