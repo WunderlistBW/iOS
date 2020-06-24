@@ -13,7 +13,7 @@ class WunderlistTests: XCTestCase {
     func testNESignUp() {
         let login = NEUserController()
         let expectation = self.expectation(description: "Waiting for signing up to be completed")
-        login.signUp(with: "Chris", password: "12345", email: "chris@gmail.com", name: "Chris") { error in
+        login.signUp(with: "Chris", password: "12345") { error in
             guard error == error else {
                 NSLog("Error signing up: \(error)")
                 return
@@ -43,8 +43,6 @@ class WunderlistTests: XCTestCase {
         let newListEntry = ListEntry(name: "newEntry",
                                      listId: Int64.random(in: 0...1000),
                                      dueDate: dueDate,
-                                     isRecurring: false,
-                                     dayOfWeek: 2,
                                      isComplete: false,
                                      context: testDataStack.mainContext)
         XCTAssertNotNil(newListEntry)
@@ -52,13 +50,11 @@ class WunderlistTests: XCTestCase {
     func testSaveAndLoadListEntryObject() {
         let testDataStack = CoreDataStack()
         let testFRC = testDataStack.fetchedResultsController
-        XCTAssertNil(testFRC.fetchedObjects)
+        XCTAssertEqual(testFRC.fetchedObjects?.count, 0)
         let dueDate = Date(timeIntervalSinceNow: 100)
         let newListEntry = ListEntry(name: "newEntry",
                                      listId: Int64.random(in: 0...1000),
                                      dueDate: dueDate,
-                                     isRecurring: false,
-                                     dayOfWeek: 2,
                                      isComplete: false,
                                      context: testDataStack.mainContext)
         XCTAssertNotNil(newListEntry)
@@ -70,13 +66,11 @@ class WunderlistTests: XCTestCase {
     func testDeleteListEntryObject() {
         let testDataStack = CoreDataStack()
         let testFRC = testDataStack.fetchedResultsController
-        XCTAssertNil(testFRC.fetchedObjects)
+        XCTAssertEqual(testFRC.fetchedObjects?.count, 0)
         let dueDate = Date(timeIntervalSinceNow: 100)
         let newListEntry = ListEntry(name: "newEntry",
                                      listId: Int64.random(in: 0...1000),
                                      dueDate: dueDate,
-                                     isRecurring: false,
-                                     dayOfWeek: 2,
                                      isComplete: false,
                                      context: testDataStack.mainContext)
         XCTAssertNotNil(newListEntry)
@@ -95,8 +89,6 @@ class WunderlistTests: XCTestCase {
         let newListEntry = ListEntry(name: "newEntry",
                                      listId: Int64.random(in: 0...1000),
                                      dueDate: dueDate,
-                                     isRecurring: false,
-                                     dayOfWeek: 2,
                                      isComplete: false,
                                      context: testDataStack.mainContext)
         XCTAssertNotNil(newListEntry)
