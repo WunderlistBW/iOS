@@ -14,6 +14,8 @@ class ListTableViewController: UITableViewController {
     // MARK: - Properties
     var neUserController = NEUserController.shared
     var listController = ListController()
+
+    // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         NEUserController.shared.delegate = self
@@ -25,6 +27,7 @@ class ListTableViewController: UITableViewController {
 
     @IBAction func entryStatusTapped(_ sender: Any) {
     }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         listController.fetchListFromServer()
@@ -41,6 +44,12 @@ class ListTableViewController: UITableViewController {
         tableView.reloadData()
     }
     // MARK: - Table view data source
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        // TODO: Populate table view by leveraging isComplete boolean.
+        return 0
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return listController.lists?.count ?? 0
         return listController.listCount
