@@ -22,7 +22,7 @@ class AddViewController: UIViewController {
     // MARK: - OUTLETS
     @IBOutlet weak var nameTextField: UITextField!
     // In case we want to add that segmented complete control
-    @IBOutlet weak var isCompleteControl: UISegmentedControl!
+    @IBOutlet weak var reminderSegment: UISegmentedControl!
     @IBOutlet weak var addDatePicker: UIDatePicker!
     override func viewDidLoad() {
         super.viewDidLoad()

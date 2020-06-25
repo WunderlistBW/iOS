@@ -13,7 +13,13 @@ enum ListStatus: String, CaseIterable {
     case completedStatus
     case upcomingStatus
 }
-
+// For segmented control and sections
+enum ReminderType: String, CaseIterable {
+    case daily
+    case weekly
+    case monthly
+    case none
+}
 extension ListEntry: Persistable {
     convenience init?(name: String, dueDate: Date? = Date(), isComplete: Bool? = false,
                       context: PersistentContext
