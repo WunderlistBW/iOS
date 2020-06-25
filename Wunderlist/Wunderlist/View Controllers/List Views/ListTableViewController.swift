@@ -45,6 +45,10 @@ class ListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+    // SEARCH BAR
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    }
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -63,7 +67,7 @@ class ListTableViewController: UITableViewController {
         return cell
     }
     // MARK: - DELETE LIST ITEM FROM SERVER & TABLE VIEW (uncomment after delete func done)
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 //        if editingStyle == .delete {
 //            // Delete the row from the data source
 //            let task = fetchedResultsController.object(at: indexPath)
@@ -82,7 +86,7 @@ class ListTableViewController: UITableViewController {
 //                    }
 //                }}
 //        }
-//    }
+    }
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
     }
