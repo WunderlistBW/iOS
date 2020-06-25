@@ -25,7 +25,6 @@
 		B4194F9F24A13A7F00B3BB5E /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4194F9E24A13A7F00B3BB5E /* UserController.swift */; };
 		B4194FA124A13A9100B3BB5E /* NetworkDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4194FA024A13A9100B3BB5E /* NetworkDataLoader.swift */; };
 		B4194FA324A13AC600B3BB5E /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4194FA224A13AC600B3BB5E /* Bearer.swift */; };
-		B4194FA524A13B1C00B3BB5E /* UserID.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4194FA424A13B1C00B3BB5E /* UserID.swift */; };
 		B4FEBEC724A267B500640C75 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FEBEC624A267B500640C75 /* ListTableViewController.swift */; };
 		B4FEBECA24A26DE600640C75 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FEBEC924A26DE600640C75 /* ListCell.swift */; };
 		B4FEBECC24A2707200640C75 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FEBECB24A2707200640C75 /* DetailViewController.swift */; };
@@ -88,7 +87,6 @@
 		B4194F9E24A13A7F00B3BB5E /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = SOURCE_ROOT; };
 		B4194FA024A13A9100B3BB5E /* NetworkDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataLoader.swift; sourceTree = SOURCE_ROOT; };
 		B4194FA224A13AC600B3BB5E /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Bearer.swift; path = Wunderlist/Model/Bearer.swift; sourceTree = SOURCE_ROOT; };
-		B4194FA424A13B1C00B3BB5E /* UserID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserID.swift; sourceTree = "<group>"; };
 		B4FEBEC624A267B500640C75 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
 		B4FEBEC924A26DE600640C75 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		B4FEBECB24A2707200640C75 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 			children = (
 				B4194F9C24A1393800B3BB5E /* User.swift */,
 				B4194FA224A13AC600B3BB5E /* Bearer.swift */,
-				B4194FA424A13B1C00B3BB5E /* UserID.swift */,
 				DBACA3BB24A119AB00F4872D /* PDMListRepresentation.swift */,
 				DB6F732924A4180A00D13829 /* Task.swift */,
 				27FB0B3B24A50FA000A2335B /* RecurringTask.swift */,
@@ -505,7 +502,6 @@
 			files = (
 				DB15110824A104730007858E /* CoreDataStack.swift in Sources */,
 				B4FEBECC24A2707200640C75 /* DetailViewController.swift in Sources */,
-				B4194FA524A13B1C00B3BB5E /* UserID.swift in Sources */,
 				DBACA3BC24A119AB00F4872D /* PDMListRepresentation.swift in Sources */,
 				DB6F732A24A4180A00D13829 /* Task.swift in Sources */,
 				B4FEBEC724A267B500640C75 /* ListTableViewController.swift in Sources */,

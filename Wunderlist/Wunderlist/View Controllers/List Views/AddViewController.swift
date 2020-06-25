@@ -31,21 +31,20 @@ class AddViewController: UIViewController {
     // MARK: - ACTIONS
     // TO DO - ADD CANCEL BUTTON ON VC
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        navigationController?.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     // TO SAVE A CREATED LIST ENTRY
     @IBAction func save(_ sender: UIBarButtonItem) {
         guard let name = nameTextField.text, !name.isEmpty else { return }
-        guard let listController = listController, let uwUserId = userId?.user.userId else { return }
+        guard let listController = listController, let uwUserId = userId?.user.id else { return }
         let dateString = dateFormatter.string(from: addDatePicker.date)
         let endOn = dateString
         if let listEntry = listEntry {
             listEntry.name = name
-            listEntry.endOn = endOn
             // update feature / function
         } else {
             do {
-                try listController.createListEntry(with: name, days: 0, endOn: endOn, userId: uwUserId)
+                try listController.createListEntry(with: name, body: "TestData", recurring: "daily", completed: false, dueDate: endOn, userId: uwUserId)
             } catch {
                 print("Error creating entry from Add Entry VC")
             }

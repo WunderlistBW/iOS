@@ -10,21 +10,13 @@ import Foundation
 
 struct ListRepresentation: Equatable, Codable, Persistable {
     var name: String
-    var listId: Int?
-    var dueDate: String?
-    var isComplete: Bool?
-    var isRepeated: Bool?
-    var days: Int64?
-    var endOn: String?
-    var userId: Int
+    var body: String?
+    var id: Int? // The post's ID
+    var dueDate: String // ""YYYY-MM-DD HH:MM:SS"
+    var completed: Bool? // defaults to false
+    var recurring: String // daily, weekly, monthly
+    var userId: Int // The user's ID
     
-    enum ListCodingKeys: String, CodingKey {
-       case listId = "id"
-        case isComplete = "completed"
-        case isRepeated = "recurring"
-        case dueDate = "due_date"
-        case userId = "user_id"
-    }
 }
 
 struct ListRepresentations: Codable {

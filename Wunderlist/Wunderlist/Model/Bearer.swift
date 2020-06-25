@@ -15,10 +15,6 @@ struct SignedInUser: Codable {
 
     // MARK: - User
     struct User: Codable {
-        var userId: Int
-        
-        enum UserCodingKeys: String, CodingKey {
-            case userId = "id"
-        }
+        var id: Int
     }
 }

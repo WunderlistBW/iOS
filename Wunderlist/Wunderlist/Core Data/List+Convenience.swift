@@ -21,32 +21,39 @@ enum ReminderType: String, CaseIterable {
     case none
 }
 extension ListEntry: Persistable {
-    convenience init?(name: String, isComplete: Bool? = false, days: Int64?, endOn:String?, isRepeated: Bool? = false, userId: Int, context: PersistentContext ) {
-        guard let context = context as? NSManagedObjectContext, let isComplete = isComplete, let isRepeated = isRepeated, let days = days, let endOn = endOn
+    convenience init?(name: String, body: String?, completed: Bool? = false, recurring: String, userId: Int, dueDate: String, context: PersistentContext ) {
+        
+        guard let completed = completed, let body = body
         else { return nil }
         self.init(context: context)
+        self.dueDate = dueDate
         self.name = name
-        self.isComplete = isComplete
-        self.days = Int64(days)
-        self.endOn = endOn
+        self.body = body
+        self.completed = completed
         self.userId = Int64(userId)
-        self.isRepeated = isRepeated
+        self.recurring = recurring
     }
+    
     @discardableResult convenience init?(listRepresentation: ListRepresentation, context: PersistentContext) {
-        guard let isComplete = listRepresentation.isComplete else { return nil }
-        let name = listRepresentation.name
         
-        self.init(name: name,
-                  isComplete: isComplete,
-            days: listRepresentation.days,
-            endOn: listRepresentation.endOn,
-            isRepeated: listRepresentation.isRepeated, userId: listRepresentation.userId,
+        self.init(name: listRepresentation.name,
+                  body: listRepresentation.body,
+                  completed: listRepresentation.completed,
+                  recurring: listRepresentation.recurring,
+                  userId: listRepresentation.userId,
+                  dueDate: listRepresentation.dueDate,
                   context: context)
     }
     var listRepresentation: ListRepresentation? {
         guard let name = name,
-        let dueDate = dueDate else { return nil }
-        return ListRepresentation(name: name, listId: Int(listId),
-                                  dueDate: dueDate, isComplete: isComplete, userId: Int(userId))
+            let recurring = recurring,
+            let dueDate = dueDate else { return nil }
+        return ListRepresentation(name: name,
+                                  body: body,
+                                  id: Int(listId),
+                                  dueDate: dueDate,
+                                  completed: completed,
+                                  recurring: recurring,
+                                  userId: Int(userId))
     }
 }

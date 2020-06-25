@@ -91,8 +91,8 @@ class ListController {
         }.resume()
     }
     private func updateList(with representation: [ListRepresentation]) throws {
-        let entriesWithId = representation.filter { $0.listId != nil }
-        let identifiersToFetch = entriesWithId.compactMap { $0.listId! }
+        let entriesWithId = representation.filter { $0.id != nil }
+        let identifiersToFetch = entriesWithId.compactMap { $0.id! }
         let representationByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, entriesWithId))
         var entriesToCreate = representationByID
         let fetchRequest: NSFetchRequest<ListEntry> = ListEntry.fetchRequest()
@@ -134,19 +134,18 @@ class ListController {
     }
     private func update(listEntry: ListEntry, with representation: ListRepresentation) {
         listEntry.name = representation.name
-        listEntry.days = representation.days ?? 0
-        listEntry.endOn = representation.endOn
-        listEntry.isRepeated = representation.isRepeated ?? false
-        listEntry.isComplete = representation.isComplete ?? false
+        listEntry.recurring = representation.recurring
+        listEntry.completed = representation.completed ?? false
+        listEntry.body = representation.body
+        listEntry.userId = Int64(representation.userId)
     }
-    func createListEntry(with name: String, isRepeated: Bool? = false, days: Int64?, endOn: String?, isComplete: Bool? = false, userId: Int) throws {
+    func createListEntry(with name: String, body: String?, recurring: String, completed: Bool? = false, dueDate: String, userId: Int) throws {
         let context = persistentStoreController.mainContext
         guard  let list = ListEntry(name: name,
-                                    isComplete: isComplete,
-                                    days: days,
-                                    endOn: endOn,
-                                    isRepeated: isRepeated,
+                                    body: body,
+                                    recurring: recurring,
                                     userId: userId,
+                                    dueDate: dueDate,
                                     context: context) else { return }
         putListToServer(list: list)
         do {
