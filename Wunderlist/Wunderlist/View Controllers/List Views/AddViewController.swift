@@ -52,7 +52,7 @@ class AddViewController: UIViewController {
             // update feature / function
         } else {
             do {
-                try listController.createListEntry(with: name, dueDate: dueDate)
+                try listController.createListEntry(with: name, dueDate: dueDate, listId: UUID())
             } catch {
                 print("Error creating entry from Add Entry VC")
             }

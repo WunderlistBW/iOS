@@ -34,8 +34,14 @@ class ListTableViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        listController.fetchListFromServer()
-         // Transition to log in view if conditions are met
+        // listController.fetchListFromServer() // Web backend
+        listController.firebaseFetchFromServer { result in
+            print(result)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
         let bearer = neUserController.bearer
         guard bearer != nil else {
             performSegue(withIdentifier: "ListSegue", sender: self)
@@ -153,7 +159,13 @@ extension ListTableViewController: PersistentStoreControllerDelegate {
 
 extension ListTableViewController: UserStateDelegate {
     func userLoggedIn() {
-        listController.fetchListFromServer()
+       // listController.fetchListFromServer() // web backend
+        listController.firebaseFetchFromServer { result in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            print(result)
+        }
     }
 
 }

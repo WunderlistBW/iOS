@@ -33,6 +33,7 @@ extension ListEntry: Persistable {
         self.name = name
         self.dueDate = dueDate
         self.isComplete = isComplete
+        self.listId = listId
     }
     
     @discardableResult convenience init?(listRepresentation: ListRepresentation, context: PersistentContext) {
@@ -44,6 +45,7 @@ extension ListEntry: Persistable {
         self.init(name: name,
                   dueDate: dueDate,
                   isComplete: isComplete,
+                  listId: listIdString,
                   context: context)
     }
     

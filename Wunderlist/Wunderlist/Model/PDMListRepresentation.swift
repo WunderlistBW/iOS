@@ -10,14 +10,14 @@ import Foundation
 
 struct ListRepresentation: Equatable, Codable, Persistable {
     var name: String
-    var listId: Int?
+    var listId: String?
     var dueDate: Date
     var isComplete: Bool?
     
-    enum ListCodingKeys: String, CodingKey {
-       case listId = "id"
-        case isComplete = "completed"
-    }
+//    enum ListCodingKeys: String, CodingKey {
+//       case listId = "id"
+//        case isComplete = "completed"
+//    }
 }
 
 struct ListRepresentations: Codable {
