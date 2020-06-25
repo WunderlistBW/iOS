@@ -39,7 +39,7 @@ class AddViewController: UIViewController {
     // MARK: - ACTIONS
     // TO DO - ADD CANCEL BUTTON ON VC
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        navigationController?.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     // TO SAVE A CREATED LIST ENTRY
     @IBAction func save(_ sender: UIBarButtonItem) {
