@@ -2,7 +2,7 @@
 //  WunderlistNetworkTests.swift
 //  WunderlistTests
 //
-//  Created by Bling Morley on 6/24/20.
+//  Created by Cody Morley on 6/24/20.
 //  Copyright © 2020 Wunderlist. All rights reserved.
 //
 
@@ -18,16 +18,6 @@ class WunderlistNetworkTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+    
 
 }
