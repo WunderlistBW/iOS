@@ -58,10 +58,13 @@ class AddViewController: UIViewController {
         }
         let alert = UIAlertController(title: "Saved", message: "Your list entry has been saved!",
                                       preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Finished",
+        alert.accessibilityLabel = "Main.Create.UIAlert"
+        let finished = UIAlertAction(title: "Finished",
                                       style: .default) { (_) -> Void in
                                         self.navigationController?.popViewController(animated: true)
-        })
+        }
+        finished.accessibilityLabel = "Main.Create.FinishedButton"
+        alert.addAction(finished)
         present(alert, animated: true, completion: nil)
     }
 } // EOC
