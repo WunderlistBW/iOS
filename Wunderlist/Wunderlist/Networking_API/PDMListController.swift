@@ -136,14 +136,12 @@ class ListController {
         listEntry.recurring = representation.recurring
         listEntry.completed = representation.completed ?? false
         listEntry.body = representation.body
-        listEntry.userId = Int64(representation.userId)
     }
     func createListEntry(with name: String, body: String?, recurring: String, completed: Bool? = false, dueDate: String, userId: Int) throws {
         let context = persistentStoreController.mainContext
         guard  let list = ListEntry(name: name,
                                     body: body,
                                     recurring: recurring,
-                                    userId: userId,
                                     dueDate: dueDate,
                                     context: context) else { return }
         putListToServer(list: list)
