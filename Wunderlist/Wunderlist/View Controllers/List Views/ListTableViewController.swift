@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import CoreData
 
 class ListTableViewController: UITableViewController {
+
     // MARK: - Properties
     var neUserController = NEUserController.shared
     var listController = ListController()
@@ -16,6 +18,11 @@ class ListTableViewController: UITableViewController {
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        NEUserController.shared.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.reloadData()
+
     }
 
     @IBAction func entryStatusTapped(_ sender: Any) {
@@ -23,50 +30,57 @@ class ListTableViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Transition to log in view if conditions are met
+        listController.fetchListFromServer()
+         // Transition to log in view if conditions are met
         let bearer = neUserController.bearer
         guard bearer != nil else {
             performSegue(withIdentifier: "ListSegue", sender: self)
             return
         }
+        tableView.reloadData()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+
+    }
     // MARK: - Table view data source
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        // TODO: Populate table view by leveraging isComplete boolean.
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listController.lists?.count ?? 0
+//        return listController.lists?.count ?? 0
+        return listController.listCount
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
+            as? ListCell else { return UITableViewCell() }
+        cell.listEntry = listController.getListEntry(at: indexPath)
         return cell
     }
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array,
-            // and add a new row to the table view
-        }
-    }
+    // MARK: - DELETE LIST ITEM FROM SERVER & TABLE VIEW (uncomment after delete func done)
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            // Delete the row from the data source
+//            let task = fetchedResultsController.object(at: indexPath)
+//            listController.deleteListFromServer(task) { result in
+//                guard let _ = try? result.get() else {
+//                    return
+//                }
+//                DispatchQueue.main.async {
+//                    let context = CoreDataStack.shared.mainContext
+//                    context.delete(task)
+//                    do {
+//                        try context.save()
+//                    } catch {
+//                        context.reset()
+//                        NSLog("Error saving managed object context (delete task): \(error)")
+//                    }
+//                }}
+//        }
+//    }
+
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
     }
     // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -74,9 +88,72 @@ class ListTableViewController: UITableViewController {
         return true
     }
     // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CreateSegue" {
+            if let addVC = segue.destination as? AddViewController {
+                addVC.listController = listController
+            }
+        }
+        // DetailViewController
+        if segue.identifier == "DetailSegue" {
+            if let detailVC = segue.destination as? DetailViewController,
+                let indexPath = tableView.indexPathForSelectedRow {
+                detailVC.listEntry = listController.getListEntry(at: indexPath)
+                detailVC.listController = listController
+            }
+        }
     }
+}
+// MARK: - EXTENSION
+extension ListTableViewController: PersistentStoreControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange sectionInfo: NSFetchedResultsSectionInfo,
+                    atSectionIndex sectionIndex: Int,
+                    for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
+        default:
+            break
+        }
+    }
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else { return }
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .update:
+            guard let indexPath = indexPath else { return }
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        case .move:
+            guard let oldIndexPath = indexPath,
+                let newIndexPath = newIndexPath else { return }
+            tableView.deleteRows(at: [oldIndexPath], with: .automatic)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            break
+        }
+    }
+}
+
+extension ListTableViewController: UserStateDelegate {
+    func userLoggedIn() {
+        listController.fetchListFromServer()
+    }
+
 }

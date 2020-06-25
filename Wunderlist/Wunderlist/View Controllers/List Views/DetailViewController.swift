@@ -13,24 +13,18 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var entryTitleField: UITextField!
     @IBOutlet weak var entryTextView: UITextView!
     @IBOutlet weak var entryDatePicker: UIDatePicker!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
         navigationItem.rightBarButtonItem = editButtonItem
     }
-//    private init() {
-//    }
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
     // MARK: - PROPERTIES
     var listController: ListController?
-    var listEntryController = ListEntryController()
     var wasEdited = false
     var listEntry: ListEntry?
     // MARK: - ACTIONS
     @IBAction func saveButtonTapped(_ sender: Any) {
-        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

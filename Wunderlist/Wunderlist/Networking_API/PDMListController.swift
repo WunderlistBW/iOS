@@ -27,30 +27,26 @@ class ListController {
             persistentStoreController.delegate = newDelegate
         }
     }
-    typealias CompletionHandler = (Error?) -> Void
-    static let sharedInstance = ListController()
-    private let databaseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com/")! // set up database URL
-
+    typealias CompletionHandler = (Result<Bool, NetworkError>) -> Void
+    private let databaseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com/")!
     func putListToServer(list: ListEntry, completion: @escaping CompletionHandler = { _ in }) {
-       // guard let userId = UserController.sharedInstance.userID else { return }
-        let requestURL = databaseURL.appendingPathComponent("api/tasks") // set up endpoint for putToServer
+        let requestURL = databaseURL.appendingPathComponent("api/tasks")
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.post.rawValue
         do {
             request.httpBody = try JSONEncoder().encode(list.listRepresentation)
             let putString = String.init(data: request.httpBody!, encoding: .utf8)
-            print(putString!)
+            print(putString!) // TODO: Fix formatting with codingKeys
         } catch {
             NSLog("Error encoding Entry: \(error)")
-            completion(error)
+            completion(.failure(.badAuth))
             return
         }
         URLSession.shared.dataTask(with: request) { _, _, error in
-            // need to assign ID's of the returned successful post
             if let error = error {
                 print("Error fetching entries: \(error.localizedDescription)")
                 DispatchQueue.main.async {
-                    completion(error)
+                    completion(.failure(.decodingError))
                 }
                 return
             }
@@ -59,9 +55,9 @@ class ListController {
     func fetchListFromServer(completion: @escaping (Error?) -> Void = { _ in }) {
         guard let bearer = NEUserController.shared.bearer else { return }
         print(bearer)
-      //  guard let userID = UserController.sharedInstance.userID else { return }
-        let requestURL = databaseURL.appendingPathExtension("api/tasks") // set endpoint for fetch
+        let requestURL = databaseURL.appendingPathExtension("api/tasks")
         var request = URLRequest(url: requestURL)
+        print("\(requestURL)")
         request.httpMethod = "GET"
         request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, _, error in
@@ -79,6 +75,8 @@ class ListController {
                 }
                 return
             }
+            print(String.init(data: data, encoding: .utf8))
+
             do {
                 let listRepresentations =
                     Array(try JSONDecoder().decode([String: ListRepresentation].self, from: data).values)
@@ -87,7 +85,7 @@ class ListController {
                     completion(nil)
                 }
             } catch {
-                print("Error decoding plant representation: \(error)")
+                print("Error decoding list representation: \(error)")
                 completion(error)
                 return
             }
@@ -120,7 +118,20 @@ class ListController {
         try CoreDataStack.shared.save(in: context)
     }
     func deleteListFromServer(_ list: ListEntry, completion: @escaping CompletionHandler = { _ in}) {
-        // TODO: Delete a list from server
+        let listID = list.listId
+        let requestURL = databaseURL.appendingPathComponent("api/tasks/\(listID)")
+        var request = URLRequest(url: requestURL)
+        guard let token = NEUserController.shared.bearer?.token else { return }
+        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.httpMethod = HTTPMethod.delete.rawValue
+        URLSession.shared.dataTask(with: request) { _, _, error in
+            if let error = error {
+                NSLog("Error deleting list from server \(list): \(error)")
+                completion(.failure(.otherError))
+                return
+            }
+            completion(.success(true))
+        }.resume()
     }
     private func update(listEntry: ListEntry, with representation: ListRepresentation) {
         listEntry.name = representation.name
@@ -131,7 +142,7 @@ class ListController {
         let context = persistentStoreController.mainContext
         guard  let list = ListEntry(name: name,
                                     dueDate: dueDate ?? Date(),
-                                     isComplete: isComplete,
+                                    isComplete: isComplete,
                                     context: context) else { return }
         putListToServer(list: list)
         do {

@@ -29,7 +29,6 @@ class CoreDataStack: NSObject, PersistentStoreController {
                 fatalError("Failed to load persistent stores: \(error)")
             }
         }
-
         container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }
@@ -86,7 +85,7 @@ class CoreDataStack: NSObject, PersistentStoreController {
         if let error = saveError { throw error }
     }
     func fetchContext(_ context: PersistentContext?) -> NSManagedObjectContext {
-        if let context = context as? NSManagedObjectContext {
+        if let context = context {
             return context
         } else {
             return rootContext
