@@ -14,15 +14,11 @@ import CoreData
 //This class will allow full testing of core data without persisting test data into the main app's persistent store.
 
 class StorageManager {
-    // MARK: - Types -
+    // MARK: - Properties -
     let persistentContainer: NSPersistentContainer!
     lazy var backgroundContext: NSManagedObjectContext = {
         return self.persistentContainer.newBackgroundContext()
     }()
-    
-    // MARK: - Properties -
-    
-    
     
     // MARK: - Inits -
     init(container: NSPersistentContainer) {
