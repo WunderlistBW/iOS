@@ -26,6 +26,7 @@ class AddViewController: UIViewController {
     // In case we want to add that segmented complete control
     @IBOutlet weak var isCompleteControl: UISegmentedControl!
     @IBOutlet weak var addDatePicker: UIDatePicker!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -56,10 +57,11 @@ class AddViewController: UIViewController {
                 print("Error creating entry from Add Entry VC")
             }
         }
-        let alert = UIAlertController(title: "Saved", message: "Your list entry has been saved!",
+        let alert = UIAlertController(title: "Saved",
+                                      message: "Your list entry has been saved!",
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Finished",
-                                      style: .default) { (_) -> Void in
+                                      style: .default) { _ -> Void in
                                         self.navigationController?.popViewController(animated: true)
         })
         present(alert, animated: true, completion: nil)

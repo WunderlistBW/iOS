@@ -18,6 +18,7 @@ protocol PersistentStoreController: AnyObject {
     var allItems: [Persistable]? { get }
     var itemCount: Int { get }
     var mainContext: PersistentContext { get }
+    
     func create(item: Persistable, in context: PersistentContext?) throws
     func fetchItem(at indexPath: IndexPath) -> Persistable?
     func delete(_ item: Persistable?, in context: PersistentContext?) throws

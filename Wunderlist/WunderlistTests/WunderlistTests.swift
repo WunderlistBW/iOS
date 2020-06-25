@@ -59,7 +59,7 @@ class WunderlistTests: XCTestCase {
     func testNESignIn() {
         let login = NEUserController()
         let expectation = self.expectation(description: "Waiting for signing in to be completed")
-        login.signIn(with: "Chris", password: "12345") { (error) in
+        login.signIn(with: "Chris", password: "12345") { error in
             guard error == error else {
                 NSLog("Error signing in :\(error)")
                 return

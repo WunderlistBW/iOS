@@ -18,7 +18,7 @@ class LoginSignUpViewController: UIViewController {
     @IBOutlet weak var rememberMeButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var anchorView: UIView!
-    var loggingIn: Bool?
+    var isLoggingIn: Bool?
     // MARK: - Life Cycles -
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,8 +42,12 @@ class LoginSignUpViewController: UIViewController {
             let password = passwordTextField.text,
             !username.isEmpty,
             !password.isEmpty else { return }
-        switch loggingIn {
+        
+        // TODO: Refactor into if/else if checking boolean value
+        switch isLoggingIn {
         case true:
+            
+            // TODO: Refactor these cases into seperate functions.
             statusLabel.text = "Logging Into Wunderlist, one moment..."
             let user = NEUser(username: username,
                               password: password)
@@ -159,7 +163,7 @@ class LoginSignUpViewController: UIViewController {
                                             }
         }))
         present(options, animated: true, completion: nil)
-        if let username = usernameTextField.text, let password = passwordTextField.text{
+        if let username = usernameTextField.text, let password = passwordTextField.text {
          returnValue = NEUser(username: username, password: password)
         }
         return returnValue! //TODO: Fix implicit unwrap
