@@ -102,26 +102,25 @@ class WunderlistTests: XCTestCase {
         XCTAssertEqual(testContents[0].name, "testingEntry")
     }
     func testDeleteListEntryObject() {
-        
-        
-        
-        /*
-        let testDataStack = CoreDataStack()
-        let testFRC = testDataStack.fetchedResultsController
-        XCTAssertEqual(testFRC.fetchedObjects?.count, 0)
-        let dueDate = Date(timeIntervalSinceNow: 100)
-        let newListEntry = ListEntry(name: "newEntry",
-                                     dueDate: dueDate,
-                                     isComplete: false,
-                                     context: testDataStack.mainContext)
-        XCTAssertNotNil(newListEntry)
-        XCTAssertNoThrow(try testDataStack.mainContext.save())
-        XCTAssertNotNil(testFRC.fetchedObjects)
-        XCTAssertEqual(testFRC.fetchedObjects?.count, 1)
-        testDataStack.mainContext.delete(newListEntry!)
-        XCTAssertNoThrow(try testDataStack.mainContext.save())
-        XCTAssertNil(testFRC.fetchedObjects)
- */
+        let letFinish = expectation(description: "wait for background thread to delete.")
+        guard let storageManager = self.storageManager else { XCTFail("No storage manager present."); return }
+        let emptyStore = storageManager.fetchAll()
+        XCTAssertEqual(emptyStore.count, 0)
+        storageManager.insertListEntry(name: "testingEntry",
+                                       dueDate: Date() + TimeInterval(exactly: 1000)!,
+                                       listId: 6969420,
+                                       isComplete: false)
+        storageManager.save()
+        let testContents = storageManager.fetchAll()
+        XCTAssertEqual(testContents.count, 1)
+        let idToDelete = testContents.first?.objectID
+        guard let unwrappedId = idToDelete else { XCTFail("No ID to delete"); return }
+        storageManager.remove(objectID: unwrappedId)
+        letFinish.fulfill()
+        wait(for: [letFinish], timeout: 3)
+        storageManager.save()
+        let clearedStore = storageManager.fetchAll()
+        XCTAssertEqual(clearedStore.count, 0)
     }
     func testListEntryCompletes() {
         /*
