@@ -161,7 +161,7 @@ extension ListTableViewController: UserStateDelegate {
 }
 
 extension ListTableViewController {
-    private func setUpIdentifiers {
+    private func setUpIdentifiers() {
         self.tableView.accessibilityIdentifier = "Main.ListTable"
         self.addButton.accessibilityIdentifier = "Main.AddButton"
     }

@@ -99,7 +99,7 @@ class ListController {
     }
     private func updateList(with representation: [ListRepresentation]) throws {
         let entriesWithId = representation.filter { $0.listId != nil }
-        let identifiersToFetch = entriesWithId.compactMap { $0.listId! }
+        let identifiersToFetch = entriesWithId.compactMap { $0.listId }
         let representationByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, entriesWithId))
         var entriesToCreate = representationByID
         let fetchRequest: NSFetchRequest<ListEntry> = ListEntry.fetchRequest()
@@ -109,10 +109,10 @@ class ListController {
             do {
                 let existingList = try context.fetch(fetchRequest)
                 for list in existingList {
-                    let listId = list.listId
-                    guard let representation = representationByID[Int(listId)] else { continue }
+                    guard let listId = list.listId else { return }
+                    guard let representation = representationByID[listId] else { continue }
                     self.update(listEntry: list, with: representation)
-                    entriesToCreate.removeValue(forKey: Int(listId))
+                    entriesToCreate.removeValue(forKey: listId)
                 }
                 for representation in entriesToCreate.values {
                     ListEntry(listRepresentation: representation, context: context)
@@ -144,11 +144,11 @@ class ListController {
         listEntry.dueDate = representation.dueDate
         listEntry.isComplete = representation.isComplete ?? false
     }
-    func createListEntry(with name: String, dueDate: Date? = Date(), isComplete: Bool? = false) throws {
+    func createListEntry(with name: String, dueDate: Date? = Date(), isComplete: Bool? = false, listId: UUID) throws {
         let context = persistentStoreController.mainContext
         guard  let list = ListEntry(name: name,
                                     dueDate: dueDate ?? Date(),
-                                    isComplete: isComplete,
+                                    isComplete: isComplete, listId: listId,
                                     context: context) else { return }
         putListToServer(list: list)
         do {
