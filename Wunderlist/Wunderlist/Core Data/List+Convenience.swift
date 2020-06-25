@@ -15,23 +15,28 @@ enum ListStatus: String, CaseIterable {
 }
 
 extension ListEntry: Persistable {
-    convenience init?(name: String, dueDate: Date? = Date(), isComplete: Bool? = false,
-                      context: PersistentContext
-    ) {
-        guard let context = context as? NSManagedObjectContext, let isComplete = isComplete
-            else { return nil }
+    convenience init?(name: String, dueDate: String?, isComplete: Bool? = false, days: Int?, endOn:String?, isRepeated: Bool? = false, context: PersistentContext ) {
+        guard let context = context as? NSManagedObjectContext, let isComplete = isComplete, let isRepeated = isRepeated, let days = days, let endOn = endOn
+        else { return nil }
         self.init(context: context)
         self.name = name
         self.dueDate = dueDate
         self.isComplete = isComplete
+        self.days = Int64(days)
+        self.endOn = endOn
+        self.isRepeated = isRepeated
     }
     @discardableResult convenience init?(listRepresentation: ListRepresentation, context: PersistentContext) {
         guard let isComplete = listRepresentation.isComplete else { return nil }
         let name = listRepresentation.name
         let dueDate = listRepresentation.dueDate
+        
         self.init(name: name,
                   dueDate: dueDate,
                   isComplete: isComplete,
+            days: listRepresentation.days,
+            endOn: listRepresentation.endOn,
+            isRepeated: listRepresentation.isRepeated,
                   context: context)
     }
     var listRepresentation: ListRepresentation? {
