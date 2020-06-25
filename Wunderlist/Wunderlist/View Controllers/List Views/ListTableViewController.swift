@@ -14,6 +14,8 @@ class ListTableViewController: UITableViewController {
     // MARK: - Properties
     var neUserController = NEUserController.shared
     var listController = ListController()
+
+    // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         NEUserController.shared.delegate = self
@@ -25,6 +27,7 @@ class ListTableViewController: UITableViewController {
 
     @IBAction func entryStatusTapped(_ sender: Any) {
     }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         listController.fetchListFromServer()
@@ -36,15 +39,18 @@ class ListTableViewController: UITableViewController {
         }
         tableView.reloadData()
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+
     }
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return listController.lists?.count ?? 0
         return listController.listCount
     }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
             as? ListCell else { return UITableViewCell() }
@@ -72,6 +78,7 @@ class ListTableViewController: UITableViewController {
 //                }}
 //        }
 //    }
+
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
     }
@@ -148,4 +155,5 @@ extension ListTableViewController: UserStateDelegate {
     func userLoggedIn() {
         listController.fetchListFromServer()
     }
+
 }

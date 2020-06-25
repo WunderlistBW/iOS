@@ -106,7 +106,7 @@ class NEUserController {
                 }
                 do {
                     self.bearer = try self.jsonDecoder.decode(NEBearer.self, from: data)
-                    print("\(self.bearer)" ?? "No Bearer")
+                    print("\(String(describing: self.bearer))")
                 } catch {
                     NSLog("Error decoding bearer object: \(error)⚠️⚠️⚠️")
                     completion(.failure(.noToken))
@@ -129,7 +129,7 @@ class NEUserController {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         guard let token = self.bearer?.token else { return }
         request.setValue(token, forHTTPHeaderField: "Authorization")
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 NSLog("Error fetching user: \(error)⚠️⚠️⚠️")
                 completion(.failure(.otherError))

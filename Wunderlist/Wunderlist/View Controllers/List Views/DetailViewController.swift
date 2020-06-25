@@ -59,7 +59,6 @@ class DetailViewController: UIViewController {
         entryTitleField.text = listEntry.name
         entryTitleField.isUserInteractionEnabled = isEditing
         entryTextView.isUserInteractionEnabled = isEditing
-        #warning("Bad unwrapping")
         entryDatePicker.date = listEntry.dueDate!
         entryDatePicker.isUserInteractionEnabled = isEditing
     }
