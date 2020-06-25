@@ -64,7 +64,7 @@ class WunderlistTests: XCTestCase {
                 NSLog("Error signing in :\(error)")
                 return
             }
-            XCTAssertNotNil(error)
+            XCTAssertNoThrow(error)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 10)
