@@ -27,7 +27,8 @@ class ListTableViewController: UITableViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        listController.fetchListFromServer()
+        // listController.fetchListFromServer() // Web backend
+        listController.firebaseFetchFromServer() // Firebase backend
          // Transition to log in view if conditions are met
         let bearer = neUserController.bearer
         guard bearer != nil else {
@@ -146,6 +147,7 @@ extension ListTableViewController: PersistentStoreControllerDelegate {
 
 extension ListTableViewController: UserStateDelegate {
     func userLoggedIn() {
-        listController.fetchListFromServer()
+       // listController.fetchListFromServer() // web backend
+        listController.firebaseFetchFromServer()
     }
 }

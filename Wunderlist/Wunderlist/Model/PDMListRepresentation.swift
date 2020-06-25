@@ -10,7 +10,7 @@ import Foundation
 
 struct ListRepresentation: Equatable, Codable, Persistable {
     var name: String
-    var listId: Int?
+    var listId: String?
     var dueDate: Date
     var isComplete: Bool?
     
