@@ -111,44 +111,63 @@ class ListController {
             }
         }.resume()
     }
-//    func fetchListFromServer(completion: @escaping (Error?) -> Void = { _ in }) {
-//        guard let bearer = NEUserController.shared.bearer else { return }
-//        print(bearer)
-//       let requestURL = databaseURL.appendingPathExtension("api/tasks") // disabled for firebase
-//        var request = URLRequest(url: databaseURL)
-//        request.httpMethod = "GET"
-//      request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
-//        URLSession.shared.dataTask(with: request) { data, _, error in
-//            if let error = error {
-//                print("Error fetching list: \(error)")
-//                DispatchQueue.main.async {
-//                    completion(error)
-//                }
-//                return
-//            }
-//            guard let data = data else {
-//                print("No data returned in fetch")
-//                DispatchQueue.main.async {
-//                    completion(NSError())
-//                }
-//                return
-//            }
-//            print(String.init(data: data, encoding: .utf8))
-//
-//            do {
-//                let listRepresentations =
-//                    try Array(JSONDecoder().decode([String: ListRepresentation].self, from: data).values)
-//                try self.updateList(with: listRepresentations)
-//                DispatchQueue.main.async {
-//                    completion(nil)
-//                }
-//            } catch {
-//                print("Error decoding list representation: \(error)")
-//                completion(error)
-//                return
-//            }
-//        }.resume()
-//    }
+    func firebaseDeleteListFromServer(_ entry: ListEntry, completion: @escaping CompletionHandler = { _ in }) {
+        guard let uuid = entry.listId else {
+            completion(.failure(.badData))
+            return
+        }
+        let requestURL = databaseURL.appendingPathComponent(uuid.uuidString).appendingPathExtension("json")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "DELETE"
+
+        URLSession.shared.dataTask(with: request) { _, _, error in
+            guard error == nil else {
+                print(error!)
+                completion(.failure(.otherError))
+                return
+            }
+            completion(.failure(.otherError))
+        }.resume()
+    }
+
+    func fetchListFromServer(completion: @escaping (Error?) -> Void = { _ in }) {
+        guard let bearer = NEUserController.shared.bearer else { return }
+        print(bearer)
+       let requestURL = databaseURL.appendingPathExtension("api/tasks") // disabled for firebase
+        var request = URLRequest(url: databaseURL)
+        request.httpMethod = "GET"
+      request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error = error {
+                print("Error fetching list: \(error)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            guard let data = data else {
+                print("No data returned in fetch")
+                DispatchQueue.main.async {
+                    completion(NSError())
+                }
+                return
+            }
+            print(String.init(data: data, encoding: .utf8))
+
+            do {
+                let listRepresentations =
+                    try Array(JSONDecoder().decode([String: ListRepresentation].self, from: data).values)
+                try self.updateList(with: listRepresentations)
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            } catch {
+                print("Error decoding list representation: \(error)")
+                completion(error)
+                return
+            }
+        }.resume()
+    }
     private func updateList(with representation: [ListRepresentation]) throws {
         let entriesWithId = representation.filter { $0.listId != nil  }
         let identifiersToFetch = entriesWithId.compactMap { UUID(uuidString: $0.listId!) }
