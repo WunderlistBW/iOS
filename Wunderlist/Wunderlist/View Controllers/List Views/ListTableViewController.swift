@@ -34,7 +34,7 @@ class ListTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         listController.fetchListFromServer()
          // Transition to log in view if conditions are met
-        let bearer = neUserController.currentUser?.token
+        let bearer = NEUserController.currentUserID?.token
         guard bearer != nil else {
             performSegue(withIdentifier: "ListSegue", sender: self)
             return

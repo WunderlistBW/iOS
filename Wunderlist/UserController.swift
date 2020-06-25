@@ -29,8 +29,7 @@ class NEUserController {
     static let shared = NEUserController()
     var loggedInUser: APIUser?
     var delegate: UserStateDelegate?
-    var currentUser: SignedInUser?
-    var currentUserID: SignedInUser?
+    static var currentUserID: SignedInUser?
     private init () {
     }
     private let baseURL = URL(string: "https://wunderlist-node.herokuapp.com")!
@@ -67,8 +66,8 @@ class NEUserController {
                 }
                 if let data = data {
                     do {
-                        try self.currentUserID = self.jsonDecoder.decode(SignedInUser.self, from: data)
-                        print("UserID:\(self.currentUserID)")
+                        try NEUserController.self.currentUserID = self.jsonDecoder.decode(SignedInUser.self, from: data)
+                        print("UserID:\(NEUserController.currentUserID)")
                     } catch {
                         print("Error decoding userID object")
                         completion(.failure(.failedSignUp))
@@ -106,8 +105,8 @@ class NEUserController {
                     return
                 }
                 do {
-                    self.currentUser = try self.jsonDecoder.decode(SignedInUser.self, from: data)
-                    print("Bearer Token: \(String(describing: self.currentUser))")
+                    NEUserController.self.currentUserID = try self.jsonDecoder.decode(SignedInUser.self, from: data)
+                    print("Bearer Token: \(String(describing: NEUserController.self.currentUserID))")
                 } catch {
                     NSLog("Error decoding bearer object: \(error)⚠️⚠️⚠️")
                     completion(.failure(.noToken))

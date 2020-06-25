@@ -12,7 +12,7 @@ class AddViewController: UIViewController {
     // MARK: - PROPERTIES
     var listController: ListController?
     var listEntry: ListEntry?
-    var userId = NEUserController.shared.currentUser
+    var userId = NEUserController.currentUserID
     // DATE FORMATTER
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -44,7 +44,12 @@ class AddViewController: UIViewController {
             // update feature / function
         } else {
             do {
-                try listController.createListEntry(with: name, body: "TestData", recurring: "daily", completed: false, dueDate: endOn, userId: uwUserId)
+                try listController.createListEntry(with: name,
+                                                   body: "TestData",
+                                                   recurring: "daily",
+                                                   completed: false,
+                                                   dueDate: endOn,
+                                                   userId: uwUserId)
             } catch {
                 print("Error creating entry from Add Entry VC")
             }

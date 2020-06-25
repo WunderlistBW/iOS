@@ -52,14 +52,14 @@ class ListController {
             }
         }.resume()
     }
+    
     func fetchListFromServer(completion: @escaping (Error?) -> Void = { _ in }) {
-        guard let bearer = NEUserController.shared.currentUser else { return }
-        print(bearer)
-     let requestURL = databaseURL.appendingPathExtension("api/tasks") // disabled for firebase
-        var request = URLRequest(url: databaseURL)
-        
+        guard let bearer = NEUserController.currentUserID?.token else { return }
+        guard let currentUID = NEUserController.currentUserID?.user.id else { return }
+     let requestURL = databaseURL.appendingPathExtension("api/items/\(currentUID)")
+        var request = URLRequest(url: requestURL)
         request.httpMethod = "GET"
-        request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 print("Error fetching list: \(error)")
@@ -75,10 +75,8 @@ class ListController {
                 }
                 return
             }
-            print(String.init(data: data, encoding: .utf8))
             do {
-                let listRepresentations =
-                    try JSONDecoder().decode([ListRepresentation].self, from: data)
+                let listRepresentations = try Array(JSONDecoder().decode([String: ListRepresentation].self, from: data).values)
                 try self.updateList(with: listRepresentations)
                 DispatchQueue.main.async {
                     completion(nil)
@@ -116,11 +114,12 @@ class ListController {
         }
         try CoreDataStack.shared.save(in: context)
     }
+    
     func deleteListFromServer(_ list: ListEntry, completion: @escaping CompletionHandler = { _ in}) {
         let listID = list.listId
-        let requestURL = databaseURL.appendingPathComponent("api/tasks/\(listID)")
+        let requestURL = databaseURL.appendingPathComponent("api/items/\(listID)")
         var request = URLRequest(url: requestURL)
-        guard let token = NEUserController.shared.currentUser?.token else { return }
+        guard let token = NEUserController.currentUserID?.token else { return }
         request.setValue(token, forHTTPHeaderField: "Authorization")
         request.httpMethod = HTTPMethod.delete.rawValue
         URLSession.shared.dataTask(with: request) { _, _, error in
