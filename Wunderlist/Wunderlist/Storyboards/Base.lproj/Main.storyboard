@@ -173,7 +173,6 @@
                             <constraint firstItem="Dos-UV-4cr" firstAttribute="top" secondItem="JOB-oQ-TM9" secondAttribute="bottom" constant="8" id="eez-VR-6as"/>
                             <constraint firstItem="W79-Am-1mB" firstAttribute="trailing" secondItem="JOB-oQ-TM9" secondAttribute="trailing" constant="316" id="fd5-Wq-I1Q"/>
                             <constraint firstItem="KJG-LI-gOA" firstAttribute="leading" secondItem="s6J-r4-VI0" secondAttribute="leading" constant="20" id="fqI-kU-3ne"/>
-                            <constraint firstItem="KJG-LI-gOA" firstAttribute="top" secondItem="Dos-UV-4cr" secondAttribute="bottom" constant="23" id="hB6-oZ-R8k"/>
                             <constraint firstItem="W79-Am-1mB" firstAttribute="trailing" secondItem="U9W-JV-897" secondAttribute="trailing" constant="20" id="kdF-x5-Ej9"/>
                             <constraint firstAttribute="bottom" secondItem="UrD-99-gS2" secondAttribute="bottom" constant="721" id="m5e-Vg-BCu"/>
                             <constraint firstItem="maF-99-Qd0" firstAttribute="top" secondItem="ydF-A4-W87" secondAttribute="bottom" constant="8" id="mNF-lO-d7E"/>
@@ -203,11 +202,12 @@
                     <connections>
                         <outlet property="addDatePicker" destination="U9W-JV-897" id="p64-kh-pQY"/>
                         <outlet property="nameTextField" destination="maF-99-Qd0" id="JYt-j2-s8F"/>
+                        <outlet property="reminderSegment" destination="Dos-UV-4cr" id="BcM-5n-JHc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h49-BV-WV6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4871.0144927536239" y="-512.27678571428567"/>
+            <point key="canvasLocation" x="4071" y="-419"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="EzT-Pn-A0I">
@@ -305,11 +305,12 @@
                     <connections>
                         <outlet property="entryDatePicker" destination="MdX-wS-P2y" id="Ksq-MF-oyy"/>
                         <outlet property="entryTitleField" destination="rPz-6K-PiS" id="HTB-gJ-hNY"/>
+                        <outlet property="reminderSegmentControl" destination="yRu-Bt-g9K" id="LHF-Zp-k4U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oYh-Rd-0DA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3960.8695652173915" y="150.66964285714286"/>
+            <point key="canvasLocation" x="4072" y="351"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lhN-GE-K5K">
