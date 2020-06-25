@@ -20,12 +20,20 @@ class AddViewController: UIViewController {
         return formatter
     }()
     // MARK: - OUTLETS
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var nameTextField: UITextField!
     // In case we want to add that segmented complete control
     @IBOutlet weak var isCompleteControl: UISegmentedControl!
     @IBOutlet weak var addDatePicker: UIDatePicker!
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    //MARK: - Life Cycles -
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setUpIdentitfiers()
     }
     // MARK: - ACTIONS
     // TO DO - ADD CANCEL BUTTON ON VC
@@ -66,3 +74,11 @@ class AddViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
+
+extension AddViewController {
+    private func setUpIdentitfiers() {
+        self.addDatePicker.accessibilityIdentifier = "Main.Create.DatePicker"
+        self.cancelButton.accessibilityIdentifier = "Main.Create.CancelButton"
+        self.saveButton.accessibilityIdentifier = "Main.Create.SaveButton"
+    }
+}
