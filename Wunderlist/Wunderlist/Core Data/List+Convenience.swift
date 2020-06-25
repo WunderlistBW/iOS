@@ -21,7 +21,7 @@ enum ReminderType: String, CaseIterable {
     case none
 }
 extension ListEntry: Persistable {
-    convenience init?(name: String, isComplete: Bool? = false, days: Int64?, endOn:String?, isRepeated: Bool? = false, context: PersistentContext ) {
+    convenience init?(name: String, isComplete: Bool? = false, days: Int64?, endOn:String?, isRepeated: Bool? = false, userId: Int, context: PersistentContext ) {
         guard let context = context as? NSManagedObjectContext, let isComplete = isComplete, let isRepeated = isRepeated, let days = days, let endOn = endOn
         else { return nil }
         self.init(context: context)
@@ -29,6 +29,7 @@ extension ListEntry: Persistable {
         self.isComplete = isComplete
         self.days = Int64(days)
         self.endOn = endOn
+        self.userId = Int64(userId)
         self.isRepeated = isRepeated
     }
     @discardableResult convenience init?(listRepresentation: ListRepresentation, context: PersistentContext) {
@@ -39,13 +40,13 @@ extension ListEntry: Persistable {
                   isComplete: isComplete,
             days: listRepresentation.days,
             endOn: listRepresentation.endOn,
-            isRepeated: listRepresentation.isRepeated,
+            isRepeated: listRepresentation.isRepeated, userId: listRepresentation.userId,
                   context: context)
     }
     var listRepresentation: ListRepresentation? {
         guard let name = name,
         let dueDate = dueDate else { return nil }
         return ListRepresentation(name: name, listId: Int(listId),
-                                  dueDate: dueDate, isComplete: isComplete)
+                                  dueDate: dueDate, isComplete: isComplete, userId: Int(userId))
     }
 }

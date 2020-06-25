@@ -16,10 +16,14 @@ struct ListRepresentation: Equatable, Codable, Persistable {
     var isRepeated: Bool?
     var days: Int64?
     var endOn: String?
+    var userId: Int
     
     enum ListCodingKeys: String, CodingKey {
        case listId = "id"
         case isComplete = "completed"
+        case isRepeated = "recurring"
+        case dueDate = "due_date"
+        case userId = "user_id"
     }
 }
 

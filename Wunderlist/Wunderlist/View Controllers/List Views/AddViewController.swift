@@ -12,6 +12,7 @@ class AddViewController: UIViewController {
     // MARK: - PROPERTIES
     var listController: ListController?
     var listEntry: ListEntry?
+    var userId = NEUserController.shared.currentUser
     // DATE FORMATTER
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -35,7 +36,7 @@ class AddViewController: UIViewController {
     // TO SAVE A CREATED LIST ENTRY
     @IBAction func save(_ sender: UIBarButtonItem) {
         guard let name = nameTextField.text, !name.isEmpty else { return }
-        guard let listController = listController else { return }
+        guard let listController = listController, let uwUserId = userId?.user.userId else { return }
         let dateString = dateFormatter.string(from: addDatePicker.date)
         let endOn = dateString
         if let listEntry = listEntry {
@@ -44,7 +45,7 @@ class AddViewController: UIViewController {
             // update feature / function
         } else {
             do {
-                try listController.createListEntry(with: name, days: 0, endOn: endOn)
+                try listController.createListEntry(with: name, days: 0, endOn: endOn, userId: uwUserId)
             } catch {
                 print("Error creating entry from Add Entry VC")
             }

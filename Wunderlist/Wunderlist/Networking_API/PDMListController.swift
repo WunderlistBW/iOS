@@ -28,9 +28,9 @@ class ListController {
         }
     }
     typealias CompletionHandler = (Result<Bool, NetworkError>) -> Void
-    private let databaseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com")!
+    private let databaseURL = URL(string: "https://wunderlist-node.herokuapp.com")!
     func putListToServer(list: ListEntry, completion: @escaping CompletionHandler = { _ in }) {
-        let requestURL = databaseURL.appendingPathComponent("api/tasks") //Disabled for firebase
+        let requestURL = databaseURL.appendingPathComponent("api/items") //Disabled for firebase
         var request = URLRequest(url: databaseURL)
         request.httpMethod = HTTPMethod.post.rawValue
         do {
@@ -53,13 +53,13 @@ class ListController {
         }.resume()
     }
     func fetchListFromServer(completion: @escaping (Error?) -> Void = { _ in }) {
-        guard let bearer = NEUserController.shared.bearer else { return }
+        guard let bearer = NEUserController.shared.currentUser else { return }
         print(bearer)
      let requestURL = databaseURL.appendingPathExtension("api/tasks") // disabled for firebase
         var request = URLRequest(url: databaseURL)
         
         request.httpMethod = "GET"
-       request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 print("Error fetching list: \(error)")
@@ -76,7 +76,6 @@ class ListController {
                 return
             }
             print(String.init(data: data, encoding: .utf8))
-
             do {
                 let listRepresentations =
                     try JSONDecoder().decode([ListRepresentation].self, from: data)
@@ -121,7 +120,7 @@ class ListController {
         let listID = list.listId
         let requestURL = databaseURL.appendingPathComponent("api/tasks/\(listID)")
         var request = URLRequest(url: requestURL)
-        guard let token = NEUserController.shared.bearer?.token else { return }
+        guard let token = NEUserController.shared.currentUser?.token else { return }
         request.setValue(token, forHTTPHeaderField: "Authorization")
         request.httpMethod = HTTPMethod.delete.rawValue
         URLSession.shared.dataTask(with: request) { _, _, error in
@@ -140,13 +139,14 @@ class ListController {
         listEntry.isRepeated = representation.isRepeated ?? false
         listEntry.isComplete = representation.isComplete ?? false
     }
-    func createListEntry(with name: String, isRepeated: Bool? = false, days: Int64?, endOn: String?, isComplete: Bool? = false) throws {
+    func createListEntry(with name: String, isRepeated: Bool? = false, days: Int64?, endOn: String?, isComplete: Bool? = false, userId: Int) throws {
         let context = persistentStoreController.mainContext
         guard  let list = ListEntry(name: name,
                                     isComplete: isComplete,
                                     days: days,
                                     endOn: endOn,
                                     isRepeated: isRepeated,
+                                    userId: userId,
                                     context: context) else { return }
         putListToServer(list: list)
         do {

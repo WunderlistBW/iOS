@@ -29,19 +29,19 @@ class NEUserController {
     static let shared = NEUserController()
     var loggedInUser: APIUser?
     var delegate: UserStateDelegate?
-    var bearer: NEBearer?
-    var currentUserID: NEUserID?
+    var currentUser: SignedInUser?
+    var currentUserID: SignedInUser?
     private init () {
     }
-    private let baseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com")!
-    private lazy var signUpURL = baseURL.appendingPathComponent("api/auth/register")
-    private lazy var signInURL = baseURL.appendingPathComponent("api/auth/login")
+    private let baseURL = URL(string: "https://wunderlist-node.herokuapp.com")!
+    private lazy var signUpURL = baseURL.appendingPathComponent("api/register")
+    private lazy var signInURL = baseURL.appendingPathComponent("api/login")
     private lazy var editUserURL = baseURL.appendingPathComponent("api/users/")
     private lazy var fetchUserURL = baseURL.appendingPathComponent("api/users/")
     private lazy var jsonEncoder = JSONEncoder()
     private lazy var jsonDecoder = JSONDecoder()
     func signUp(with username: String, password: String, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
-        let user = NEUser(username: username, password: password)
+        let user = NEUser(username: username, password: password, email: "testing12@testing.com") // implement this in UI
         print("\(String(describing: loggedInUser))🧚🏿‍♀️")
         print("signUpURL = \(signUpURL.absoluteString)")
         var request = URLRequest(url: signUpURL)
@@ -67,8 +67,8 @@ class NEUserController {
                 }
                 if let data = data {
                     do {
-                        try self.currentUserID = self.jsonDecoder.decode(NEUserID.self, from: data)
-                        print("\(self.currentUserID)")
+                        try self.currentUserID = self.jsonDecoder.decode(SignedInUser.self, from: data)
+                        print("UserID:\(self.currentUserID)")
                     } catch {
                         print("Error decoding userID object")
                         completion(.failure(.failedSignUp))
@@ -77,6 +77,7 @@ class NEUserController {
                 completion(.success(true))
         }.resume()
     }
+    
     func signIn(with username: String, password: String, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         print("signInURL = \(signInURL.absoluteString)")
         var request = URLRequest(url: signInURL)
@@ -105,8 +106,8 @@ class NEUserController {
                     return
                 }
                 do {
-                    self.bearer = try self.jsonDecoder.decode(NEBearer.self, from: data)
-                    print("\(String(describing: self.bearer))")
+                    self.currentUser = try self.jsonDecoder.decode(SignedInUser.self, from: data)
+                    print("Bearer Token: \(String(describing: self.currentUser))")
                 } catch {
                     NSLog("Error decoding bearer object: \(error)⚠️⚠️⚠️")
                     completion(.failure(.noToken))
@@ -120,14 +121,14 @@ class NEUserController {
             completion(.failure(.failedSignIn))
         }
     }
-    func fetchUserFromServer(with userID: NEUserID, completion: @escaping (Result<APIUser, NetworkError>) -> Void = { _ in }) {
-        let requestURL = fetchUserURL.appendingPathComponent("\(userID.userId)")
+    func fetchUserFromServer(with userID: SignedInUser, completion: @escaping (Result<APIUser, NetworkError>) -> Void = { _ in }) {
+        let requestURL = fetchUserURL.appendingPathComponent("\(currentUserID?.user.userId)")
         print("\(userID)")
         print("fetchUserURL: \(requestURL)")
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.get.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let token = self.bearer?.token else { return }
+        guard let token = self.currentUser?.token else { return }
         request.setValue(token, forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
@@ -151,11 +152,11 @@ class NEUserController {
     }
     func updateUser(with username: String, email: String, completion: @escaping (Result<Bool, NetworkError>) -> Void = { _ in }) {
         guard let userID = currentUserID else { return }
-        let requestURL = editUserURL.appendingPathComponent("\(userID.userId)")
+        let requestURL = editUserURL.appendingPathComponent("\(currentUserID?.user.userId)")
         print("editUserURL = \(requestURL.absoluteString)")
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.put.rawValue
-        guard let token = self.bearer?.token else { return }
+        guard let token = self.currentUser?.token else { return }
         request.setValue(token, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
