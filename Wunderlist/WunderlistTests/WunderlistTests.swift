@@ -12,6 +12,7 @@ import Foundation
 @testable import Wunderlist
 
 class WunderlistTests: XCTestCase {
+    // MARK: - Properties -
     var storageManager: StorageManager?
     var managedObjectModel: NSManagedObjectModel = {
         let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])!
@@ -29,6 +30,7 @@ class WunderlistTests: XCTestCase {
         return container
     }()
 
+    // MARK: - Methods -
     override func setUp() {
         super.setUp()
         storageManager = StorageManager(container: mockPersistantContainer)
@@ -39,6 +41,8 @@ class WunderlistTests: XCTestCase {
         storageManager = nil
     }
     
+    // MARK: - Unit Tests -
+    // Live network:
     func testNESignUp() {
         let login = NEUserController()
         let expectation = self.expectation(description: "Waiting for signing up to be completed")
@@ -60,12 +64,13 @@ class WunderlistTests: XCTestCase {
                 NSLog("Error signing in :\(error)")
                 return
             }
-            XCTAssertNotNil(error)
+            XCTAssertNoThrow(error)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 10)
         XCTAssertNotNil(login.bearer)
     }
+    // Core Data
     func testEmptyStore() {
         if let storageManager = self.storageManager {
             let listEntries = storageManager.fetchAll()
@@ -122,25 +127,24 @@ class WunderlistTests: XCTestCase {
         let clearedStore = storageManager.fetchAll()
         XCTAssertEqual(clearedStore.count, 0)
     }
+    // Features
     func testListEntryCompletes() {
-        /*
-        let testDataStack = CoreDataStack()
         let interval: TimeInterval = 30
-        let dueDate = Date(timeIntervalSinceNow: interval)
-        let letComplete = expectation(description: "Wait for ListEntry to complete.")
-        let newListEntry = ListEntry(name: "newEntry",
-                                     dueDate: dueDate,
-                                     isComplete: false,
-                                     context: testDataStack.mainContext)
-        XCTAssertNotNil(newListEntry)
-        XCTAssertEqual(newListEntry?.isComplete, false)
-        
-        wait(for: [letComplete], timeout: 40)
-        XCTAssertEqual(newListEntry?.isComplete, true)
- */
-    }
-    func testSortListEntryObjectsByDate() {
-    }
-    func testSortListEntryObjectsByCompleted() {
+        let waiting1 = expectation(description: "Waiting for ListEntry to expire.")
+        let waiting2 = expectation(description: "Checking ListEntry completion status.")
+        guard let storageManager = storageManager else { XCTFail("No storage manager present."); return }
+        let completionTestEntry = storageManager.insertListEntry(name: "completionTest",
+                                                                 dueDate: Date() + TimeInterval(interval),
+                                                                 listId: 80085,
+                                                                 isComplete: false)
+        storageManager.save()
+        let testContents = storageManager.fetchAll()
+        XCTAssertEqual(testContents.count, 1)
+        XCTAssertEqual(completionTestEntry?.isComplete, false)
+        waiting1.fulfill()
+        wait(for: [waiting1], timeout: interval)
+        waiting2.fulfill()
+        wait(for: [waiting2], timeout: 2)
+        XCTAssertEqual(completionTestEntry?.isComplete, true)
     }
 }
