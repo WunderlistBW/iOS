@@ -26,6 +26,7 @@ extension String {
     static let loginButton = "Onboarding.LoginButton"
     static let submitButton = "Onboarding.SubmitButton"
     static let rememberMeButton = "Onboarding.RememberMeButton"
+    static let getStartedButton = "Onboarding.UIAlert.GetStarted"
     ///Text Fields
     static let usernameTextField = "Onboarding.UserField"
     static let passwordTextField = "Onboarding.PasswordField"

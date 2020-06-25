@@ -8,7 +8,6 @@
 
 import XCTest
 import UIKit
-import CoreData
 @testable import Wunderlist
 
 class WunderlistUITests: XCTestCase {
@@ -26,17 +25,20 @@ class WunderlistUITests: XCTestCase {
     // MARK: - Tests -
     func testNewUserSignup() {
         let app = XCUIApplication()
+        app.activate()
         let signupButton = app.buttons[.signupButton]
         signupButton.tap()
         let userBox = app.textFields[.usernameTextField]
-        let passBox = app.textFields[.passwordTextField]
+        let passBox = app.secureTextFields[.passwordTextField]
         userBox.tap()
         userBox.typeText("NewUser123")
         passBox.tap()
         passBox.typeText("password")
         let submitButton = app.buttons[.submitButton]
         submitButton.tap()
-        let homeTable = app.tableViews[.listTableView]
+        
+        let homeTable = app.tables[.listTableView]
+        XCTAssertTrue(homeTable.exists)
     }
     func testUserLoginAndRememberMe() {
         //launch app
