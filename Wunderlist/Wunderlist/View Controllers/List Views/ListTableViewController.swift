@@ -165,19 +165,18 @@ extension ListTableViewController: UserStateDelegate {
     }
 }
 extension ListTableViewController: UISearchBarDelegate {
-    #warning("SEARCH METHOD -- this *should* work if I figure out what the replacement for fetch is, listcontroller.something")
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//    #warning("SEARCH METHOD -- this *should* work if I figure out what the replacement for fetch is, listcontroller.something")
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 //        var predicate: NSPredicate?
 //        if searchBar.text?.count != 0 {
 //            predicate = NSPredicate(format: "(name CONTAINS[cd] %@) || (recurring CONTAINS[cd] %@)", searchText, searchText)
 //        }
-//        listController.searchedListEntry.
-////        fetchedResultsController.fetchRequest.predicate = predicate
+//        let coreDataSearch = CoreDataStack.shared.fetchedResultsController.fetchedObjects
 //        do {
 //            try listController.fetchListFromServer()
 //        } catch {
 //            NSLog("Error performing fetch: \(error)")
 //        }
 //        tableView.reloadData()
-    }
+//    }
 }
