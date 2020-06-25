@@ -19,4 +19,27 @@ extension String {
     // MARK: - Segues -
     static let signupSegue = "Signup"
     static let loginSegue = "Login"
+    // MARK: - Storyboard IDs -
+    //Onboarding
+    ///Buttons
+    static let signupButton = "Onboarding.SignUpButton"
+    static let loginButton = "Onboarding.LoginButton"
+    static let submitButton = "Onboarding.SubmitButton"
+    static let rememberMeButton = "Onboarding.RememberMeButton"
+    ///Text Fields
+    static let usernameTextField = "Onboarding.UserField"
+    static let passwordTextField = "Onboarding.PasswordField"
+    ///Labels
+    static let statusLabel = "Onboarding.StatusLabel"
+    //Main
+    ///Views
+    static let listTableView = "Main.ListTable"
+    static let createDatePicker = "Main.Create.DatePicker"
+    ///Buttons
+    static let addButton = "Main.AddButton"
+    static let createCancelButton = "Main.Create.CancelButton"
+    static let createSaveButton = "Main.Create.SaveButton"
+    ///Text Fields
+    static let createListTextField = "Main.Create.TextField"
+    
 }

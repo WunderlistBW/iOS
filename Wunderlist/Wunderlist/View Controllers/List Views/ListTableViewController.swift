@@ -12,12 +12,14 @@ import CoreData
 class ListTableViewController: UITableViewController {
 
     // MARK: - Properties
+    @IBOutlet weak var addButton: UIBarButtonItem!
     var neUserController = NEUserController.shared
     var listController = ListController()
 
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpIdentifiers()
         NEUserController.shared.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
@@ -156,4 +158,11 @@ extension ListTableViewController: UserStateDelegate {
         listController.fetchListFromServer()
     }
 
+}
+
+extension ListTableViewController {
+    private func setUpIdentifiers {
+        self.tableView.accessibilityIdentifier = "Main.ListTable"
+        self.addButton.accessibilityIdentifier = "Main.AddButton"
+    }
 }

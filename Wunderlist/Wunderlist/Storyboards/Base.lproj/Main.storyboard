@@ -96,6 +96,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="sOs-e6-NWA" id="l9U-QH-CXg"/>
                         <segue destination="lOV-Hi-60G" kind="presentation" identifier="ListSegue" modalPresentationStyle="fullScreen" id="MHQ-o1-2lS"/>
                     </connections>
                 </tableViewController>
@@ -113,6 +114,7 @@
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title Your List Here:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="maF-99-Qd0">
                                 <rect key="frame" x="20" y="110" width="374" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Main.Create.TextField"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -145,7 +147,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addDatePicker" destination="U9W-JV-897" id="p64-kh-pQY"/>
+                        <outlet property="cancelButton" destination="1C6-ZP-XOq" id="aJH-lq-J7G"/>
                         <outlet property="nameTextField" destination="maF-99-Qd0" id="JYt-j2-s8F"/>
+                        <outlet property="saveButton" destination="j25-xe-lp3" id="smw-QM-keR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h49-BV-WV6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
