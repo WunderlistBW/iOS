@@ -10,6 +10,18 @@ import XCTest
 @testable import Wunderlist
 
 class WunderlistUITests: XCTestCase {
+    // MARK: - Properties -
+    
+    
+    // MARK: - Methods -
+    override func setUp() {
+        <#code#>
+    }
+    
+    override func tearDown() {
+        <#code#>
+    }
+    // MARK: - Tests -
 
     func testNewUserSignup() {
     }
