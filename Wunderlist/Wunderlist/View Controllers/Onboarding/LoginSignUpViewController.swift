@@ -144,20 +144,24 @@ class LoginSignUpViewController: UIViewController {
     private func presentOptions(for username: String,
                                 with password: String) -> NEUser {
         var returnValue: NEUser?
+        var getStarted = UIAlertAction(title: "Get Started!",
+                                       style: .default,
+                                       handler: { _ in
+                                        switch self.usernameTextField.text!.isEmpty && self.passwordTextField.text!.isEmpty {
+                                        case true:
+                                            returnValue = NEUser(username: username,
+                                                                 password: password)
+                                        case false:
+                                            print("Text field empty")
+                                        }
+        
+        })
+        getStarted.accessibilityLabel = "Onboarding.UIAlert.GetStarted"
+        
         let options = UIAlertController(title: "Welcome!",
                                         message: "If you'd like you can help Wunderlist give you all the best featues by providing a little bit of info below:",
                                         preferredStyle: .alert)
-        options.addAction(UIAlertAction(title: "Get Started!",
-                                        style: .default,
-                                        handler: { _ in
-                                            switch self.usernameTextField.text!.isEmpty && self.passwordTextField.text!.isEmpty {
-                                            case true:
-                                                returnValue = NEUser(username: username,
-                                                                     password: password)
-                                            case false:
-                                                print("Text field empty")
-                                            }
-        }))
+        options.addAction(getStarted)
         present(options, animated: true, completion: nil)
         if let username = usernameTextField.text, let password = passwordTextField.text{
          returnValue = NEUser(username: username, password: password)
