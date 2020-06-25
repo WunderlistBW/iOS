@@ -31,8 +31,13 @@ class ListTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // listController.fetchListFromServer() // Web backend
-        listController.firebaseFetchFromServer() // Firebase backend
-         // Transition to log in view if conditions are met
+        listController.firebaseFetchFromServer { result in
+            print(result)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
         let bearer = neUserController.bearer
         guard bearer != nil else {
             performSegue(withIdentifier: "ListSegue", sender: self)
@@ -43,7 +48,14 @@ class ListTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        listController.firebaseFetchFromServer { result in
+            if result == .success(true) {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    print(result)
+                }
+            }
+        }
     }
     
     // MARK: - Table view data source
@@ -64,7 +76,8 @@ class ListTableViewController: UITableViewController {
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let list = coreDataStack.fetchedResultsController.object(at: indexPath)
-            listController.firebaseDeleteListFromServer(list) { error in
+            listController.firebaseDeleteListFromServer(list) { result in
+                if result == .success(true) {
                 DispatchQueue.main.async {
                     let context = CoreDataStack.shared.mainContext
                     context.delete(list)
@@ -74,8 +87,10 @@ class ListTableViewController: UITableViewController {
                     } catch {
                         context.reset()
                         NSLog("Error saving managed object context (delete task): \(error)")
+                        }
                     }
-                }}
+                }
+            }
         }
     }
     
@@ -151,7 +166,9 @@ extension ListTableViewController: UserStateDelegate {
     func userLoggedIn() {
        // listController.fetchListFromServer() // web backend
         listController.firebaseFetchFromServer { result in
-            // TODO: Do something with result on the UI layer
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
             print(result)
         }
     }
