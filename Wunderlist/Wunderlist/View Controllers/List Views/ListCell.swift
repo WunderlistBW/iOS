@@ -9,10 +9,9 @@
 import UIKit
 
 class ListCell: UITableViewCell {
+    var listEntryController: ListController?
     
-    var listEntryController = ListController()
     var isCompleted: Bool = false
-    
     // MARK: OUTLETS
     @IBOutlet weak var reminderName: UILabel!
     @IBOutlet weak var isCompleteButton: UIButton!
@@ -21,10 +20,10 @@ class ListCell: UITableViewCell {
             updateViews()
         }
     }
+    
     func updateViews() {
          guard let task = listEntry else { return }
         reminderName.text = task.name
-//        isCompleteButton.setBackgroundImage(UIImage(named: "alarm"), for: .normal) // this fails and crashes
      }
     // MARK: - ACTIONS
     @IBAction func reminderTapped(_ sender: UIButton) {
@@ -34,6 +33,8 @@ class ListCell: UITableViewCell {
             UIImage(systemName: "alarm"), for: .normal)
         do {
             try CoreDataStack.shared.mainContext.save()
+            listEntryController?.firebaseSendToServer(entry: listEntry)
+            updateViews()
         } catch {
             CoreDataStack.shared.mainContext.reset()
             NSLog("Error saving contact (changing reminder/complete boolean): \(error)")

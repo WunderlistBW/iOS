@@ -14,6 +14,8 @@ class ListTableViewController: UITableViewController {
     // MARK: - Properties
     var neUserController = NEUserController.shared
     var listController = ListController()
+    var coreDataStack = CoreDataStack.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NEUserController.shared.delegate = self
@@ -25,6 +27,7 @@ class ListTableViewController: UITableViewController {
 
     @IBAction func entryStatusTapped(_ sender: Any) {
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // listController.fetchListFromServer() // Web backend
@@ -37,50 +40,45 @@ class ListTableViewController: UITableViewController {
         }
         tableView.reloadData()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return listController.lists?.count ?? 0
         return listController.listCount
     }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
             as? ListCell else { return UITableViewCell() }
         cell.listEntry = listController.getListEntry(at: indexPath)
         return cell
     }
-    // MARK: - DELETE LIST ITEM FROM SERVER & TABLE VIEW (uncomment after delete func done)
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            // Delete the row from the data source
-//            let task = fetchedResultsController.object(at: indexPath)
-//            listController.deleteListFromServer(task) { result in
-//                guard let _ = try? result.get() else {
-//                    return
-//                }
-//                DispatchQueue.main.async {
-//                    let context = CoreDataStack.shared.mainContext
-//                    context.delete(task)
-//                    do {
-//                        try context.save()
-//                    } catch {
-//                        context.reset()
-//                        NSLog("Error saving managed object context (delete task): \(error)")
-//                    }
-//                }}
-//        }
-//    }
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    
+    override func tableView(_ tableView: UITableView,
+                            commit editingStyle: UITableViewCell.EditingStyle,
+                            forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let list = coreDataStack.fetchedResultsController.object(at: indexPath)
+            listController.firebaseDeleteListFromServer(list) { error in
+                DispatchQueue.main.async {
+                    let context = CoreDataStack.shared.mainContext
+                    context.delete(list)
+                    do {
+                        try context.save()
+                        tableView.reloadData()
+                    } catch {
+                        context.reset()
+                        NSLog("Error saving managed object context (delete task): \(error)")
+                    }
+                }}
+        }
     }
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
+    
     // MARK: - Navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CreateSegue" {
@@ -98,14 +96,17 @@ class ListTableViewController: UITableViewController {
         }
     }
 }
+
 // MARK: - EXTENSION
 extension ListTableViewController: PersistentStoreControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
+    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                     didChange sectionInfo: NSFetchedResultsSectionInfo,
                     atSectionIndex sectionIndex: Int,
@@ -119,6 +120,7 @@ extension ListTableViewController: PersistentStoreControllerDelegate {
             break
         }
     }
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                     didChange anObject: Any,
                     at indexPath: IndexPath?,
@@ -148,6 +150,9 @@ extension ListTableViewController: PersistentStoreControllerDelegate {
 extension ListTableViewController: UserStateDelegate {
     func userLoggedIn() {
        // listController.fetchListFromServer() // web backend
-        listController.firebaseFetchFromServer()
+        listController.firebaseFetchFromServer { result in
+            // TODO: Do something with result on the UI layer
+            print(result)
+        }
     }
 }

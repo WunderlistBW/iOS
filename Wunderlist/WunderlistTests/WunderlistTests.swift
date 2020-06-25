@@ -26,7 +26,7 @@ class WunderlistTests: XCTestCase {
     func testNESignIn() {
         let login = NEUserController()
         let expectation = self.expectation(description: "Waiting for signing in to be completed")
-        login.signIn(with: "Chris", password: "12345") { (error) in
+        login.signIn(with: "Chris", password: "12345") { error in
             guard error == error else {
                 NSLog("Error signing in :\(error)")
                 return
@@ -41,9 +41,9 @@ class WunderlistTests: XCTestCase {
         let testDataStack = CoreDataStack()
         let dueDate = Date(timeIntervalSinceNow: 100)
         let newListEntry = ListEntry(name: "newEntry",
-                                     listId: Int64.random(in: 0...1000),
                                      dueDate: dueDate,
                                      isComplete: false,
+                                     listId: UUID(),
                                      context: testDataStack.mainContext)
         XCTAssertNotNil(newListEntry)
     }
@@ -53,9 +53,9 @@ class WunderlistTests: XCTestCase {
         XCTAssertEqual(testFRC.fetchedObjects?.count, 0)
         let dueDate = Date(timeIntervalSinceNow: 100)
         let newListEntry = ListEntry(name: "newEntry",
-                                     listId: Int64.random(in: 0...1000),
                                      dueDate: dueDate,
                                      isComplete: false,
+                                     listId: UUID(),
                                      context: testDataStack.mainContext)
         XCTAssertNotNil(newListEntry)
         XCTAssertNoThrow(try testDataStack.mainContext.save())
@@ -69,9 +69,9 @@ class WunderlistTests: XCTestCase {
         XCTAssertEqual(testFRC.fetchedObjects?.count, 0)
         let dueDate = Date(timeIntervalSinceNow: 100)
         let newListEntry = ListEntry(name: "newEntry",
-                                     listId: Int64.random(in: 0...1000),
                                      dueDate: dueDate,
                                      isComplete: false,
+                                     listId: UUID(),
                                      context: testDataStack.mainContext)
         XCTAssertNotNil(newListEntry)
         XCTAssertNoThrow(try testDataStack.mainContext.save())
@@ -87,9 +87,9 @@ class WunderlistTests: XCTestCase {
         let dueDate = Date(timeIntervalSinceNow: interval)
         let letComplete = expectation(description: "Wait for ListEntry to complete.")
         let newListEntry = ListEntry(name: "newEntry",
-                                     listId: Int64.random(in: 0...1000),
                                      dueDate: dueDate,
                                      isComplete: false,
+                                     listId: UUID(),
                                      context: testDataStack.mainContext)
         XCTAssertNotNil(newListEntry)
         XCTAssertEqual(newListEntry?.isComplete, false)

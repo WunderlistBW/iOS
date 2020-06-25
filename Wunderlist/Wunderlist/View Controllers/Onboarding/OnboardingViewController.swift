@@ -31,11 +31,11 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == .signupSegue {
             if let signupVC = segue.destination as? LoginSignUpViewController {
-                signupVC.loggingIn = false
+                signupVC.isLoggingIn = false
             }
         } else if segue.identifier == .loginSegue {
             if let loginVC = segue.destination as? LoginSignUpViewController {
-                loginVC.loggingIn = true
+                loginVC.isLoggingIn = true
             }
         }
     }

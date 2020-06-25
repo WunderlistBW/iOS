@@ -11,6 +11,7 @@ import CoreData
 
 class ListController {
     // MARK: - Properties
+    var isFirebaseBackend: Bool = true // TODO: Abstract firebase + backend to hotswap between DB's
     var searchedListEntry: [ListRepresentation] = []
     var persistentStoreController: PersistentStoreController = CoreDataStack()
     var listCount: Int {
@@ -21,14 +22,17 @@ class ListController {
     }
     var delegate: PersistentStoreControllerDelegate? {
         get {
-            return persistentStoreController.delegate
+            persistentStoreController.delegate
         }
         set(newDelegate) {
             persistentStoreController.delegate = newDelegate
         }
     }
+    
     typealias CompletionHandler = (Result<Bool, NetworkError>) -> Void
+    
     private let databaseURL = URL(string: "https://wunderlist-97c2c.firebaseio.com/")!
+    
     func firebaseSendToServer(entry: ListEntry, completion: @escaping () -> Void = { }) {
         let context = persistentStoreController.mainContext
         let uuid = entry.listId ?? UUID()
@@ -51,7 +55,7 @@ class ListController {
             return
         }
 
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        URLSession.shared.dataTask(with: request) { _, _, error in
             guard error == nil else {
                 print("Error putting task to server: \(error!)")
                 completion()
@@ -61,13 +65,14 @@ class ListController {
             completion()
         }.resume()
     }
+    
     func putListToServer(list: ListEntry, completion: @escaping CompletionHandler = { _ in }) {
 //        let requestURL = databaseURL.appendingPathComponent("api/tasks") Disabled for firebase
         var request = URLRequest(url: databaseURL)
         request.httpMethod = HTTPMethod.put.rawValue
         do {
             request.httpBody = try JSONEncoder().encode(list.listRepresentation)
-            let putString = String.init(data: request.httpBody!, encoding: .utf8)
+            let putString = String(data: request.httpBody!, encoding: .utf8)
             print(putString!) // TODO: Fix formatting with codingKeys
         } catch {
             NSLog("Error encoding Entry: \(error)")
@@ -84,7 +89,7 @@ class ListController {
             }
         }.resume()
     }
-    func firebaseFetchFromServer(completion: @escaping CompletionHandler = { _ in}) {
+    func firebaseFetchFromServer(completion: @escaping CompletionHandler = { _ in }) {
         let requestURL = databaseURL.appendingPathExtension("json")
 
         URLSession.shared.dataTask(with: requestURL) { data, _, error in
@@ -134,7 +139,7 @@ class ListController {
         guard let bearer = NEUserController.shared.bearer else { return }
         print(bearer)
        let requestURL = databaseURL.appendingPathExtension("api/tasks") // disabled for firebase
-        var request = URLRequest(url: databaseURL)
+        var request = URLRequest(url: requestURL)
         request.httpMethod = "GET"
       request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, _, error in
@@ -152,7 +157,7 @@ class ListController {
                 }
                 return
             }
-            print(String.init(data: data, encoding: .utf8))
+            print(String(data: data, encoding: .utf8))
 
             do {
                 let listRepresentations =
@@ -169,7 +174,7 @@ class ListController {
         }.resume()
     }
     private func updateList(with representation: [ListRepresentation]) throws {
-        let entriesWithId = representation.filter { $0.listId != nil  }
+        let entriesWithId = representation.filter { $0.listId != nil }
         let identifiersToFetch = entriesWithId.compactMap { UUID(uuidString: $0.listId!) }
         let representationByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, entriesWithId))
         var entriesToCreate = representationByID
@@ -194,8 +199,8 @@ class ListController {
         }
         try CoreDataStack.shared.save(in: context)
     }
-    func deleteListFromServer(_ list: ListEntry, completion: @escaping CompletionHandler = { _ in}) {
-        let listID = list.listId
+    func deleteListFromServer(_ list: ListEntry, completion: @escaping CompletionHandler = { _ in }) {
+        guard let listID = list.listId else { return }
         let requestURL = databaseURL.appendingPathComponent("api/tasks/\(listID)")
         var request = URLRequest(url: requestURL)
         guard let token = NEUserController.shared.bearer?.token else { return }
@@ -210,11 +215,13 @@ class ListController {
             completion(.success(true))
         }.resume()
     }
+    
     private func update(listEntry: ListEntry, with representation: ListRepresentation) {
         listEntry.name = representation.name
         listEntry.dueDate = representation.dueDate
         listEntry.isComplete = representation.isComplete ?? false
     }
+    
     func createListEntry(with name: String, dueDate: Date? = Date(), isComplete: Bool? = false, listId: UUID) throws {
         let context = persistentStoreController.mainContext
         guard  let list = ListEntry(name: name,
@@ -230,6 +237,7 @@ class ListController {
             print("Error saving list object \(error)")
         }
     }
+    
     func delete(for list: ListEntry, context: PersistentContext) {
         deleteListFromServer(list)
         do {
@@ -240,9 +248,11 @@ class ListController {
             print("Error deleting listEntry from MOC \(error)")
         }
     }
+    
     func getListEntry(at indexPath: IndexPath) -> ListEntry? {
-        return persistentStoreController.fetchItem(at: indexPath) as? ListEntry
+        persistentStoreController.fetchItem(at: indexPath) as? ListEntry
     }
+    
     func deleteListEntry(at indexPath: IndexPath) throws {
         guard let thisListEntry = getListEntry(at: indexPath) else { throw NSError() }
         try persistentStoreController.delete(thisListEntry, in: nil)

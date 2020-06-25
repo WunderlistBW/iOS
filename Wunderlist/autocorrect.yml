@@ -4,13 +4,11 @@
 # Once done, that enhancement might obsolete this approach.
 
 # Only add rules here you want to auto-correct
-whitelist_rules: 
+whitelist_rules:
 - trailing_whitespace
 - trailing_semicolon
 - trailing_newline
-- identifier_name
-- large_tuple
-- type_body_length
-
 excluded: # paths to ignore during linting.
   - Carthage
+  - Pods
+  

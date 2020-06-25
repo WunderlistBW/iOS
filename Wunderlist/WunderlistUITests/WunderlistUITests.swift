@@ -34,7 +34,4 @@ class WunderlistUITests: XCTestCase {
     func testCheckUserListEntries() {
         
     }
-    
-    
-    
 }

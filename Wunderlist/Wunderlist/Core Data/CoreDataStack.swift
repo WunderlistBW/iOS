@@ -8,9 +8,11 @@
 
 import Foundation
 import CoreData
+
 // MARK: - Protocols
 protocol PersistentStoreControllerDelegate: NSFetchedResultsControllerDelegate {}
 extension NSManagedObjectContext: PersistentContext {}
+
 class CoreDataStack: NSObject, PersistentStoreController {
     // MARK: - Properties
     weak var delegate: PersistentStoreControllerDelegate?
@@ -21,6 +23,7 @@ class CoreDataStack: NSObject, PersistentStoreController {
     var allItems: [Persistable]? { fetchedResultsController.fetchedObjects }
     var itemCount: Int { fetchedResultsController.sections?[0].numberOfObjects ?? 0 }
     var mainContext: PersistentContext { rootContext }
+    
     // MARK: - Setup
     func setUpContainer() -> NSPersistentContainer {
         let container = NSPersistentContainer(name: "Wunderlist")
@@ -32,17 +35,15 @@ class CoreDataStack: NSObject, PersistentStoreController {
         container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }
+    
     func setUpResultsController() -> NSFetchedResultsController<ListEntry> {
-        guard let moc = mainContext as? NSManagedObjectContext else {
-            fatalError("Main Context error")
-        }
         let fetchRequest: NSFetchRequest<ListEntry> = ListEntry.fetchRequest()
         fetchRequest.sortDescriptors = [
             //sort by key here
             NSSortDescriptor(key: "dueDate", ascending: false)]
         let frc = NSFetchedResultsController(
             fetchRequest: fetchRequest,
-            managedObjectContext: moc,
+            managedObjectContext: mainContext,
             sectionNameKeyPath: nil,
             cacheName: nil)
         frc.delegate = self.delegate
@@ -53,25 +54,30 @@ class CoreDataStack: NSObject, PersistentStoreController {
         }
         return frc
     }
+    
     // MARK: - CRUD Methods
     func create(item: Persistable, in context: PersistentContext?) throws {
         let thisContext = fetchContext(context)
         try thisContext.save()
     }
+    
     func fetchItem(at indexPath: IndexPath) -> Persistable? {
-        return fetchedResultsController.object(at: indexPath)
+        fetchedResultsController.object(at: indexPath)
     }
+    
     func deleteInSelectedIndexPath(itemAtIndexPath indexPath: IndexPath, in context: PersistentContext?) throws {
         let thisContext = fetchContext(context)
         let entry = fetchedResultsController.object(at: indexPath)
         try delete(entry, in: thisContext)
     }
+    
     func delete(_ item: Persistable?, in context: PersistentContext?) throws {
         let thisContext = fetchContext(context)
         guard let entry = item as? ListEntry else { throw NSError() }
         thisContext.delete(entry)
         try save(in: thisContext)
     }
+    
     func save(in context: PersistentContext?) throws {
         let thisContext = fetchContext(context)
         var saveError: Error?
@@ -84,6 +90,7 @@ class CoreDataStack: NSObject, PersistentStoreController {
         }
         if let error = saveError { throw error }
     }
+    
     func fetchContext(_ context: PersistentContext?) -> NSManagedObjectContext {
         if let context = context {
             return context
