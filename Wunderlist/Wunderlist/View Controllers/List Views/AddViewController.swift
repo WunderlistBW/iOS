@@ -36,14 +36,15 @@ class AddViewController: UIViewController {
     @IBAction func save(_ sender: UIBarButtonItem) {
         guard let name = nameTextField.text, !name.isEmpty else { return }
         guard let listController = listController else { return }
-        let dueDate = addDatePicker.date
+        let dateString = dateFormatter.string(from: addDatePicker.date)
+        let dueDate = dateString
         if let listEntry = listEntry {
             listEntry.name = name
             listEntry.dueDate = dueDate
             // update feature / function
         } else {
             do {
-                try listController.createListEntry(with: name, dueDate: dueDate)
+                try listController.createListEntry(with: name, dueDate: duDate)
             } catch {
                 print("Error creating entry from Add Entry VC")
             }

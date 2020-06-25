@@ -65,6 +65,7 @@
 		27D818F124A136D200564B68 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		27D818F524A13A3500564B68 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		27FB0B3B24A50FA000A2335B /* RecurringTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurringTask.swift; sourceTree = "<group>"; };
+		27FB0B4024A518D500A2335B /* Wunderlist 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Wunderlist 2.xcdatamodel"; sourceTree = "<group>"; };
 		2FA5D5110893E905758FF010 /* Pods-Wunderlist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.debug.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.debug.xcconfig"; sourceTree = "<group>"; };
 		5E65BA5624A401A300EE875F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		5E65BA5824A43E5E00EE875F /* WunderlistNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WunderlistNetworkTests.swift; sourceTree = "<group>"; };
@@ -839,9 +840,10 @@
 		DB15110424A104620007858E /* Wunderlist.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				27FB0B4024A518D500A2335B /* Wunderlist 2.xcdatamodel */,
 				DB15110524A104620007858E /* Wunderlist.xcdatamodel */,
 			);
-			currentVersion = DB15110524A104620007858E /* Wunderlist.xcdatamodel */;
+			currentVersion = 27FB0B4024A518D500A2335B /* Wunderlist 2.xcdatamodel */;
 			path = Wunderlist.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
