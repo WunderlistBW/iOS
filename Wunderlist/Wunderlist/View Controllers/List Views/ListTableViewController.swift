@@ -14,7 +14,9 @@ class ListTableViewController: UITableViewController {
     // MARK: - Properties
     var neUserController = NEUserController.shared
     var listController = ListController()
-
+    // MARK: - OUTLETS
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -157,4 +159,7 @@ extension ListTableViewController: UserStateDelegate {
     func userLoggedIn() {
         listController.fetchListFromServer()
     }
+}
+extension ListTableViewController: UISearchBarDelegate {
+    // TODO: SEARCH METHOD
 }
