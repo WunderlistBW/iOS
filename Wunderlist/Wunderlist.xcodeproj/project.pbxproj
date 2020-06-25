@@ -12,6 +12,8 @@
 		27D818F624A13A3500564B68 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D818F524A13A3500564B68 /* NetworkError.swift */; };
 		5E65BA5724A401A300EE875F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65BA5624A401A300EE875F /* StorageManager.swift */; };
 		5E65BA5924A43E5E00EE875F /* WunderlistNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65BA5824A43E5E00EE875F /* WunderlistNetworkTests.swift */; };
+		5E65BA5B24A4621A00EE875F /* MockDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65BA5A24A4621A00EE875F /* MockDataLoader.swift */; };
+		5E65BA5D24A4634800EE875F /* mockJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65BA5C24A4634800EE875F /* mockJSON.swift */; };
 		5E7B072F249EDB4F00F6664A /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E7B072E249EDB4F00F6664A /* Onboarding.storyboard */; };
 		5E7B0732249EDC0B00F6664A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */; };
 		5E7B0734249EDC3600F6664A /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */; };
@@ -64,6 +66,8 @@
 		2FA5D5110893E905758FF010 /* Pods-Wunderlist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.debug.xcconfig"; path = "Target Support Files/Pods-Wunderlist/Pods-Wunderlist.debug.xcconfig"; sourceTree = "<group>"; };
 		5E65BA5624A401A300EE875F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		5E65BA5824A43E5E00EE875F /* WunderlistNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WunderlistNetworkTests.swift; sourceTree = "<group>"; };
+		5E65BA5A24A4621A00EE875F /* MockDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataLoader.swift; sourceTree = "<group>"; };
+		5E65BA5C24A4634800EE875F /* mockJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mockJSON.swift; sourceTree = "<group>"; };
 		5E7B072E249EDB4F00F6664A /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		5E7B0731249EDC0B00F6664A /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		5E7B0733249EDC3600F6664A /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
@@ -151,10 +155,12 @@
 		5E7B073D24A186D100F6664A /* WunderlistTests */ = {
 			isa = PBXGroup;
 			children = (
-				5E65BA5624A401A300EE875F /* StorageManager.swift */,
 				5E7B073E24A186D100F6664A /* WunderlistTests.swift */,
-				5E7B074024A186D100F6664A /* Info.plist */,
 				5E65BA5824A43E5E00EE875F /* WunderlistNetworkTests.swift */,
+				5E65BA5A24A4621A00EE875F /* MockDataLoader.swift */,
+				5E65BA5624A401A300EE875F /* StorageManager.swift */,
+				5E7B074024A186D100F6664A /* Info.plist */,
+				5E65BA5C24A4634800EE875F /* mockJSON.swift */,
 			);
 			path = WunderlistTests;
 			sourceTree = "<group>";
@@ -475,6 +481,8 @@
 			files = (
 				5E7B073F24A186D100F6664A /* WunderlistTests.swift in Sources */,
 				5E65BA5924A43E5E00EE875F /* WunderlistNetworkTests.swift in Sources */,
+				5E65BA5D24A4634800EE875F /* mockJSON.swift in Sources */,
+				5E65BA5B24A4621A00EE875F /* MockDataLoader.swift in Sources */,
 				5E65BA5724A401A300EE875F /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
