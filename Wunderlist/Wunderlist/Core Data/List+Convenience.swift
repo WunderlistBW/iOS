@@ -13,7 +13,13 @@ enum ListStatus: String, CaseIterable {
     case completedStatus
     case upcomingStatus
 }
-
+// For segmented control and sections
+enum ReminderType: String, CaseIterable {
+    case daily
+    case weekly
+    case monthly
+    case none
+}
 extension ListEntry: Persistable {
     convenience init?(name: String, isComplete: Bool? = false, days: Int64?, endOn:String?, isRepeated: Bool? = false, context: PersistentContext ) {
         guard let context = context as? NSManagedObjectContext, let isComplete = isComplete, let isRepeated = isRepeated, let days = days, let endOn = endOn

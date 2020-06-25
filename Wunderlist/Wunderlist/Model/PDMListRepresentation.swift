@@ -17,10 +17,10 @@ struct ListRepresentation: Equatable, Codable, Persistable {
     var days: Int64?
     var endOn: String?
     
-    enum ListCodingKeys: String, CodingKey {
-       case listId = "id"
-        case isComplete = "completed"
-    }
+//    enum ListCodingKeys: String, CodingKey {
+//       case listId = "id"
+//        case isComplete = "completed"
+//    }
 }
 
 struct ListRepresentations: Codable {
