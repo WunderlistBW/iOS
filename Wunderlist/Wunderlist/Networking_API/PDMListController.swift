@@ -11,6 +11,7 @@ import CoreData
 
 class ListController {
     // MARK: - Properties
+    var dataLoader: NetworkDataLoader?
     var searchedListEntry: [ListRepresentation] = []
     var persistentStoreController: PersistentStoreController = CoreDataStack()
     var listCount: Int {
@@ -29,6 +30,11 @@ class ListController {
     }
     typealias CompletionHandler = (Result<Bool, NetworkError>) -> Void
     private let databaseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com/")!
+    
+    init(dataLoader: NetworkDataLoader = URLSession.shared) {
+        self.dataLoader = dataLoader
+    }
+    
     func putListToServer(list: ListEntry, completion: @escaping CompletionHandler = { _ in }) {
         let requestURL = databaseURL.appendingPathComponent("api/tasks")
         var request = URLRequest(url: requestURL)
@@ -42,7 +48,7 @@ class ListController {
             completion(.failure(.badAuth))
             return
         }
-        URLSession.shared.dataTask(with: request) { _, _, error in
+        dataLoader?.loadData(with: request) { _, _, error in
             if let error = error {
                 print("Error fetching entries: \(error.localizedDescription)")
                 DispatchQueue.main.async {
@@ -50,7 +56,7 @@ class ListController {
                 }
                 return
             }
-        }.resume()
+        }
     }
     func fetchListFromServer(completion: @escaping (Error?) -> Void = { _ in }) {
         guard let bearer = NEUserController.shared.bearer else { return }
@@ -60,7 +66,7 @@ class ListController {
         print("\(requestURL)")
         request.httpMethod = "GET"
         request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        dataLoader?.loadData(with: request) { data, _, error in
             if let error = error {
                 print("Error fetching list: \(error)")
                 DispatchQueue.main.async {
@@ -89,7 +95,7 @@ class ListController {
                 completion(error)
                 return
             }
-        }.resume()
+        }
     }
     private func updateList(with representation: [ListRepresentation]) throws {
         let entriesWithId = representation.filter { $0.listId != nil }
@@ -124,14 +130,14 @@ class ListController {
         guard let token = NEUserController.shared.bearer?.token else { return }
         request.setValue(token, forHTTPHeaderField: "Authorization")
         request.httpMethod = HTTPMethod.delete.rawValue
-        URLSession.shared.dataTask(with: request) { _, _, error in
+        dataLoader?.loadData(with: request) { _, _, error in
             if let error = error {
                 NSLog("Error deleting list from server \(list): \(error)")
                 completion(.failure(.otherError))
                 return
             }
             completion(.success(true))
-        }.resume()
+        }
     }
     private func update(listEntry: ListEntry, with representation: ListRepresentation) {
         listEntry.name = representation.name
