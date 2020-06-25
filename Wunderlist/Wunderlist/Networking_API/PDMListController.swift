@@ -31,7 +31,7 @@ class ListController {
     private let databaseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com")!
     func putListToServer(list: ListEntry, completion: @escaping CompletionHandler = { _ in }) {
         let requestURL = databaseURL.appendingPathComponent("api/tasks") //Disabled for firebase
-        var request = URLRequest(url: databaseURL)
+        var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.post.rawValue
         do {
             request.httpBody = try JSONEncoder().encode(list.listRepresentation)
@@ -56,7 +56,7 @@ class ListController {
         guard let bearer = NEUserController.shared.bearer else { return }
         print(bearer)
      let requestURL = databaseURL.appendingPathExtension("api/tasks") // disabled for firebase
-        var request = URLRequest(url: databaseURL)
+        var request = URLRequest(url: requestURL)
         
         request.httpMethod = "GET"
        request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")

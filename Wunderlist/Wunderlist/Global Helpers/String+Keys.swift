@@ -16,6 +16,7 @@ extension String {
     static let loggedInKey = "loggedIn"
     static let userKey = "username"
     static let passKey = "password"
+    static let emailKey = "email"
     // MARK: - Segues -
     static let signupSegue = "Signup"
     static let loginSegue = "Login"

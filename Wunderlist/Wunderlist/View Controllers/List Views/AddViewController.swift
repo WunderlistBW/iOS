@@ -24,6 +24,7 @@ class AddViewController: UIViewController {
     // In case we want to add that segmented complete control
     @IBOutlet weak var reminderSegment: UISegmentedControl!
     @IBOutlet weak var addDatePicker: UIDatePicker!
+    @IBOutlet weak var entryDetailsTextView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -40,7 +41,7 @@ class AddViewController: UIViewController {
         let endOn = dateString
         if let listEntry = listEntry {
             listEntry.name = name
-            listEntry.endOn = endOn
+           // listEntry.endOn = endOn
             // update feature / function
         } else {
             do {

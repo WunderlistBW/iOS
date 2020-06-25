@@ -14,6 +14,7 @@ class LoginSignUpViewController: UIViewController {
     @IBOutlet weak var logoView: UIImageView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var rememberMeButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
@@ -40,15 +41,19 @@ class LoginSignUpViewController: UIViewController {
     @IBAction func submit(_ sender: UIButton) {
         guard let username = usernameTextField.text,
             let password = passwordTextField.text,
+            let email = emailTextField.text,
+            !email.isEmpty,
             !username.isEmpty,
             !password.isEmpty else { return }
         switch loggingIn {
         case true:
             statusLabel.text = "Logging Into Wunderlist, one moment..."
             let user = NEUser(username: username,
-                              password: password)
+                              password: password,
+                              email: email)
             NEUserController.shared.signIn(with: user.username,
-                                           password: user.password) { result in
+                                           password: user.password,
+                                           email: user.email) { result in
                                             do {
                                                 let loginResult = try result.get()
                                                 if loginResult == true {
@@ -67,9 +72,10 @@ class LoginSignUpViewController: UIViewController {
             }
         case false:
             statusLabel.text = "Joining Wunderlist, one moment..."
-            let userWithOptions = presentOptions(for: username, with: password)
+            let userWithOptions = presentOptions(for: username, with: password, with: email)
             NEUserController.shared.signUp(with: userWithOptions.username,
-                                           password: userWithOptions.password) { result in
+                                           password: userWithOptions.password,
+                                           email: userWithOptions.email) { result in
                                             do {
                                                 let loginResult = try result.get()
                                                 if loginResult == true {
@@ -91,7 +97,7 @@ class LoginSignUpViewController: UIViewController {
         }
         UserDefaults.standard.set(true, forKey: .loggedInKey)
         
-        NEUserController.shared.signIn(with: username, password: password) { _ in }
+        NEUserController.shared.signIn(with: username, password: password, email: email) { _ in }
         
         presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
@@ -99,6 +105,7 @@ class LoginSignUpViewController: UIViewController {
     @IBAction func rememberMe(_ sender: UIButton) {
         UserDefaults.standard.set(usernameTextField.text, forKey: .userKey)
         UserDefaults.standard.set(passwordTextField.text, forKey: .passKey)
+        UserDefaults.standard.set(emailTextField.text, forKey: .emailKey)
         rememberMeButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
     }
     @IBAction func textBeganEditing(_ sender: UITextField) {
@@ -119,13 +126,16 @@ class LoginSignUpViewController: UIViewController {
     }
     private func autoFill() {
         guard let user = UserDefaults.standard.object(forKey: .userKey) as? String,
-            let password = UserDefaults.standard.object(forKey: .passKey) as? String else { return }
+            let password = UserDefaults.standard.object(forKey: .passKey) as? String,
+            let email = UserDefaults.standard.object(forKey: .emailKey) as? String else { return }
         usernameTextField.text = user
         passwordTextField.text = password
+        emailTextField.text = email
     }
     private func checkRememberMe() {
         if usernameTextField.text == UserDefaults.standard.object(forKey: .userKey) as? String &&
-            passwordTextField.text == UserDefaults.standard.object(forKey: .passKey) as? String {
+            passwordTextField.text == UserDefaults.standard.object(forKey: .passKey) as? String &&
+            emailTextField.text == UserDefaults.standard.object(forKey: .emailKey) as? String {
             rememberMeButton.setImage(UIImage(systemName: "checkmark.square"), for: .normal)
         } else {
             rememberMeButton.setImage(UIImage(systemName: "square"), for: .normal)
@@ -142,7 +152,8 @@ class LoginSignUpViewController: UIViewController {
         statusLabel.text = ""
     }
     private func presentOptions(for username: String,
-                                with password: String) -> NEUser {
+                                with password: String,
+                                with email: String) -> NEUser {
         var returnValue: NEUser?
         let options = UIAlertController(title: "Welcome!",
                                         message: "If you'd like you can help Wunderlist give you all the best featues by providing a little bit of info below:",
@@ -150,17 +161,20 @@ class LoginSignUpViewController: UIViewController {
         options.addAction(UIAlertAction(title: "Get Started!",
                                         style: .default,
                                         handler: { _ in
-                                            switch self.usernameTextField.text!.isEmpty && self.passwordTextField.text!.isEmpty {
+                                            switch self.usernameTextField.text!.isEmpty && self.passwordTextField.text!.isEmpty &&
+                                            self.emailTextField.text!.isEmpty {
                                             case true:
                                                 returnValue = NEUser(username: username,
-                                                                     password: password)
+                                                                     password: password,
+                                                                     email: email)
                                             case false:
                                                 print("Text field empty")
                                             }
         }))
         present(options, animated: true, completion: nil)
-        if let username = usernameTextField.text, let password = passwordTextField.text{
-         returnValue = NEUser(username: username, password: password)
+        if let username = usernameTextField.text, let password = passwordTextField.text,
+            let email = emailTextField.text {
+            returnValue = NEUser(username: username, password: password, email: email)
         }
         return returnValue! //TODO: Fix implicit unwrap
     }

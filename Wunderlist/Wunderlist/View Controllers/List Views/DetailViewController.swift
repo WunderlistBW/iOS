@@ -11,7 +11,7 @@ import UIKit
 class DetailViewController: UIViewController {
     // MARK: - OUTLETS
     @IBOutlet weak var entryTitleField: UITextField!
-    @IBOutlet weak var entryTextView: UITextView!
+    @IBOutlet weak var entryDetailsTextView: UITextView!
     @IBOutlet weak var entryDatePicker: UIDatePicker!
     @IBOutlet weak var reminderSegmentControl: UISegmentedControl!
     
@@ -33,8 +33,8 @@ class DetailViewController: UIViewController {
         if wasEdited {
             guard let entryTitle = entryTitleField.text,
                 !entryTitle.isEmpty,
-                let entryText = entryTextView.text,
-                !entryText.isEmpty,
+                let entryDetailsText = entryDetailsTextView.text,
+                !entryDetailsText.isEmpty,
                 let listEntry = listEntry else { return }
             let name = entryTitleField.text
             listEntry.name = name
@@ -52,7 +52,7 @@ class DetailViewController: UIViewController {
         super.setEditing(editing, animated: animated)
         if editing { wasEdited = true }
         entryTitleField.isUserInteractionEnabled = editing
-        entryTextView.isUserInteractionEnabled = editing
+        entryDetailsTextView.isUserInteractionEnabled = editing
         entryDatePicker.isUserInteractionEnabled = editing
         navigationItem.hidesBackButton = editing
     }
@@ -60,8 +60,8 @@ class DetailViewController: UIViewController {
         guard let listEntry = listEntry else { return }
         entryTitleField.text = listEntry.name
         entryTitleField.isUserInteractionEnabled = isEditing
-        entryTextView.isUserInteractionEnabled = isEditing
-        //entryDatePicker.date = listEntry.dueDate!
+        entryDetailsTextView.isUserInteractionEnabled = isEditing
+        entryDatePicker.date = listEntry.dueDate!
         entryDatePicker.isUserInteractionEnabled = isEditing
     }
     /*

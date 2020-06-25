@@ -11,6 +11,5 @@ import Foundation
 struct NEUser: Codable {
     var username: String
     var password: String
-    var email: String?
-    var name: String?
+    var email: String
 }
