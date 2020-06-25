@@ -28,9 +28,9 @@ class ListController {
         }
     }
     typealias CompletionHandler = (Result<Bool, NetworkError>) -> Void
-    private let databaseURL = URL(string: "https://wunderlist-97c2c.firebaseio.com/")!
+    private let databaseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com")!
     func putListToServer(list: ListEntry, completion: @escaping CompletionHandler = { _ in }) {
-//        let requestURL = databaseURL.appendingPathComponent("api/tasks") Disabled for firebase
+        let requestURL = databaseURL.appendingPathComponent("api/tasks") //Disabled for firebase
         var request = URLRequest(url: databaseURL)
         request.httpMethod = HTTPMethod.post.rawValue
         do {
@@ -55,11 +55,11 @@ class ListController {
     func fetchListFromServer(completion: @escaping (Error?) -> Void = { _ in }) {
         guard let bearer = NEUserController.shared.bearer else { return }
         print(bearer)
-//        let requestURL = databaseURL.appendingPathExtension("api/tasks") // disabled for firebase
+     let requestURL = databaseURL.appendingPathExtension("api/tasks") // disabled for firebase
         var request = URLRequest(url: databaseURL)
         
         request.httpMethod = "GET"
-//        request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
+       request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 print("Error fetching list: \(error)")

@@ -61,7 +61,7 @@ class DetailViewController: UIViewController {
         entryTitleField.text = listEntry.name
         entryTitleField.isUserInteractionEnabled = isEditing
         entryTextView.isUserInteractionEnabled = isEditing
-        entryDatePicker.date = listEntry.dueDate!
+        //entryDatePicker.date = listEntry.dueDate!
         entryDatePicker.isUserInteractionEnabled = isEditing
     }
     /*

@@ -37,14 +37,14 @@ class AddViewController: UIViewController {
         guard let name = nameTextField.text, !name.isEmpty else { return }
         guard let listController = listController else { return }
         let dateString = dateFormatter.string(from: addDatePicker.date)
-        let dueDate = dateString
+        let endOn = dateString
         if let listEntry = listEntry {
             listEntry.name = name
-            listEntry.dueDate = dueDate
+            listEntry.endOn = endOn
             // update feature / function
         } else {
             do {
-                try listController.createListEntry(with: <#T##String#>, days: <#T##Int64?#>, endOn: <#T##String?#>)
+                try listController.createListEntry(with: name, days: 0, endOn: endOn)
             } catch {
                 print("Error creating entry from Add Entry VC")
             }
@@ -56,7 +56,7 @@ class AddViewController: UIViewController {
                                         self.navigationController?.popViewController(animated: true)
         })
         present(alert, animated: true, completion: nil)
-    }
+  }
 } // EOC
     /*
      // MARK: - Navigation
