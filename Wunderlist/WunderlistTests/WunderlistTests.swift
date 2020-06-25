@@ -123,6 +123,27 @@ class WunderlistTests: XCTestCase {
         XCTAssertEqual(clearedStore.count, 0)
     }
     func testListEntryCompletes() {
+        let interval: TimeInterval = 30
+        let waiting1 = expectation(description: "Waiting for ListEntry to expire.")
+        let waiting2 = expectation(description: "Checking ListEntry completion status.")
+        guard let storageManager = storageManager else { XCTFail("No storage manager present."); return }
+        let completionTestEntry = storageManager.insertListEntry(name: "completionTest",
+                                                                 dueDate: Date() + TimeInterval(interval),
+                                                                 listId: 80085,
+                                                                 isComplete: false)
+        storageManager.save()
+        let testContents = storageManager.fetchAll()
+        XCTAssertEqual(testContents.count, 1)
+        XCTAssertEqual(completionTestEntry?.isComplete, false)
+        waiting1.fulfill()
+        wait(for: [waiting1], timeout: interval)
+        waiting2.fulfill()
+        wait(for: [waiting2], timeout: 2)
+        XCTAssertEqual(completionTestEntry?.isComplete, true)
+        
+        
+        
+        
         /*
         let testDataStack = CoreDataStack()
         let interval: TimeInterval = 30
