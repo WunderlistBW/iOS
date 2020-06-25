@@ -135,14 +135,18 @@ class ListController {
     }
     private func update(listEntry: ListEntry, with representation: ListRepresentation) {
         listEntry.name = representation.name
-        listEntry.dueDate = representation.dueDate
+        listEntry.days = representation.days ?? 0
+        listEntry.endOn = representation.endOn
+        listEntry.isRepeated = representation.isRepeated ?? false
         listEntry.isComplete = representation.isComplete ?? false
     }
-    func createListEntry(with name: String, dueDate: Date? = Date(), isComplete: Bool? = false) throws {
+    func createListEntry(with name: String, isRepeated: Bool? = false, days: Int64?, endOn: String?, isComplete: Bool? = false) throws {
         let context = persistentStoreController.mainContext
         guard  let list = ListEntry(name: name,
-                                    dueDate: dueDate ?? Date(),
                                     isComplete: isComplete,
+                                    days: days,
+                                    endOn: endOn,
+                                    isRepeated: isRepeated,
                                     context: context) else { return }
         putListToServer(list: list)
         do {

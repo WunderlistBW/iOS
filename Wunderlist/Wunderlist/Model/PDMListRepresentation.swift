@@ -14,7 +14,7 @@ struct ListRepresentation: Equatable, Codable, Persistable {
     var dueDate: String?
     var isComplete: Bool?
     var isRepeated: Bool?
-    var days: Int?
+    var days: Int64?
     var endOn: String?
     
     enum ListCodingKeys: String, CodingKey {

@@ -44,7 +44,7 @@ class AddViewController: UIViewController {
             // update feature / function
         } else {
             do {
-                try listController.createListEntry(with: name, dueDate: duDate)
+                try listController.createListEntry(with: <#T##String#>, days: <#T##Int64?#>, endOn: <#T##String?#>)
             } catch {
                 print("Error creating entry from Add Entry VC")
             }
