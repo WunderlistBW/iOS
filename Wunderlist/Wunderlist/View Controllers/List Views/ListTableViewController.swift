@@ -13,7 +13,6 @@ class ListTableViewController: UITableViewController {
 
     // MARK: - Properties
     @IBOutlet weak var addButton: UIBarButtonItem!
-    
     var coreDataStack = CoreDataStack.shared
     var neUserController = NEUserController.shared
     var listController = ListController()
@@ -50,17 +49,9 @@ class ListTableViewController: UITableViewController {
             if error != nil {
                 print("Error fetching in viewWillAppear")
             }
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
         }
     }
     // MARK: - Table view data source
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        // TODO: Populate table view by leveraging isComplete boolean.
-        return 1
-    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CoreDataStack.shared.fetchedResultsController.fetchedObjects?.count ?? 0
     }
@@ -70,13 +61,9 @@ class ListTableViewController: UITableViewController {
         cell.listEntry = CoreDataStack.shared.fetchedResultsController.object(at: indexPath)
         return cell
     }
-    // MARK: - DELETE LIST ITEM FROM SERVER & TABLE VIEW (uncomment after delete func done)
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        #warning("WILL BREAK IF YOU TRY")
         if editingStyle == .delete {
-            // Delete the row from the data source
             let task = coreDataStack.fetchedResultsController.object(at: indexPath)
-//            let task = fetchedResultsController.object(at: indexPath)
             listController.deleteListFromServer(task) { result in
                 guard let _ = try? result.get() else {
                     return
@@ -92,14 +79,6 @@ class ListTableViewController: UITableViewController {
                     }
                 }}
         }
-    }
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-    }
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
     }
     // MARK: - Navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

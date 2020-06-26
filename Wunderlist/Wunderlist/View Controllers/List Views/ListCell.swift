@@ -22,7 +22,6 @@ class ListCell: UITableViewCell {
     func updateViews() {
         guard let listEntry = listEntry else { return }
         reminderName.text = listEntry.name
-//        isCompleteButton.setBackgroundImage(UIImage(named: "alarm"), for: .normal) // this fails and crashes
      }
     // MARK: - ACTIONS
     @IBAction func reminderTapped(_ sender: UIButton) {

@@ -22,7 +22,12 @@ class DetailViewController: UIViewController {
     }
     // MARK: - PROPERTIES
     var listController: ListController?
-    
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.dateFormat = "YYYY-MM-d HH:MM:ss"
+        return formatter
+    }()
     var wasEdited = false
     var listEntry: ListEntry?
     // MARK: - ACTIONS
@@ -61,8 +66,13 @@ class DetailViewController: UIViewController {
 //        navigationItem.hidesBackButton = editing
 //    }
     func updateViews() {
+        guard let date = listEntry?.dueDate else { return }
+        let dateFromString = dateFormatter.date(from: date)
+        guard let formattedDate = dateFromString else { return }
+        
         guard let listEntry = listEntry else { return }
         entryTitleField.text = listEntry.name
+        entryDatePicker.date = formattedDate
         entryTitleField.isUserInteractionEnabled = isEditing
         entryDetailsTextView.isUserInteractionEnabled = isEditing
         entryDatePicker.isUserInteractionEnabled = isEditing

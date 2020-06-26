@@ -37,7 +37,6 @@ class AddViewController: UIViewController {
     @IBOutlet weak var detailsTextView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        #warning("Should probably be moved to the table view so when they first open the app they are asked if they want notifications")
         self.notificationController.requestNotificationAuthorization()
     }
     private func updateViews() {
@@ -90,7 +89,6 @@ class AddViewController: UIViewController {
                                         self.navigationController?.popViewController(animated: true)
         })
         present(alert, animated: true, completion: nil)
-        #warning("New addition, remember to check if breaking app")
     }
 //        navigationController?.popViewController(animated: true)
 //        guard let name = nameTextField.text,

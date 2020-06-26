@@ -22,7 +22,7 @@
         <scene sceneID="44Y-oW-J0b">
             <objects>
                 <tableViewController id="KpC-u5-G76" customClass="ListTableViewController" customModule="Wunderlist" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="q3r-8y-0Wn">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="q3r-8y-0Wn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -34,25 +34,28 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListCell" rowHeight="43.5" id="ysd-TE-AxP" customClass="ListCell" customModule="Wunderlist" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListCell" rowHeight="45" id="ysd-TE-AxP" customClass="ListCell" customModule="Wunderlist" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="414" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ysd-TE-AxP" id="TY3-pp-NPQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fUJ-Nx-q9b">
-                                            <rect key="frame" x="20" y="11" width="374" height="22"/>
+                                            <rect key="frame" x="8" y="8" width="398" height="29"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uI2-a4-tRl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="183" height="22"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="195" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ir7-if-EHK">
-                                                    <rect key="frame" x="191" y="0.0" width="183" height="22"/>
+                                                    <rect key="frame" x="203" y="0.0" width="195" height="29"/>
                                                     <state key="normal" image="alarm" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="reminderTapped:" destination="ysd-TE-AxP" eventType="touchUpInside" id="Hkd-bt-doC"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -61,13 +64,10 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="xrX-US-cPX" firstAttribute="top" secondItem="TY3-pp-NPQ" secondAttribute="top" constant="10" id="OYU-dM-9ra"/>
-                                        <constraint firstItem="dz5-2e-OxJ" firstAttribute="centerY" secondItem="xrX-US-cPX" secondAttribute="centerY" id="TYm-iP-q21"/>
-                                        <constraint firstAttribute="trailing" secondItem="xrX-US-cPX" secondAttribute="trailing" constant="20" id="WW0-Q0-UGS"/>
-                                        <constraint firstAttribute="bottom" secondItem="xrX-US-cPX" secondAttribute="bottom" constant="11.5" id="eQW-Rr-srg"/>
-                                        <constraint firstItem="dz5-2e-OxJ" firstAttribute="trailing" secondItem="xrX-US-cPX" secondAttribute="trailing" id="ijQ-m7-Zwh"/>
-                                        <constraint firstItem="dz5-2e-OxJ" firstAttribute="top" secondItem="TY3-pp-NPQ" secondAttribute="top" constant="10" id="ke8-00-fda"/>
-                                        <constraint firstItem="dz5-2e-OxJ" firstAttribute="leading" secondItem="TY3-pp-NPQ" secondAttribute="leading" constant="20" id="pNA-fO-G7v"/>
+                                        <constraint firstItem="fUJ-Nx-q9b" firstAttribute="top" secondItem="TY3-pp-NPQ" secondAttribute="top" constant="8" id="AXY-4M-h7U"/>
+                                        <constraint firstAttribute="bottom" secondItem="fUJ-Nx-q9b" secondAttribute="bottom" constant="8" id="VvY-f6-P53"/>
+                                        <constraint firstAttribute="trailing" secondItem="fUJ-Nx-q9b" secondAttribute="trailing" constant="8" id="n23-Ip-kJK"/>
+                                        <constraint firstItem="fUJ-Nx-q9b" firstAttribute="leading" secondItem="TY3-pp-NPQ" secondAttribute="leading" constant="8" id="sj7-ZG-Tvn"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

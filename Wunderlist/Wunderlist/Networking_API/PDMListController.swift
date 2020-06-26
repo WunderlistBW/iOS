@@ -84,7 +84,6 @@ class ListController {
                 jsonDecoder.dateDecodingStrategy = .formatted(self.dateFormatter)
                 let listRepresentations =
                     try Array(jsonDecoder.decode([ListRepresentation].self, from: data))
-                
                 try self.updateList(with: listRepresentations)
                 DispatchQueue.main.async {
                     completion(nil)
@@ -106,7 +105,6 @@ class ListController {
         let fetchRequest: NSFetchRequest<ListEntry> = ListEntry.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id IN %@", pulledId)
         let context = CoreDataStack.shared.mainContext
-        
         context.performAndWait {
             do {
                 let existingList = try context.fetch(fetchRequest)
