@@ -20,8 +20,8 @@ class ListCell: UITableViewCell {
         }
     }
     func updateViews() {
-        guard let task = listEntry else { return }
-        reminderName.text = task.name
+        guard let listEntry = listEntry else { return }
+        reminderName.text = listEntry.name
 //        isCompleteButton.setBackgroundImage(UIImage(named: "alarm"), for: .normal) // this fails and crashes
      }
     // MARK: - ACTIONS

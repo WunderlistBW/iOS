@@ -41,34 +41,28 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="313" translatesAutoresizingMaskIntoConstraints="NO" id="fUJ-Nx-q9b">
-                                            <rect key="frame" x="20" y="11" width="374" height="22"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uI2-a4-tRl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ir7-if-EHK">
-                                                    <rect key="frame" x="355" y="0.0" width="19" height="22"/>
-                                                    <state key="normal" image="alarm" catalog="system"/>
-                                                    <connections>
-                                                        <action selector="reminderTapped:" destination="ysd-TE-AxP" eventType="touchUpInside" id="JSf-bH-JVG"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                        </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrX-US-cPX">
+                                            <rect key="frame" x="375" y="10" width="19" height="22"/>
+                                            <state key="normal" image="alarm" catalog="system"/>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dz5-2e-OxJ">
+                                            <rect key="frame" x="20" y="10" width="347" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="fUJ-Nx-q9b" secondAttribute="bottom" constant="10.5" id="1Mq-jl-hhv"/>
-                                        <constraint firstItem="fUJ-Nx-q9b" firstAttribute="leading" secondItem="TY3-pp-NPQ" secondAttribute="leading" constant="20" id="Lph-ZU-llV"/>
-                                        <constraint firstAttribute="trailing" secondItem="fUJ-Nx-q9b" secondAttribute="trailing" constant="20" id="cWb-v7-Kqg"/>
+                                        <constraint firstItem="xrX-US-cPX" firstAttribute="top" secondItem="TY3-pp-NPQ" secondAttribute="top" constant="10" id="OYU-dM-9ra"/>
+                                        <constraint firstItem="dz5-2e-OxJ" firstAttribute="centerY" secondItem="xrX-US-cPX" secondAttribute="centerY" id="TYm-iP-q21"/>
+                                        <constraint firstAttribute="trailing" secondItem="xrX-US-cPX" secondAttribute="trailing" constant="20" id="WW0-Q0-UGS"/>
+                                        <constraint firstAttribute="bottom" secondItem="xrX-US-cPX" secondAttribute="bottom" constant="11.5" id="eQW-Rr-srg"/>
+                                        <constraint firstItem="dz5-2e-OxJ" firstAttribute="trailing" secondItem="xrX-US-cPX" secondAttribute="trailing" id="ijQ-m7-Zwh"/>
+                                        <constraint firstItem="dz5-2e-OxJ" firstAttribute="top" secondItem="TY3-pp-NPQ" secondAttribute="top" constant="10" id="ke8-00-fda"/>
+                                        <constraint firstItem="dz5-2e-OxJ" firstAttribute="leading" secondItem="TY3-pp-NPQ" secondAttribute="leading" constant="20" id="pNA-fO-G7v"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="isCompleteButton" destination="ir7-if-EHK" id="Hxj-9V-pd3"/>
-                                    <outlet property="reminderName" destination="uI2-a4-tRl" id="syP-kj-QMC"/>
                                     <segue destination="JdF-3B-QMV" kind="show" identifier="DetailSegue" id="SPO-Xe-lfc"/>
                                 </connections>
                             </tableViewCell>
