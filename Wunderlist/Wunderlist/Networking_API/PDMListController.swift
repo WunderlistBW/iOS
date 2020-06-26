@@ -142,7 +142,7 @@ class ListController {
         listEntry.id = representation.id ?? 0
         listEntry.dueDate = representation.dueDate
     }
-    func createListEntry(with name: String, body: String?, recurring: String, completed: Bool? = false, dueDate: String, id: Int) throws {
+    func createListEntry(with name: String, body: String?, recurring: String, completed: Bool? = false, dueDate: String, id: Int64) throws {
         let context = persistentStoreController.mainContext
         guard  let list = ListEntry(name: name,
                                     body: body,

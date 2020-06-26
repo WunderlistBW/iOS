@@ -7,18 +7,18 @@
 //
 
 import UIKit
-enum Recurring: CaseIterable {
-    case weekly
-    case daily
-    case monthly
-    case never
+enum Recurring: String, CaseIterable {
+    case weekly = "weekly"
+    case daily = "daily"
+    case monthly = "monthly"
+    case never = ""
 }
 // TODO - ADD COMPLETED CONTROL ON SCREEN VC? - OUTLET FOR IT BELOW
 class AddViewController: UIViewController {
     // MARK: - PROPERTIES
     var listController: ListController?
     var listEntry: ListEntry?
-    var userId = NEUserController.currentUserID
+    var userId = NEUserController.currentUserID?.user.id
     // DATE FORMATTER
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -50,20 +50,27 @@ class AddViewController: UIViewController {
     }
     // TO SAVE A CREATED LIST ENTRY
     @IBAction func save(_ sender: UIBarButtonItem) {
+        let date = dateFormatter.string(from: addDatePicker.date)
+        let body = detailsTextView.text
         guard let name = nameTextField.text else {
             print("Name of list is required")
             return
         }
-        var recurring: Recurring?
-        if reminderSegment.selectedSegmentIndex == 4 {
-            recurring = nil
-        } else {
-            let selectedSegment = reminderSegment.selectedSegmentIndex - 1
-            recurring = Recurring.allCases[selectedSegment]
-        }
-        let representation = ListRepresentation(name: name, body: detailsTextView.text, id: Int64(userId?.user.id), dueDate: addDatePicker.date, completed: false, recurring: recurring)
+        guard let uwUserId = userId else { return }
         
-        listController?.putListToServer(list: ListEntry(representation)) {_ in
+        var recurring: Recurring?
+        switch reminderSegment.selectedSegmentIndex {
+        case 4: recurring = Recurring.never
+        case 3: recurring = Recurring.monthly
+        case 2: recurring = Recurring.weekly
+        case 1: recurring = Recurring.daily
+        default: recurring = Recurring.never
+        }
+        guard let recurringString = recurring?.rawValue else { return }
+        
+        guard let list = ListEntry(name: name, body: body, recurring: recurringString, dueDate: date, id: uwUserId, context: CoreDataStack.shared.mainContext) else { return }
+        
+        listController?.putListToServer(list: list) {_ in
             guard let listRepresentation = self.listController? else { return } // idk
             switch recurring {
             case .daily:

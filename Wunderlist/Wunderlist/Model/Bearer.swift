@@ -15,6 +15,6 @@ struct SignedInUser: Codable {
 
     // MARK: - User
     struct User: Codable {
-        var id: Int
+        var id: Int64
     }
 }
