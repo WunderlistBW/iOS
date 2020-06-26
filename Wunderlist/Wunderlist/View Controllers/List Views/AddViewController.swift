@@ -94,9 +94,9 @@ class AddViewController: UIViewController {
         })
         present(alert, animated: true, completion: nil)
         #warning("New addition, remember to check if breaking app")
-        DispatchQueue.main.async {
-            self.navigationController?.popViewController(animated: true)
-        }
+//        DispatchQueue.main.async {
+//            self.navigationController?.popViewController(animated: true)
+//        }
     }
 //        navigationController?.popViewController(animated: true)
 //        guard let name = nameTextField.text,

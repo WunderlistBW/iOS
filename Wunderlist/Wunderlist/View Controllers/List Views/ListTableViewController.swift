@@ -52,9 +52,6 @@ class ListTableViewController: UITableViewController {
 //            }
         }
     }
-    // SEARCH BAR
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    }
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections

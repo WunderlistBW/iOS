@@ -73,8 +73,7 @@ class NEUserController {
                 }
                 completion(.success(true))
         }.resume()
-    }
-    
+    }    
     func signIn(with username: String, password: String, completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         print("signInURL = \(signInURL.absoluteString)")
         var request = URLRequest(url: signInURL)

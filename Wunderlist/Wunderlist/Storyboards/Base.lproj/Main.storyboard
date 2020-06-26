@@ -53,6 +53,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ir7-if-EHK">
                                                     <rect key="frame" x="333" y="0.0" width="41" height="22"/>
                                                     <state key="normal" image="alarm" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="reminderTapped:" destination="ysd-TE-AxP" eventType="touchUpInside" id="JSf-bH-JVG"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -64,6 +67,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="isCompleteButton" destination="ir7-if-EHK" id="Hxj-9V-pd3"/>
+                                    <outlet property="reminderName" destination="uI2-a4-tRl" id="syP-kj-QMC"/>
                                     <segue destination="JdF-3B-QMV" kind="show" identifier="DetailSegue" id="SPO-Xe-lfc"/>
                                 </connections>
                             </tableViewCell>

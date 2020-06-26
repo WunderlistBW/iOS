@@ -87,7 +87,7 @@ class ListController {
                 completion(error)
                 return
             }
-        }
+        }.resume()
     }
     private func updateList(with representation: [ListRepresentation]) throws {
         let entriesWithId = representation.filter { $0.id != nil }
