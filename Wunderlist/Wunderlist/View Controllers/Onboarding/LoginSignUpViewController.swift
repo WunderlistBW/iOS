@@ -92,10 +92,8 @@ class LoginSignUpViewController: UIViewController {
         UserDefaults.standard.set(true, forKey: .loggedInKey)
         
         NEUserController.shared.signIn(with: username, password: password) { _ in }
-        
         presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
-    
     @IBAction func rememberMe(_ sender: UIButton) {
         UserDefaults.standard.set(usernameTextField.text, forKey: .userKey)
         UserDefaults.standard.set(passwordTextField.text, forKey: .passKey)

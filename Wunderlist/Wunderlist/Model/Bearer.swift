@@ -8,6 +8,13 @@
 
 import Foundation
 
-struct NEBearer: Codable {
-    let token: String
+struct SignedInUser: Codable {
+ // MARK: - SignedInUser
+        var token: String
+        var user: User
+
+    // MARK: - User
+    struct User: Codable {
+        var id: Int64
+    }
 }

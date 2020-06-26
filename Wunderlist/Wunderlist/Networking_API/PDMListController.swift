@@ -17,9 +17,13 @@ class ListController {
     var listCount: Int {
         persistentStoreController.itemCount
     }
-    var lists: [ListRepresentation]? {
-        persistentStoreController.allItems as? [ListRepresentation]
-    }
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.dateFormat = "YYYY-MM-d HH:MM:ss"
+        return formatter
+    }()
+    var lists: [ListRepresentation]?
     var delegate: PersistentStoreControllerDelegate? {
         get {
             return persistentStoreController.delegate
@@ -29,20 +33,14 @@ class ListController {
         }
     }
     typealias CompletionHandler = (Result<Bool, NetworkError>) -> Void
-    private let databaseURL = URL(string: "https://wunderlist-api-2020.herokuapp.com/")!
-    
-    init(dataLoader: NetworkDataLoader = URLSession.shared) {
-        self.dataLoader = dataLoader
-    }
-    
+    private let databaseURL = URL(string: "https://wunderlist-node.herokuapp.com")!
     func putListToServer(list: ListEntry, completion: @escaping CompletionHandler = { _ in }) {
-        let requestURL = databaseURL.appendingPathComponent("api/tasks")
+        let requestURL = databaseURL.appendingPathComponent("api/items")
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.post.rawValue
         do {
             request.httpBody = try JSONEncoder().encode(list.listRepresentation)
-            let putString = String.init(data: request.httpBody!, encoding: .utf8)
-            print(putString!) // TODO: Fix formatting with codingKeys
+            print("\(request.httpBody?.prettyPrintedJSONString)")
         } catch {
             NSLog("Error encoding Entry: \(error)")
             completion(.failure(.badAuth))
@@ -59,14 +57,13 @@ class ListController {
         }
     }
     func fetchListFromServer(completion: @escaping (Error?) -> Void = { _ in }) {
-        guard let bearer = NEUserController.shared.bearer else { return }
-        print(bearer)
-        let requestURL = databaseURL.appendingPathExtension("api/tasks")
+        guard let bearer = NEUserController.currentUserID?.token else { return }
+        guard let currentUID = NEUserController.currentUserID?.user.id else { return }
+     let requestURL = databaseURL.appendingPathComponent("api/items/\(currentUID)")
         var request = URLRequest(url: requestURL)
-        print("\(requestURL)")
         request.httpMethod = "GET"
-        request.addValue("Bearer \(bearer.token)", forHTTPHeaderField: "Authorization")
-        dataLoader?.loadData(with: request) { data, _, error in
+        request.addValue("\(bearer)", forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 print("Error fetching list: \(error)")
                 DispatchQueue.main.async {
@@ -81,11 +78,12 @@ class ListController {
                 }
                 return
             }
-            print(String.init(data: data, encoding: .utf8))
-
+            print(data.prettyPrintedJSONString!)
             do {
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.dateDecodingStrategy = .formatted(self.dateFormatter)
                 let listRepresentations =
-                    Array(try JSONDecoder().decode([String: ListRepresentation].self, from: data).values)
+                    try Array(jsonDecoder.decode([ListRepresentation].self, from: data))
                 try self.updateList(with: listRepresentations)
                 DispatchQueue.main.async {
                     completion(nil)
@@ -95,39 +93,41 @@ class ListController {
                 completion(error)
                 return
             }
-        }
+        }.resume()
     }
-    private func updateList(with representation: [ListRepresentation]) throws {
-        let entriesWithId = representation.filter { $0.listId != nil }
-        let identifiersToFetch = entriesWithId.compactMap { $0.listId }
-        let representationByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, entriesWithId))
-        var entriesToCreate = representationByID
+    private func updateList(with representations: [ListRepresentation]) throws {
+        var pulledId: [Int] = []
+        for representation in representations {
+            pulledId.append(representation.id)
+        }
+        let representationsByID = Dictionary(uniqueKeysWithValues: zip(pulledId, representations))
+        var entriesToCreate = representationsByID
         let fetchRequest: NSFetchRequest<ListEntry> = ListEntry.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id IN %@", identifiersToFetch)
-        let context = CoreDataStack.shared.container.newBackgroundContext()
-        context.perform {
+        fetchRequest.predicate = NSPredicate(format: "id IN %@", pulledId)
+        let context = CoreDataStack.shared.mainContext
+        context.performAndWait {
             do {
                 let existingList = try context.fetch(fetchRequest)
-                for list in existingList {
-                    guard let listId = list.listId else { return }
-                    guard let representation = representationByID[listId] else { continue }
-                    self.update(listEntry: list, with: representation)
-                    entriesToCreate.removeValue(forKey: listId)
-                }
+                    for list in existingList {
+                        let id = Int(list.id)
+                        guard let representation = representationsByID[id] else { continue }
+                        self.update(listEntry: list, with: representation)
+                        entriesToCreate.removeValue(forKey: id)
+                    }
                 for representation in entriesToCreate.values {
                     ListEntry(listRepresentation: representation, context: context)
                 }
+                try CoreDataStack.shared.save(in: context)
             } catch {
                 print("Error fetching entries for UUIDs: \(error)")
             }
         }
-        try CoreDataStack.shared.save(in: context)
     }
     func deleteListFromServer(_ list: ListEntry, completion: @escaping CompletionHandler = { _ in}) {
-        let listID = list.listId
-        let requestURL = databaseURL.appendingPathComponent("api/tasks/\(listID)")
+        let listID = list.id
+        let requestURL = databaseURL.appendingPathComponent("api/items/\(listID)")
         var request = URLRequest(url: requestURL)
-        guard let token = NEUserController.shared.bearer?.token else { return }
+        guard let token = NEUserController.currentUserID?.token else { return }
         request.setValue(token, forHTTPHeaderField: "Authorization")
         request.httpMethod = HTTPMethod.delete.rawValue
         dataLoader?.loadData(with: request) { _, _, error in
@@ -141,14 +141,19 @@ class ListController {
     }
     private func update(listEntry: ListEntry, with representation: ListRepresentation) {
         listEntry.name = representation.name
+        listEntry.recurring = representation.recurring
+        listEntry.completed = representation.completed ?? false
+        listEntry.body = representation.body
+        listEntry.id = Int64(representation.id)
         listEntry.dueDate = representation.dueDate
-        listEntry.isComplete = representation.isComplete ?? false
     }
-    func createListEntry(with name: String, dueDate: Date? = Date(), isComplete: Bool? = false, listId: UUID) throws {
+    func createListEntry(with name: String, body: String?, recurring: String, completed: Bool? = false, dueDate: String, id: Int64) throws {
         let context = persistentStoreController.mainContext
         guard  let list = ListEntry(name: name,
-                                    dueDate: dueDate ?? Date(),
-                                    isComplete: isComplete, listId: listId,
+                                    body: body,
+                                    recurring: recurring,
+                                    dueDate: dueDate,
+                                    id: id,
                                     context: context) else { return }
         putListToServer(list: list)
         do {
