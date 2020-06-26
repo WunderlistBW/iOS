@@ -11,16 +11,15 @@ import Foundation
 struct ListRepresentation: Equatable, Codable, Persistable {
     var name: String
     var body: String?
-    var id: Int64? // The post's ID
+    var id: Int // The post's ID
     var dueDate: String // ""YYYY-MM-DD HH:MM:SS"
     var completed: Bool? // defaults to false
-    var recurring: String? // daily, weekly, monthly
-    
+    var recurring: String? // daily, weekly, monthly    
     enum CodingKeys: String, CodingKey {
         case dueDate = "due_date"
         case name
         case body
-        case id = "user_id"
+        case id
         case completed
         case recurring
     }

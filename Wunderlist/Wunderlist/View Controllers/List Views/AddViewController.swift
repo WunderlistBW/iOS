@@ -18,6 +18,7 @@ class AddViewController: UIViewController {
     // MARK: - PROPERTIES
     var listController: ListController?
     var listEntry: ListEntry?
+    let notificationController = NotificationController()
     var userId = NEUserController.currentUserID?.user.id
     // DATE FORMATTER
     private let dateFormatter: DateFormatter = {
@@ -36,9 +37,11 @@ class AddViewController: UIViewController {
     @IBOutlet weak var detailsTextView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.notificationController.requestNotificationAuthorization()
     }
-    
-    //MARK: - Life Cycles -
+    private func updateViews() {
+    }
+    // MARK: - Life Cycles
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpIdentitfiers()
@@ -57,8 +60,13 @@ class AddViewController: UIViewController {
             return
         }
         guard let uwUserId = userId else { return }
-        
         var recurring: Recurring?
+        if reminderSegment.selectedSegmentIndex == 3 {
+            recurring = .never
+        } else {
+            let segment = reminderSegment.selectedSegmentIndex
+            recurring = Recurring.allCases[segment]
+        }
         switch reminderSegment.selectedSegmentIndex {
         case 4: recurring = Recurring.never
         case 3: recurring = Recurring.monthly
@@ -67,25 +75,22 @@ class AddViewController: UIViewController {
         default: recurring = Recurring.never
         }
         guard let recurringString = recurring?.rawValue else { return }
-        
-        guard let list = ListEntry(name: name, body: body, recurring: recurringString, dueDate: date, id: uwUserId, context: CoreDataStack.shared.mainContext) else { return }
-        
-        listController?.putListToServer(list: list) {_ in
-            guard let listRepresentation = self.listController? else { return } // idk
-            switch recurring {
-            case .daily:
-                self.notificationController.trigger(list: list, notificationType: .daily, onDate: self.addDatePicker.date)
-            case .weekly:
-                self.notificationController.trigger(list: list, notificationType: .weekly, onDate: self.addDatePicker.date)
-            case .monthly:
-                self.notificationController.trigger(list: list, notificationType: .monthly, onDate: self.addDatePicker.date)
-            case nil:
-                self.notificationController.trigger(list: list, notificationType: .never, onDate: self.addDatePicker.date)
-            case .deleted:
-                return
-            }
+
+        do {
+        try listController?.createListEntry(with: name, body: body,
+                                            recurring: recurringString,
+                                            dueDate: date, id: uwUserId)
+    } catch {
         }
-        navigationController?.popViewController(animated: true)
+        let alert = UIAlertController(title: "Saved", message: "Your list entry has been saved!",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Finished",
+                                      style: .default) { (_) -> Void in
+                                        self.navigationController?.popViewController(animated: true)
+        })
+        present(alert, animated: true, completion: nil)
+    }
+//        navigationController?.popViewController(animated: true)
 //        guard let name = nameTextField.text,
 //            let details = detailsTextView.text,
 //            !name.isEmpty,
@@ -117,7 +122,8 @@ class AddViewController: UIViewController {
 //        })
 //        present(alert, animated: true, completion: nil)
   }
-} // EOC
+
+ // EOC
     /*
      // MARK: - Navigation
      

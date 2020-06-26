@@ -11,7 +11,6 @@ import Foundation
 struct Task: Codable {
 
     var task: [ListRepresentation]
-    
     enum TaskCodingKey: String, CodingKey {
         case task = "Tasks"
     }
