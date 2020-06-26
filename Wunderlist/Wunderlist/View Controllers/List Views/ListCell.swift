@@ -29,8 +29,8 @@ class ListCell: UITableViewCell {
     // MARK: - ACTIONS
     @IBAction func reminderTapped(_ sender: UIButton) {
         guard let listEntry = listEntry else { return }
-        listEntry.isComplete.toggle()
-        sender.setImage(listEntry.isComplete ? UIImage(systemName: "alarm.fill") :
+        listEntry.completed.toggle()
+        sender.setImage(listEntry.completed ? UIImage(systemName: "alarm.fill") :
             UIImage(systemName: "alarm"), for: .normal)
         do {
             try CoreDataStack.shared.mainContext.save()

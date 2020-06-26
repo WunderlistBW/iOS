@@ -7,17 +7,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "26F699AE-0F48-4CBB-972F-DF6E3BCAD5F9"
+            uuid = "80EE5465-3BD2-40D2-81BE-F4529DDEB7A5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wunderlist/View Controllers/List Views/ListTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "ListTableViewController"
-            landmarkType = "3">
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "fetchListFromServer(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "80EE5465-3BD2-40D2-81BE-F4529DDEB7A5 - 434f7445bacdfe3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Wunderlist.ListController.fetchListFromServer(completion: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Wunderlist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/patrickmillet/Documents/Development/Wunderlist_BW/Wunderlist/Wunderlist/Networking_API/PDMListController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "1733">
+               </Location>
+               <Location
+                  uuid = "80EE5465-3BD2-40D2-81BE-F4529DDEB7A5 - d29a371e7b098043"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Wunderlist.ListController.fetchListFromServer(completion: (Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Wunderlist"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/patrickmillet/Documents/Development/Wunderlist_BW/Wunderlist/Wunderlist/Networking_API/PDMListController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "334">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

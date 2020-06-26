@@ -12,6 +12,7 @@ class AddViewController: UIViewController {
     // MARK: - PROPERTIES
     var listController: ListController?
     var listEntry: ListEntry?
+    var userId = NEUserController.currentUserID
     // DATE FORMATTER
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -24,7 +25,7 @@ class AddViewController: UIViewController {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var nameTextField: UITextField!
     // In case we want to add that segmented complete control
-    @IBOutlet weak var isCompleteControl: UISegmentedControl!
+    @IBOutlet weak var reminderSegment: UISegmentedControl!
     @IBOutlet weak var addDatePicker: UIDatePicker!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,20 +39,25 @@ class AddViewController: UIViewController {
     // MARK: - ACTIONS
     // TO DO - ADD CANCEL BUTTON ON VC
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        navigationController?.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     // TO SAVE A CREATED LIST ENTRY
     @IBAction func save(_ sender: UIBarButtonItem) {
         guard let name = nameTextField.text, !name.isEmpty else { return }
-        guard let listController = listController else { return }
-        let dueDate = addDatePicker.date
+        guard let listController = listController, let uwUserId = userId?.user.id else { return }
+        let dateString = dateFormatter.string(from: addDatePicker.date)
+        let endOn = dateString
         if let listEntry = listEntry {
             listEntry.name = name
-            listEntry.dueDate = dueDate
             // update feature / function
         } else {
             do {
-                try listController.createListEntry(with: name, dueDate: dueDate, listId: UUID())
+                try listController.createListEntry(with: name,
+                                                   body: "TestData",
+                                                   recurring: "daily",
+                                                   completed: false,
+                                                   dueDate: endOn,
+                                                   userId: uwUserId)
             } catch {
                 print("Error creating entry from Add Entry VC")
             }
@@ -63,7 +69,7 @@ class AddViewController: UIViewController {
                                         self.navigationController?.popViewController(animated: true)
         })
         present(alert, animated: true, completion: nil)
-    }
+  }
 } // EOC
     /*
      // MARK: - Navigation
