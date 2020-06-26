@@ -34,8 +34,6 @@ class ListTableViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        listController.fetchListFromServer()
-         // Transition to log in view if conditions are met
         let bearer = NEUserController.currentUserID?.token
         guard bearer != nil else {
             performSegue(withIdentifier: "ListSegue", sender: self)
@@ -46,6 +44,14 @@ class ListTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        listController.fetchListFromServer { error in
+            if error != nil {
+                print("Error fetching in viewWillAppear")
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     // SEARCH BAR
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -163,7 +169,14 @@ extension ListTableViewController: PersistentStoreControllerDelegate {
 
 extension ListTableViewController: UserStateDelegate {
     func userLoggedIn() {
-        listController.fetchListFromServer()
+        listController.fetchListFromServer { error in
+            if error != nil {
+                print("Error fetching items on TVC")
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 }
 extension ListTableViewController: UISearchBarDelegate {
@@ -186,6 +199,5 @@ extension ListTableViewController: UISearchBarDelegate {
 extension ListTableViewController {
     private func setUpIdentifiers() {
         self.tableView.accessibilityIdentifier = "Main.ListTable"
-        self.addButton.accessibilityIdentifier = "Main.AddButton"
     }
 }
