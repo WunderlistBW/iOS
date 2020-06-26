@@ -11,26 +11,25 @@ import UserNotifications
 
 class NotificationController: NSObject, UNUserNotificationCenterDelegate {
     let userNotificationCenter =  UNUserNotificationCenter.current()
-    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 84600, repeats: false)
+    var trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
     let calendar = Calendar.current
     private let options: UNAuthorizationOptions = [.alert, .sound, .badge]
     private var date = Date()
     func requestNotificationAuthorization() {
         let authOptions = UNAuthorizationOptions.init(arrayLiteral: .alert, .badge, .sound)
-        self.userNotificationCenter.requestAuthorization(options: authOptions) { (success, error) in
+        self.userNotificationCenter.requestAuthorization(options: authOptions) { (_, error) in
             if let error = error {
                 print("Error:", error)
             }
         }
     }
-    func triggerNotification(lists: ListRepresentation, notificationType: NotificationType, onDate date: Date, withId id: String) {
+    func triggerNotification(lists: ListRepresentation, notificationType: NotificationType,
+                             onDate date: Date, withId id: String) {
         switch notificationType {
         case .never:
             self.date = date
-            var components = DateComponents()
-            components.hour = 0
-            components.minute = 0
-            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+            let notificationTime = Calendar.current.dateComponents([.month, .day, .hour, .minute], from: date)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
             let identifier = id
             let request = UNNotificationRequest(identifier: identifier,
                                                 content: scheduleNotification(lists: lists, notificationType: .never),
@@ -43,10 +42,8 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
             }
         case .daily:
             self.date = date
-            var components = DateComponents()
-            components.hour = 12
-            components.minute = 30
-            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+            let notificationTime = Calendar.current.dateComponents([.month, .day, .hour, .minute], from: date)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
             let identifier = id
             let request = UNNotificationRequest(identifier: identifier,
                                                 content: scheduleNotification(lists: lists, notificationType: .daily),
@@ -61,10 +58,8 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
             self.date = date
             var weekComponents = DateComponents()
             weekComponents.weekday = calendar.component(.weekday, from: date)
-            weekComponents.hour = 12
-            weekComponents.minute = 30
-            let notificationDate = weekComponents
-            let trigger = UNCalendarNotificationTrigger(dateMatching: notificationDate, repeats: true)
+            let notificationTime = Calendar.current.dateComponents([.month, .day, .hour, .minute], from: date)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
             let identifier = id
             let request = UNNotificationRequest(identifier: identifier,
                                                 content: scheduleNotification(lists: lists, notificationType: .weekly), trigger: trigger)
@@ -73,17 +68,11 @@ class NotificationController: NSObject, UNUserNotificationCenterDelegate {
                 if let error = error {
                     print("Error \(error.localizedDescription)")
                 }
-                
             }
         case .monthly:
             self.date = date
-            var monthComponents = DateComponents()
-            monthComponents.weekOfMonth = calendar.component(.weekOfMonth, from: date)
-            monthComponents.weekday = calendar.component(.weekday, from: date)
-            monthComponents.hour = 12
-            monthComponents.minute = 30
-            let notificationDate = monthComponents
-            let trigger = UNCalendarNotificationTrigger(dateMatching: notificationDate, repeats: true)
+            let notificationTime = Calendar.current.dateComponents([.month, .day, .hour, .minute], from: date)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
             let identifier = id
             let request = UNNotificationRequest(identifier: identifier,
                                                 content: scheduleNotification(lists: lists, notificationType: .monthly), trigger: trigger)

@@ -25,6 +25,7 @@ class ListTableViewController: UITableViewController {
         NEUserController.shared.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
+        searchBar.delegate = self
         tableView.reloadData()
 
     }
@@ -63,7 +64,7 @@ class ListTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         // TODO: Populate table view by leveraging isComplete boolean.
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,24 +79,26 @@ class ListTableViewController: UITableViewController {
     }
     // MARK: - DELETE LIST ITEM FROM SERVER & TABLE VIEW (uncomment after delete func done)
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            // Delete the row from the data source
+        #warning("WILL BREAK IF YOU TRY")
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            let task = listController.getListEntry(at: indexPath)
 //            let task = fetchedResultsController.object(at: indexPath)
-//            listController.deleteListFromServer(task) { result in
-//                guard let _ = try? result.get() else {
-//                    return
-//                }
-//                DispatchQueue.main.async {
-//                    let context = CoreDataStack.shared.mainContext
-//                    context.delete(task)
-//                    do {
-//                        try context.save()
-//                    } catch {
-//                        context.reset()
-//                        NSLog("Error saving managed object context (delete task): \(error)")
-//                    }
-//                }}
-//        }
+            listController.deleteListFromServer(task!) { result in
+                guard let _ = try? result.get() else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    let context = CoreDataStack.shared.mainContext
+                    context.delete(task!)
+                    do {
+                        try context.save()
+                    } catch {
+                        context.reset()
+                        NSLog("Error saving managed object context (delete task): \(error)")
+                    }
+                }}
+        }
     }
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
@@ -183,19 +186,20 @@ extension ListTableViewController: UserStateDelegate {
 }
 extension ListTableViewController: UISearchBarDelegate {
 //    #warning("SEARCH METHOD -- this *should* work if I figure out what the replacement for fetch is, listcontroller.something")
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        var predicate: NSPredicate?
-//        if searchBar.text?.count != 0 {
-//            predicate = NSPredicate(format: "(name CONTAINS[cd] %@) || (recurring CONTAINS[cd] %@)", searchText, searchText)
-//        }
-//        let coreDataSearch = CoreDataStack.shared.fetchedResultsController.fetchedObjects
-//        do {
-//            try listController.fetchListFromServer()
-//        } catch {
-//            NSLog("Error performing fetch: \(error)")
-//        }
-//        tableView.reloadData()
-//    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        var predicate: NSPredicate?
+        if searchBar.text?.count != 0 {
+            predicate = NSPredicate(format: "(name CONTAINS[cd] %@) || (recurring CONTAINS[cd] %@)", searchText, searchText)
+        }
+        // need to pass predicate here?
+        let coreDataSearch = CoreDataStack.shared.fetchedResultsController.fetchedObjects
+        do {
+            try listController.fetchListFromServer()
+        } catch {
+            NSLog("Error performing fetch from server: \(error)")
+        }
+        tableView.reloadData()
+    }
 }
 
 extension ListTableViewController {
