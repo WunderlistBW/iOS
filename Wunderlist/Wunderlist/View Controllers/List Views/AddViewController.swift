@@ -27,6 +27,7 @@ class AddViewController: UIViewController {
     // In case we want to add that segmented complete control
     @IBOutlet weak var reminderSegment: UISegmentedControl!
     @IBOutlet weak var addDatePicker: UIDatePicker!
+    @IBOutlet weak var detailsTextView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -43,17 +44,21 @@ class AddViewController: UIViewController {
     }
     // TO SAVE A CREATED LIST ENTRY
     @IBAction func save(_ sender: UIBarButtonItem) {
-        guard let name = nameTextField.text, !name.isEmpty else { return }
+        guard let name = nameTextField.text,
+            let details = detailsTextView.text,
+            !name.isEmpty,
+            !details.isEmpty else { return }
         guard let listController = listController, let uwUserId = userId?.user.id else { return }
         let dateString = dateFormatter.string(from: addDatePicker.date)
         let endOn = dateString
         if let listEntry = listEntry {
             listEntry.name = name
+            listEntry.body = details
             // update feature / function
         } else {
             do {
                 try listController.createListEntry(with: name,
-                                                   body: "TestData",
+                                                   body: details,
                                                    recurring: "daily",
                                                    completed: false,
                                                    dueDate: endOn,
