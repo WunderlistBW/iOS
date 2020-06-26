@@ -25,7 +25,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="q3r-8y-0Wn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.43509857153115111" green="0.40909094461596179" blue="0.54401967005076135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.804565325" green="0.76042182719999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.804565325" green="0.76042182719999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="wbH-dD-9f8">
@@ -42,36 +42,37 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fUJ-Nx-q9b">
-                                            <rect key="frame" x="8" y="8" width="398" height="29"/>
+                                            <rect key="frame" x="20" y="8" width="374" height="29"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uI2-a4-tRl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="195" height="29"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="29"/>
+                                                    <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ir7-if-EHK">
-                                                    <rect key="frame" x="203" y="0.0" width="195" height="29"/>
-                                                    <state key="normal" image="alarm" catalog="system"/>
-                                                    <connections>
-                                                        <action selector="reminderTapped:" destination="ysd-TE-AxP" eventType="touchUpInside" id="Hkd-bt-doC"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="ir7-if-EHK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uI2-a4-tRl" secondAttribute="trailing" constant="8" id="Rqy-Cr-hQj"/>
-                                            </constraints>
                                         </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="189-qQ-mvb">
+                                            <rect key="frame" x="388" y="12" width="19" height="22"/>
+                                            <state key="normal" image="alarm" catalog="system"/>
+                                            <connections>
+                                                <action selector="reminderTapped:" destination="ysd-TE-AxP" eventType="touchUpInside" id="Qem-Dr-Zb4"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="fUJ-Nx-q9b" firstAttribute="top" secondItem="TY3-pp-NPQ" secondAttribute="top" constant="8" id="AXY-4M-h7U"/>
+                                        <constraint firstAttribute="trailing" secondItem="fUJ-Nx-q9b" secondAttribute="trailing" constant="20" id="6da-F0-Voo"/>
+                                        <constraint firstItem="fUJ-Nx-q9b" firstAttribute="top" secondItem="TY3-pp-NPQ" secondAttribute="top" constant="8" id="E5d-3k-WTi"/>
+                                        <constraint firstItem="189-qQ-mvb" firstAttribute="bottom" secondItem="TY3-pp-NPQ" secondAttribute="bottomMargin" id="VCP-He-Fmz"/>
                                         <constraint firstAttribute="bottom" secondItem="fUJ-Nx-q9b" secondAttribute="bottom" constant="8" id="VvY-f6-P53"/>
-                                        <constraint firstAttribute="trailing" secondItem="fUJ-Nx-q9b" secondAttribute="trailing" constant="8" id="n23-Ip-kJK"/>
-                                        <constraint firstItem="fUJ-Nx-q9b" firstAttribute="leading" secondItem="TY3-pp-NPQ" secondAttribute="leading" constant="8" id="sj7-ZG-Tvn"/>
+                                        <constraint firstItem="fUJ-Nx-q9b" firstAttribute="leading" secondItem="TY3-pp-NPQ" secondAttribute="leading" constant="20" id="XA8-VT-5uQ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="189-qQ-mvb" secondAttribute="trailing" constant="-13" id="p4g-LG-Q5A"/>
+                                        <constraint firstItem="189-qQ-mvb" firstAttribute="centerY" secondItem="fUJ-Nx-q9b" secondAttribute="centerY" id="tuM-yy-cuz"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.804565325" green="0.76042182719999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <outlet property="isCompleteButton" destination="ir7-if-EHK" id="LvC-PT-NKK"/>
+                                    <outlet property="isCompleteButton" destination="189-qQ-mvb" id="jqf-Zf-Fhm"/>
                                     <outlet property="reminderName" destination="uI2-a4-tRl" id="epz-H5-wiL"/>
                                     <segue destination="JdF-3B-QMV" kind="show" identifier="DetailSegue" id="SPO-Xe-lfc"/>
                                 </connections>

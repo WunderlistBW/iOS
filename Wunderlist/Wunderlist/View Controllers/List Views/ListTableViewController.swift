@@ -64,11 +64,11 @@ class ListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let task = coreDataStack.fetchedResultsController.object(at: indexPath)
-            listController.deleteListFromServer(task) { result in
-                guard let _ = try? result.get() else {
-                    return
-                }
-                DispatchQueue.main.async {
+//            listController.deleteListFromServer(task) { result in
+//                guard let _ = try? result.get() else {
+//                    return
+//                }
+//                DispatchQueue.main.async {
                     let context = CoreDataStack.shared.mainContext
                     context.delete(task)
                     do {
@@ -78,8 +78,8 @@ class ListTableViewController: UITableViewController {
                         NSLog("Error saving managed object context (delete task): \(error)")
                     }
                 }}
-        }
-    }
+//        }
+//    }
     // MARK: - Navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CreateSegue" {
