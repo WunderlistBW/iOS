@@ -29,10 +29,8 @@ class ListTableViewController: UITableViewController {
         tableView.reloadData()
 
     }
-
     @IBAction func entryStatusTapped(_ sender: Any) {
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         DispatchQueue.main.asyncAfter(deadline: .now()) {
