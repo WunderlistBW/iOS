@@ -17,7 +17,7 @@ class AddViewController: UIViewController {
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US")
-        formatter.dateFormat = "YYYY-MM-DD HH:MM:SS:SSS"
+        formatter.dateFormat = "YYYY-MM-d HH:MM:ss"
         return formatter
     }()
     // MARK: - OUTLETS
@@ -57,7 +57,7 @@ class AddViewController: UIViewController {
                                                    recurring: "daily",
                                                    completed: false,
                                                    dueDate: endOn,
-                                                   userId: uwUserId)
+                                                   id: uwUserId)
             } catch {
                 print("Error creating entry from Add Entry VC")
             }
@@ -85,6 +85,5 @@ extension AddViewController {
     private func setUpIdentitfiers() {
         self.addDatePicker.accessibilityIdentifier = "Main.Create.DatePicker"
         self.cancelButton.accessibilityIdentifier = "Main.Create.CancelButton"
-        self.saveButton.accessibilityIdentifier = "Main.Create.SaveButton"
     }
 }
