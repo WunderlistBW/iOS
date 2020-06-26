@@ -7,6 +7,12 @@
 //
 
 import UIKit
+enum Recurring: CaseIterable {
+    case weekly
+    case daily
+    case monthly
+    case never
+}
 // TODO - ADD COMPLETED CONTROL ON SCREEN VC? - OUTLET FOR IT BELOW
 class AddViewController: UIViewController {
     // MARK: - PROPERTIES
@@ -44,36 +50,65 @@ class AddViewController: UIViewController {
     }
     // TO SAVE A CREATED LIST ENTRY
     @IBAction func save(_ sender: UIBarButtonItem) {
-        guard let name = nameTextField.text,
-            let details = detailsTextView.text,
-            !name.isEmpty,
-            !details.isEmpty else { return }
-        guard let listController = listController, let uwUserId = userId?.user.id else { return }
-        let dateString = dateFormatter.string(from: addDatePicker.date)
-        let endOn = dateString
-        if let listEntry = listEntry {
-            listEntry.name = name
-            listEntry.body = details
-            // update feature / function
+        guard let name = nameTextField.text else {
+            print("Name of list is required")
+            return
+        }
+        var recurring: Recurring?
+        if reminderSegment.selectedSegmentIndex == 4 {
+            recurring = nil
         } else {
-            do {
-                try listController.createListEntry(with: name,
-                                                   body: details,
-                                                   recurring: "daily",
-                                                   completed: false,
-                                                   dueDate: endOn,
-                                                   id: uwUserId)
-            } catch {
-                print("Error creating entry from Add Entry VC")
+            let selectedSegment = reminderSegment.selectedSegmentIndex - 1
+            recurring = Recurring.allCases[selectedSegment]
+        }
+        let representation = ListRepresentation(name: name, body: detailsTextView.text, id: Int64(userId?.user.id), dueDate: addDatePicker.date, completed: false, recurring: recurring)
+        
+        listController?.putListToServer(list: ListEntry(representation)) {_ in
+            guard let listRepresentation = self.listController? else { return } // idk
+            switch recurring {
+            case .daily:
+                self.notificationController.trigger(list: list, notificationType: .daily, onDate: self.addDatePicker.date)
+            case .weekly:
+                self.notificationController.trigger(list: list, notificationType: .weekly, onDate: self.addDatePicker.date)
+            case .monthly:
+                self.notificationController.trigger(list: list, notificationType: .monthly, onDate: self.addDatePicker.date)
+            case nil:
+                self.notificationController.trigger(list: list, notificationType: .never, onDate: self.addDatePicker.date)
+            case .deleted:
+                return
             }
         }
-        let alert = UIAlertController(title: "Saved", message: "Your list entry has been saved!",
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Finished",
-                                      style: .default) { (_) -> Void in
-                                        self.navigationController?.popViewController(animated: true)
-        })
-        present(alert, animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+//        guard let name = nameTextField.text,
+//            let details = detailsTextView.text,
+//            !name.isEmpty,
+//            !details.isEmpty else { return }
+//        guard let listController = listController, let uwUserId = userId?.user.id else { return }
+//        let dateString = dateFormatter.string(from: addDatePicker.date)
+//        let endOn = dateString
+//        if let listEntry = listEntry {
+//            listEntry.name = name
+//            listEntry.body = details
+//            // update feature / function
+//        } else {
+//            do {
+//                try listController.createListEntry(with: name,
+//                                                   body: details,
+//                                                   recurring: "daily",
+//                                                   completed: false,
+//                                                   dueDate: endOn,
+//                                                   id: uwUserId)
+//            } catch {
+//                print("Error creating entry from Add Entry VC")
+//            }
+//        }
+//        let alert = UIAlertController(title: "Saved", message: "Your list entry has been saved!",
+//                                      preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Finished",
+//                                      style: .default) { (_) -> Void in
+//                                        self.navigationController?.popViewController(animated: true)
+//        })
+//        present(alert, animated: true, completion: nil)
   }
 } // EOC
     /*

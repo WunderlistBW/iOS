@@ -31,13 +31,15 @@ class ListTableViewController: UITableViewController {
 
     @IBAction func entryStatusTapped(_ sender: Any) {
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let bearer = NEUserController.currentUserID?.token
-        guard bearer != nil else {
-            performSegue(withIdentifier: "ListSegue", sender: self)
-            return
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            let bearer = NEUserController.currentUserID?.token
+            guard bearer != nil else {
+                self.performSegue(withIdentifier: "ListSegue", sender: self)
+                return
+            }
         }
         tableView.reloadData()
     }
@@ -48,9 +50,9 @@ class ListTableViewController: UITableViewController {
             if error != nil {
                 print("Error fetching in viewWillAppear")
             }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
         }
     }
     // SEARCH BAR
