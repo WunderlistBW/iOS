@@ -230,6 +230,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addDatePicker" destination="U9W-JV-897" id="p64-kh-pQY"/>
+                        <outlet property="cancelButton" destination="1C6-ZP-XOq" id="pmw-n2-MCF"/>
+                        <outlet property="detailsTextView" destination="l1T-JH-MR8" id="MnK-Fu-c1s"/>
                         <outlet property="nameTextField" destination="maF-99-Qd0" id="JYt-j2-s8F"/>
                         <outlet property="reminderSegment" destination="Dos-UV-4cr" id="BcM-5n-JHc"/>
                     </connections>
@@ -359,6 +361,12 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="entryDatePicker" destination="2fT-hQ-9lc" id="iIk-Jk-ul5"/>
+                        <outlet property="entryDetailsTextView" destination="kYw-0J-LlW" id="89V-Q9-HMf"/>
+                        <outlet property="entryTitleField" destination="SJg-sZ-Ds5" id="VYu-QU-ueh"/>
+                        <outlet property="reminderSegmentControl" destination="2gd-pS-FY8" id="5kK-Qh-I8b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oYh-Rd-0DA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

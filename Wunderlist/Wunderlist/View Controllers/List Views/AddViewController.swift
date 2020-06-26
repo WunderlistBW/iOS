@@ -88,7 +88,7 @@ class AddViewController: UIViewController {
 
 extension AddViewController {
     private func setUpIdentitfiers() {
-        self.addDatePicker.accessibilityIdentifier = "Main.Create.DatePicker"
-        self.cancelButton.accessibilityIdentifier = "Main.Create.CancelButton"
+//        self.addDatePicker.accessibilityIdentifier = "Main.Create.DatePicker"
+//        self.cancelButton.accessibilityIdentifier = "Main.Create.CancelButton"
     }
 }
