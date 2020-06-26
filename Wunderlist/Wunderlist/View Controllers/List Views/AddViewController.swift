@@ -76,6 +76,7 @@ class AddViewController: UIViewController {
         default: recurring = Recurring.never
         }
         guard let recurringString = recurring?.rawValue else { return }
+
         let representation =  ListRepresentation(name: name, body: detailsTextView.text,
                                                  id: userId, dueDate: date, completed: false,
                                                  recurring: recurring.map { $0.rawValue })
@@ -97,32 +98,6 @@ class AddViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
     }
-//        switch reminderSegment.selectedSegmentIndex {
-//        case 4: recurring = Recurring.never
-//        case 3: recurring = Recurring.monthly
-//        case 2: recurring = Recurring.weekly
-//        case 1: recurring = Recurring.daily
-//        default: recurring = Recurring.never
-//        }
-//        guard let recurringString = recurring?.rawValue else { return }
-//
-//        guard let list = ListEntry(name: name, body: body, recurring: recurringString, dueDate: date, id: uwUserId, context: CoreDataStack.shared.mainContext) else { return }
-//
-//        listController?.putListToServer(list: list) {_ in
-//            guard let listRepresentation = self.listController? else { return } // idk
-//            switch recurring {
-//            case .daily:
-//                self.notificationController.trigger(list: list, notificationType: .daily, onDate: self.addDatePicker.date)
-//            case .weekly:
-//                self.notificationController.trigger(list: list, notificationType: .weekly, onDate: self.addDatePicker.date)
-//            case .monthly:
-//                self.notificationController.trigger(list: list, notificationType: .monthly, onDate: self.addDatePicker.date)
-//            case .never:
-//                self.notificationController.trigger(list: list, notificationType: .never, onDate: self.addDatePicker.date)
-//            case nil:
-//                return
-//            }
-//        }
 //        navigationController?.popViewController(animated: true)
 //        guard let name = nameTextField.text,
 //            let details = detailsTextView.text,

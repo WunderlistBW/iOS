@@ -14,7 +14,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var entryDetailsTextView: UITextView!
     @IBOutlet weak var entryDatePicker: UIDatePicker!
     @IBOutlet weak var reminderSegmentControl: UISegmentedControl!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()

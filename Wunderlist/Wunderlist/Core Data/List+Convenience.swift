@@ -21,8 +21,7 @@ enum ReminderType: String, CaseIterable {
     case none
 }
 extension ListEntry: Persistable {
-    convenience init?(name: String, body: String?, completed: Bool? = false, recurring: String, dueDate: String, id: Int64, context: PersistentContext ) {
-        
+    convenience init?(name: String, body: String?, completed: Bool? = false, recurring: String, dueDate: String, id: Int64, context: PersistentContext ) {        
         guard let completed = completed, let body = body
         else { return nil }
         self.init(context: context)
@@ -33,7 +32,6 @@ extension ListEntry: Persistable {
         self.completed = completed
         self.recurring = recurring
     }
-    
     @discardableResult convenience init?(listRepresentation: ListRepresentation, context: PersistentContext) {
         guard let recurring = listRepresentation.recurring, let id = listRepresentation.id else { return nil }
         self.init(name: listRepresentation.name,
@@ -43,9 +41,7 @@ extension ListEntry: Persistable {
                   dueDate: listRepresentation.dueDate,
                   id: id,
                   context: context)
-        
     }
-    
     var listRepresentation: ListRepresentation? {
         guard let name = name,
             let recurring = recurring,

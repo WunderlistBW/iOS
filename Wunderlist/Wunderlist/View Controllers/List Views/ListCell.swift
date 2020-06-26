@@ -9,10 +9,8 @@
 import UIKit
 
 class ListCell: UITableViewCell {
-    
     var listEntryController = ListController()
     var isCompleted: Bool = false
-    
     // MARK: OUTLETS
     @IBOutlet weak var reminderName: UILabel!
     @IBOutlet weak var isCompleteButton: UIButton!

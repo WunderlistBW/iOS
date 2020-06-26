@@ -52,7 +52,6 @@ class ListController {
             }
         }
     }
-    
     func fetchListFromServer(completion: @escaping (Error?) -> Void = { _ in }) {
         guard let bearer = NEUserController.currentUserID?.token else { return }
         guard let currentUID = NEUserController.currentUserID?.user.id else { return }
@@ -90,7 +89,6 @@ class ListController {
             }
         }
     }
-    
     private func updateList(with representation: [ListRepresentation]) throws {
         let entriesWithId = representation.filter { $0.id != nil }
         let identifiersToFetch = entriesWithId.compactMap { $0.id! }
@@ -116,8 +114,7 @@ class ListController {
             }
         }
         try CoreDataStack.shared.save(in: context)
-    }
-    
+    }    
     func deleteListFromServer(_ list: ListEntry, completion: @escaping CompletionHandler = { _ in}) {
         let listID = list.id
         let requestURL = databaseURL.appendingPathComponent("api/items/\(listID)")
