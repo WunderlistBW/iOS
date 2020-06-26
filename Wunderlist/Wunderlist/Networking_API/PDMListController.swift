@@ -79,6 +79,7 @@ class ListController {
                 let listRepresentations =
                     try Array(JSONDecoder().decode([ListRepresentation].self, from: data))
                 try self.updateList(with: listRepresentations)
+                self.lists = listRepresentations
                 DispatchQueue.main.async {
                     completion(nil)
                 }
@@ -87,7 +88,7 @@ class ListController {
                 completion(error)
                 return
             }
-        }
+        }.resume()
     }
     private func updateList(with representation: [ListRepresentation]) throws {
         let entriesWithId = representation.filter { $0.id != nil }
