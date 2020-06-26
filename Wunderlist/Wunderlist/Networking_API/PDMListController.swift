@@ -90,6 +90,7 @@ class ListController {
             }
         }
     }
+    
     private func updateList(with representation: [ListRepresentation]) throws {
         let entriesWithId = representation.filter { $0.id != nil }
         let identifiersToFetch = entriesWithId.compactMap { $0.id! }
@@ -103,9 +104,9 @@ class ListController {
                 let existingList = try context.fetch(fetchRequest)
                 for list in existingList {
                     let id = list.id
-                    guard let representation = representationByID[Int(id)] else { continue }
+                    guard let representation = representationByID[id] else { continue }
                     self.update(listEntry: list, with: representation)
-                    entriesToCreate.removeValue(forKey: Int(id))
+                    entriesToCreate.removeValue(forKey: id)
                 }
                 for representation in entriesToCreate.values {
                     ListEntry(listRepresentation: representation, context: context)
@@ -138,6 +139,8 @@ class ListController {
         listEntry.recurring = representation.recurring
         listEntry.completed = representation.completed ?? false
         listEntry.body = representation.body
+        listEntry.id = representation.id ?? 0
+        listEntry.dueDate = representation.dueDate
     }
     func createListEntry(with name: String, body: String?, recurring: String, completed: Bool? = false, dueDate: String, id: Int) throws {
         let context = persistentStoreController.mainContext

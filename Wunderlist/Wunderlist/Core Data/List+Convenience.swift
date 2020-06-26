@@ -41,7 +41,7 @@ extension ListEntry: Persistable {
                   completed: listRepresentation.completed,
                   recurring: recurring,
                   dueDate: listRepresentation.dueDate,
-                  id: id,
+                  id: Int(id),
                   context: context)
         
     }
@@ -52,7 +52,7 @@ extension ListEntry: Persistable {
             let dueDate = dueDate else { return nil }
         return ListRepresentation(name: name,
                                   body: body,
-                                  id: Int(id),
+                                  id: id,
                                   dueDate: dueDate,
                                   completed: completed,
                                   recurring: recurring)

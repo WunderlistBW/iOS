@@ -11,7 +11,7 @@ import Foundation
 struct ListRepresentation: Equatable, Codable, Persistable {
     var name: String
     var body: String?
-    var id: Int? // The post's ID
+    var id: Int64? // The post's ID
     var dueDate: String // ""YYYY-MM-DD HH:MM:SS"
     var completed: Bool? // defaults to false
     var recurring: String? // daily, weekly, monthly
