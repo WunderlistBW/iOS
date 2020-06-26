@@ -11,9 +11,13 @@ import UIKit
 class DetailViewController: UIViewController {
     // MARK: - OUTLETS
     @IBOutlet weak var entryTitleField: UITextField!
-    @IBOutlet weak var entryTextView: UITextView!
+    @IBOutlet weak var entryDetailsTextView: UITextView!
     @IBOutlet weak var entryDatePicker: UIDatePicker!
+
     @IBOutlet weak var saveButton: UIBarButtonItem!
+
+    @IBOutlet weak var reminderSegmentControl: UISegmentedControl!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,13 +36,14 @@ class DetailViewController: UIViewController {
     
     // MARK: - ACTIONS
     @IBAction func saveButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if wasEdited {
             guard let entryTitle = entryTitleField.text,
                 !entryTitle.isEmpty,
-                let entryText = entryTextView.text,
+                let entryText = entryDetailsTextView.text,
                 !entryText.isEmpty,
                 let listEntry = listEntry else { return }
             let name = entryTitleField.text
@@ -57,7 +62,7 @@ class DetailViewController: UIViewController {
         super.setEditing(editing, animated: animated)
         if editing { wasEdited = true }
         entryTitleField.isUserInteractionEnabled = editing
-        entryTextView.isUserInteractionEnabled = editing
+        entryDetailsTextView.isUserInteractionEnabled = editing
         entryDatePicker.isUserInteractionEnabled = editing
         navigationItem.hidesBackButton = editing
     }
@@ -65,8 +70,8 @@ class DetailViewController: UIViewController {
         guard let listEntry = listEntry else { return }
         entryTitleField.text = listEntry.name
         entryTitleField.isUserInteractionEnabled = isEditing
-        entryTextView.isUserInteractionEnabled = isEditing
-        entryDatePicker.date = listEntry.dueDate!
+        entryDetailsTextView.isUserInteractionEnabled = isEditing
+        //entryDatePicker.date = listEntry.dueDate!
         entryDatePicker.isUserInteractionEnabled = isEditing
     }
     /*

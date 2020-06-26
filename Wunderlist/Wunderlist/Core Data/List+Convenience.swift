@@ -13,33 +13,48 @@ enum ListStatus: String, CaseIterable {
     case completedStatus
     case upcomingStatus
 }
-
+// For segmented control and sections
+enum ReminderType: String, CaseIterable {
+    case daily
+    case weekly
+    case monthly
+    case none
+}
 extension ListEntry: Persistable {
-    convenience init?(name: String, dueDate: Date? = Date(), isComplete: Bool? = false, listId: UUID,
-                      context: PersistentContext
-    ) {
-        guard let context = context as? NSManagedObjectContext, let isComplete = isComplete
-            else { return nil }
+    convenience init?(name: String, body: String?, completed: Bool? = false, recurring: String, dueDate: String, id: Int64, context: PersistentContext ) {
+        
+        guard let completed = completed, let body = body
+        else { return nil }
         self.init(context: context)
-        self.listId = listId
-        self.name = name
+        self.id = Int64(id)
         self.dueDate = dueDate
-        self.isComplete = isComplete
+        self.name = name
+        self.body = body
+        self.completed = completed
+        self.recurring = recurring
     }
+    
     @discardableResult convenience init?(listRepresentation: ListRepresentation, context: PersistentContext) {
-        guard let isComplete = listRepresentation.isComplete else { return nil }
-        let name = listRepresentation.name
-        let dueDate = listRepresentation.dueDate
-        let listId = listRepresentation.listId
-        self.init(name: name,
-                  dueDate: dueDate,
-                  isComplete: isComplete, listId: listId,
+        guard let recurring = listRepresentation.recurring, let id = listRepresentation.id else { return nil }
+        self.init(name: listRepresentation.name,
+                  body: listRepresentation.body,
+                  completed: listRepresentation.completed,
+                  recurring: recurring,
+                  dueDate: listRepresentation.dueDate,
+                  id: id,
                   context: context)
+        
     }
+    
     var listRepresentation: ListRepresentation? {
-        guard let name = name, let listId = listId,
-        let dueDate = dueDate else { return nil }
-        return ListRepresentation(name: name, listId: listId,
-                                  dueDate: dueDate, isComplete: isComplete)
+        guard let name = name,
+            let recurring = recurring,
+            let dueDate = dueDate else { return nil }
+        return ListRepresentation(name: name,
+                                  body: body,
+                                  id: id,
+                                  dueDate: dueDate,
+                                  completed: completed,
+                                  recurring: recurring)
     }
 }
