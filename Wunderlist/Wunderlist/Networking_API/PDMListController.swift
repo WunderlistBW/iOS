@@ -17,9 +17,13 @@ class ListController {
     var listCount: Int {
         persistentStoreController.itemCount
     }
-    var lists: [ListRepresentation]? {
-        persistentStoreController.allItems as? [ListRepresentation]
-    }
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.dateFormat = "YYYY-MM-d HH:MM:ss"
+        return formatter
+    }()
+    var lists: [ListRepresentation]?
     var delegate: PersistentStoreControllerDelegate? {
         get {
             return persistentStoreController.delegate
@@ -76,10 +80,15 @@ class ListController {
             }
             print(data.prettyPrintedJSONString!)
             do {
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.dateDecodingStrategy = .formatted(self.dateFormatter)
                 let listRepresentations =
-                    try Array(JSONDecoder().decode([ListRepresentation].self, from: data))
-                try self.updateList(with: listRepresentations)
-                self.lists = listRepresentations
+                    try Array(jsonDecoder.decode([ListRepresentation].self, from: data))
+                
+                for representation in listRepresentations {
+                try self.updateList(with: representation)
+                }
+                
                 DispatchQueue.main.async {
                     completion(nil)
                 }
@@ -90,32 +99,30 @@ class ListController {
             }
         }.resume()
     }
-    private func updateList(with representation: [ListRepresentation]) throws {
-        let entriesWithId = representation.filter { $0.id != nil }
-        let identifiersToFetch = entriesWithId.compactMap { $0.id! }
-        let representationByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, entriesWithId))
-        var entriesToCreate = representationByID
+    private func updateList(with representation: ListRepresentation) throws {
+        
+        // TODO: I feel like this is on the right track? 
+        guard let getWithId = representation.id else { return }
         let fetchRequest: NSFetchRequest<ListEntry> = ListEntry.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id IN %@", identifiersToFetch)
-        let context = CoreDataStack.shared.container.newBackgroundContext()
+        fetchRequest.predicate = NSPredicate(format: "id IN %@", getWithId)
+        let context = CoreDataStack.shared.mainContext
         context.perform {
             do {
                 let existingList = try context.fetch(fetchRequest)
-                for list in existingList {
-                    let id = list.id
-                    guard let representation = representationByID[id] else { continue }
-                    self.update(listEntry: list, with: representation)
-                    entriesToCreate.removeValue(forKey: id)
-                }
-                for representation in entriesToCreate.values {
-                    ListEntry(listRepresentation: representation, context: context)
-                }
+                    for list in existingList {
+                        let id = list.id
+                            if id == getWithId {
+                                self.update(listEntry: list, with: representation)
+                            } else {
+                                ListEntry(listRepresentation: representation, context: context)
+                            }
+                    }
             } catch {
                 print("Error fetching entries for UUIDs: \(error)")
             }
         }
         try CoreDataStack.shared.save(in: context)
-    }    
+    }
     func deleteListFromServer(_ list: ListEntry, completion: @escaping CompletionHandler = { _ in}) {
         let listID = list.id
         let requestURL = databaseURL.appendingPathComponent("api/items/\(listID)")
