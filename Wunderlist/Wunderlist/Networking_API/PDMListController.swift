@@ -101,8 +101,9 @@ class ListController {
     }
     private func updateList(with representation: ListRepresentation) throws {
         
-        // TODO: I feel like this is on the right track? 
-        guard let getWithId = representation.id else { return }
+        // TODO: I feel like this is on the right track?
+        // representation ID is nil ><
+        let getWithId = representation.id
         let fetchRequest: NSFetchRequest<ListEntry> = ListEntry.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id IN %@", getWithId)
         let context = CoreDataStack.shared.mainContext
@@ -144,7 +145,7 @@ class ListController {
         listEntry.recurring = representation.recurring
         listEntry.completed = representation.completed ?? false
         listEntry.body = representation.body
-        listEntry.id = representation.id ?? 0
+        listEntry.id = Int64(representation.id)
         listEntry.dueDate = representation.dueDate
     }
     func createListEntry(with name: String, body: String?, recurring: String, completed: Bool? = false, dueDate: String, id: Int64) throws {
