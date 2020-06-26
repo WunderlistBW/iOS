@@ -181,6 +181,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jE5-mm-1rn">
                                 <rect key="frame" x="20" y="172" width="374" height="351"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Main.Edit.DetailTextView"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -217,6 +218,7 @@
                         <outlet property="entryDatePicker" destination="L97-AS-zXl" id="wnM-wY-cPU"/>
                         <outlet property="entryTextView" destination="jE5-mm-1rn" id="LjM-iU-c1Z"/>
                         <outlet property="entryTitleField" destination="Fnp-Dy-lCW" id="sCE-xL-a8s"/>
+                        <outlet property="saveButton" destination="Tdf-W7-5tF" id="rl3-cJ-EuA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oYh-Rd-0DA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

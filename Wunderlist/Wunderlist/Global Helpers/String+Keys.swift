@@ -44,7 +44,9 @@ extension String {
     static let createCancelButton = "Main.Create.CancelButton"
     static let createSaveButton = "Main.Create.SaveButton"
     static let finishedButton = "Main.Create.FinishedButton"
+    static let saveEditButton = "Main.Edit.SaveEditButton"
     ///Text Fields
     static let createListTextField = "Main.Create.TextField"
-    
+    ///Text Views
+    static let editDetailsTextView = "Main.Edit.DetailTextView"
 }

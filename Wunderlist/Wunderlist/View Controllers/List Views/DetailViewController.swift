@@ -13,7 +13,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var entryTitleField: UITextField!
     @IBOutlet weak var entryTextView: UITextView!
     @IBOutlet weak var entryDatePicker: UIDatePicker!
-
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
@@ -23,6 +24,12 @@ class DetailViewController: UIViewController {
     var listController: ListController?
     var wasEdited = false
     var listEntry: ListEntry?
+    //MARK: - Life Cycles
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setUpIdentifiers()
+    }
+    
     // MARK: - ACTIONS
     @IBAction func saveButtonTapped(_ sender: Any) {
     }
@@ -72,4 +79,10 @@ class DetailViewController: UIViewController {
     }
     */
 
+}
+
+extension DetailViewController {
+    private func setUpIdentifiers() {
+        self.saveButton.accessibilityIdentifier = "Main.Edit.SaveEditButton"
+    }
 }
