@@ -20,7 +20,7 @@ struct ListRepresentation: Equatable, Codable, Persistable {
         case dueDate = "due_date"
         case name
         case body
-        case id
+        case id = "user_id"
         case completed
         case recurring
     }

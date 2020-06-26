@@ -31,13 +31,12 @@ class ListController {
     typealias CompletionHandler = (Result<Bool, NetworkError>) -> Void
     private let databaseURL = URL(string: "https://wunderlist-node.herokuapp.com")!
     func putListToServer(list: ListEntry, completion: @escaping CompletionHandler = { _ in }) {
-        let requestURL = databaseURL.appendingPathComponent("api/items") //Disabled for firebase
-        var request = URLRequest(url: databaseURL)
+        let requestURL = databaseURL.appendingPathComponent("api/items")
+        var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.post.rawValue
         do {
             request.httpBody = try JSONEncoder().encode(list.listRepresentation)
-            let putString = String.init(data: request.httpBody!, encoding: .utf8)
-            print(putString!) // TODO: Fix formatting with codingKeys
+            print("\(request.httpBody?.prettyPrintedJSONString)")
         } catch {
             NSLog("Error encoding Entry: \(error)")
             completion(.failure(.badAuth))
@@ -140,12 +139,13 @@ class ListController {
         listEntry.completed = representation.completed ?? false
         listEntry.body = representation.body
     }
-    func createListEntry(with name: String, body: String?, recurring: String, completed: Bool? = false, dueDate: String, userId: Int) throws {
+    func createListEntry(with name: String, body: String?, recurring: String, completed: Bool? = false, dueDate: String, id: Int) throws {
         let context = persistentStoreController.mainContext
         guard  let list = ListEntry(name: name,
                                     body: body,
                                     recurring: recurring,
                                     dueDate: dueDate,
+                                    id: id,
                                     context: context) else { return }
         putListToServer(list: list)
         do {

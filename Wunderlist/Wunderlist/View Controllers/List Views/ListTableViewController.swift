@@ -186,6 +186,5 @@ extension ListTableViewController: UISearchBarDelegate {
 extension ListTableViewController {
     private func setUpIdentifiers() {
         self.tableView.accessibilityIdentifier = "Main.ListTable"
-        self.addButton.accessibilityIdentifier = "Main.AddButton"
     }
 }
