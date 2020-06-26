@@ -17,7 +17,6 @@ class ListTableViewController: UITableViewController {
     var listController = ListController()
     // MARK: - OUTLETS
     @IBOutlet weak var searchBar: UISearchBar!
-    
     // MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +26,6 @@ class ListTableViewController: UITableViewController {
         tableView.delegate = self
         searchBar.delegate = self
         tableView.reloadData()
-
     }
     @IBAction func entryStatusTapped(_ sender: Any) {
     }
@@ -57,14 +55,12 @@ class ListTableViewController: UITableViewController {
     // SEARCH BAR
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     }
-    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         // TODO: Populate table view by leveraging isComplete boolean.
         return 1
     }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return listController.lists?.count ?? 0
         return listController.listCount
