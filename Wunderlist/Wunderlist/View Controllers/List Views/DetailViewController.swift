@@ -57,14 +57,14 @@ class DetailViewController: UIViewController {
 //            }
         }
     }
-//    override func setEditing(_ editing: Bool, animated: Bool) {
-//        super.setEditing(editing, animated: animated)
-//        if editing { wasEdited = true }
-//        entryTitleField.isUserInteractionEnabled = editing
-//        entryDetailsTextView.isUserInteractionEnabled = editing
-//        entryDatePicker.isUserInteractionEnabled = editing
-//        navigationItem.hidesBackButton = editing
-//    }
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if editing { wasEdited = true }
+        entryTitleField.isUserInteractionEnabled = editing
+        entryDetailsTextView.isUserInteractionEnabled = editing
+        entryDatePicker.isUserInteractionEnabled = editing
+        navigationItem.hidesBackButton = editing
+    }
     func updateViews() {
         guard let date = listEntry?.dueDate else { return }
         let dateFromString = dateFormatter.date(from: date)
