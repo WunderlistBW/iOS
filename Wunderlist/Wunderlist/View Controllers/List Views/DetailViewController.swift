@@ -14,6 +14,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var entryDetailsTextView: UITextView!
     @IBOutlet weak var entryDatePicker: UIDatePicker!
     @IBOutlet weak var reminderSegmentControl: UISegmentedControl!
+//    @IBOutlet weak var saveButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
@@ -21,10 +22,14 @@ class DetailViewController: UIViewController {
     }
     // MARK: - PROPERTIES
     var listController: ListController?
+    
     var wasEdited = false
     var listEntry: ListEntry?
     // MARK: - ACTIONS
+    //actually an edit button
     @IBAction func saveButtonTapped(_ sender: Any) {
+        isEditing.toggle()
+        updateViews()
         self.dismiss(animated: true, completion: nil)
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,21 +52,21 @@ class DetailViewController: UIViewController {
 //            }
         }
     }
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        if editing { wasEdited = true }
-        entryTitleField.isUserInteractionEnabled = editing
-        entryDetailsTextView.isUserInteractionEnabled = editing
-        entryDatePicker.isUserInteractionEnabled = editing
-        navigationItem.hidesBackButton = editing
-    }
-    private func updateViews() {
+//    override func setEditing(_ editing: Bool, animated: Bool) {
+//        super.setEditing(editing, animated: animated)
+//        if editing { wasEdited = true }
+//        entryTitleField.isUserInteractionEnabled = editing
+//        entryDetailsTextView.isUserInteractionEnabled = editing
+//        entryDatePicker.isUserInteractionEnabled = editing
+//        navigationItem.hidesBackButton = editing
+//    }
+    func updateViews() {
         guard let listEntry = listEntry else { return }
         entryTitleField.text = listEntry.name
         entryTitleField.isUserInteractionEnabled = isEditing
         entryDetailsTextView.isUserInteractionEnabled = isEditing
-        //entryDatePicker.date = listEntry.dueDate!
         entryDatePicker.isUserInteractionEnabled = isEditing
+        reminderSegmentControl.isUserInteractionEnabled = isEditing
     }
     /*
     // MARK: - Navigation
