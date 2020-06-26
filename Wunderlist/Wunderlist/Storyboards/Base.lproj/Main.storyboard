@@ -355,7 +355,7 @@
                         <viewLayoutGuide key="safeArea" id="CZ4-Oz-K3r"/>
                     </view>
                     <navigationItem key="navigationItem" id="1UV-ot-oea">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="Tdf-W7-5tF">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="Tdf-W7-5tF">
                             <connections>
                                 <action selector="saveButtonTapped:" destination="JdF-3B-QMV" id="OZv-Ob-3t1"/>
                             </connections>
