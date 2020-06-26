@@ -41,7 +41,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="291" translatesAutoresizingMaskIntoConstraints="NO" id="fUJ-Nx-q9b">
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="313" translatesAutoresizingMaskIntoConstraints="NO" id="fUJ-Nx-q9b">
                                             <rect key="frame" x="20" y="11" width="374" height="22"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uI2-a4-tRl">
@@ -51,7 +51,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ir7-if-EHK">
-                                                    <rect key="frame" x="333" y="0.0" width="41" height="22"/>
+                                                    <rect key="frame" x="355" y="0.0" width="19" height="22"/>
                                                     <state key="normal" image="alarm" catalog="system"/>
                                                     <connections>
                                                         <action selector="reminderTapped:" destination="ysd-TE-AxP" eventType="touchUpInside" id="JSf-bH-JVG"/>
@@ -61,9 +61,9 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="fUJ-Nx-q9b" firstAttribute="top" secondItem="TY3-pp-NPQ" secondAttribute="top" constant="11" id="98Y-Wr-eYZ"/>
-                                        <constraint firstAttribute="trailing" secondItem="fUJ-Nx-q9b" secondAttribute="trailing" constant="20" id="AxK-my-CPw"/>
-                                        <constraint firstItem="fUJ-Nx-q9b" firstAttribute="leading" secondItem="TY3-pp-NPQ" secondAttribute="leading" constant="20" id="fxS-W4-yus"/>
+                                        <constraint firstAttribute="bottom" secondItem="fUJ-Nx-q9b" secondAttribute="bottom" constant="10.5" id="1Mq-jl-hhv"/>
+                                        <constraint firstItem="fUJ-Nx-q9b" firstAttribute="leading" secondItem="TY3-pp-NPQ" secondAttribute="leading" constant="20" id="Lph-ZU-llV"/>
+                                        <constraint firstAttribute="trailing" secondItem="fUJ-Nx-q9b" secondAttribute="trailing" constant="20" id="cWb-v7-Kqg"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
