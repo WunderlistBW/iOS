@@ -39,6 +39,7 @@
 		DB3EA165249EABD0009B3BEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA164249EABD0009B3BEA /* Assets.xcassets */; };
 		DB3EA168249EABD0009B3BEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB3EA166249EABD0009B3BEA /* LaunchScreen.storyboard */; };
 		DB6F732A24A4180A00D13829 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6F732924A4180A00D13829 /* Task.swift */; };
+		DB6F732C24A56E4D00D13829 /* PrettyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6F732B24A56E4D00D13829 /* PrettyJSON.swift */; };
 		DBACA3BA24A1198600F4872D /* PDMListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3B924A1198600F4872D /* PDMListController.swift */; };
 		DBACA3BC24A119AB00F4872D /* PDMListRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBACA3BB24A119AB00F4872D /* PDMListRepresentation.swift */; };
 /* End PBXBuildFile section */
@@ -103,6 +104,7 @@
 		DB3EA167249EABD0009B3BEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB3EA169249EABD0009B3BEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB6F732924A4180A00D13829 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		DB6F732B24A56E4D00D13829 /* PrettyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyJSON.swift; sourceTree = "<group>"; };
 		DBACA3B924A1198600F4872D /* PDMListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMListController.swift; sourceTree = "<group>"; };
 		DBACA3BB24A119AB00F4872D /* PDMListRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDMListRepresentation.swift; sourceTree = "<group>"; };
 		F485D1A929BE2D5E081E4B61 /* Pods-Wunderlist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wunderlist.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wunderlist/Pods-Wunderlist.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				5E7B0736249F3FC700F6664A /* String+Keys.swift */,
 				27D818F124A136D200564B68 /* HTTPMethod.swift */,
 				27D818F524A13A3500564B68 /* NetworkError.swift */,
+				DB6F732B24A56E4D00D13829 /* PrettyJSON.swift */,
 			);
 			path = "Global Helpers";
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				27D818F624A13A3500564B68 /* NetworkError.swift in Sources */,
 				27D818F224A136D200564B68 /* HTTPMethod.swift in Sources */,
 				B4FEBECA24A26DE600640C75 /* ListCell.swift in Sources */,
+				DB6F732C24A56E4D00D13829 /* PrettyJSON.swift in Sources */,
 				DBACA3BA24A1198600F4872D /* PDMListController.swift in Sources */,
 				DB3EA15E249EABCD009B3BEA /* SceneDelegate.swift in Sources */,
 			);

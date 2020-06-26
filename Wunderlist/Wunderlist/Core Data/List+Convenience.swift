@@ -34,11 +34,11 @@ extension ListEntry: Persistable {
     }
     
     @discardableResult convenience init?(listRepresentation: ListRepresentation, context: PersistentContext) {
-        
+        guard let recurring = listRepresentation.recurring else { return nil }
         self.init(name: listRepresentation.name,
                   body: listRepresentation.body,
                   completed: listRepresentation.completed,
-                  recurring: listRepresentation.recurring,
+                  recurring: recurring,
                   dueDate: listRepresentation.dueDate,
                   context: context)
         
@@ -50,7 +50,7 @@ extension ListEntry: Persistable {
             let dueDate = dueDate else { return nil }
         return ListRepresentation(name: name,
                                   body: body,
-                                  id: Int(listId),
+                                  id: Int(id),
                                   dueDate: dueDate,
                                   completed: completed,
                                   recurring: recurring)

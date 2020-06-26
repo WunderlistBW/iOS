@@ -30,8 +30,6 @@ class NEUserController {
     var loggedInUser: APIUser?
     var delegate: UserStateDelegate?
     static var currentUserID: SignedInUser?
-    private init () {
-    }
     private let baseURL = URL(string: "https://wunderlist-node.herokuapp.com")!
     private lazy var signUpURL = baseURL.appendingPathComponent("api/register")
     private lazy var signInURL = baseURL.appendingPathComponent("api/login")

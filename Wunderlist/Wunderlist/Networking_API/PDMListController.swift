@@ -56,10 +56,10 @@ class ListController {
     func fetchListFromServer(completion: @escaping (Error?) -> Void = { _ in }) {
         guard let bearer = NEUserController.currentUserID?.token else { return }
         guard let currentUID = NEUserController.currentUserID?.user.id else { return }
-     let requestURL = databaseURL.appendingPathExtension("api/items/\(currentUID)")
+     let requestURL = databaseURL.appendingPathComponent("api/items/\(currentUID)")
         var request = URLRequest(url: requestURL)
         request.httpMethod = "GET"
-        request.addValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+        request.addValue("\(bearer)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
                 print("Error fetching list: \(error)")
@@ -75,8 +75,10 @@ class ListController {
                 }
                 return
             }
+            print(data.prettyPrintedJSONString!)
             do {
-                let listRepresentations = try Array(JSONDecoder().decode([String: ListRepresentation].self, from: data).values)
+                let listRepresentations =
+                    try Array(JSONDecoder().decode([ListRepresentation].self, from: data))
                 try self.updateList(with: listRepresentations)
                 DispatchQueue.main.async {
                     completion(nil)
@@ -100,10 +102,10 @@ class ListController {
             do {
                 let existingList = try context.fetch(fetchRequest)
                 for list in existingList {
-                    let listId = list.listId
-                    guard let representation = representationByID[Int(listId)] else { continue }
+                    let id = list.id
+                    guard let representation = representationByID[Int(id)] else { continue }
                     self.update(listEntry: list, with: representation)
-                    entriesToCreate.removeValue(forKey: Int(listId))
+                    entriesToCreate.removeValue(forKey: Int(id))
                 }
                 for representation in entriesToCreate.values {
                     ListEntry(listRepresentation: representation, context: context)
@@ -116,7 +118,7 @@ class ListController {
     }
     
     func deleteListFromServer(_ list: ListEntry, completion: @escaping CompletionHandler = { _ in}) {
-        let listID = list.listId
+        let listID = list.id
         let requestURL = databaseURL.appendingPathComponent("api/items/\(listID)")
         var request = URLRequest(url: requestURL)
         guard let token = NEUserController.currentUserID?.token else { return }

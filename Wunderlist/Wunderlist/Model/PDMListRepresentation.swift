@@ -14,10 +14,15 @@ struct ListRepresentation: Equatable, Codable, Persistable {
     var id: Int? // The post's ID
     var dueDate: String // ""YYYY-MM-DD HH:MM:SS"
     var completed: Bool? // defaults to false
-    var recurring: String // daily, weekly, monthly
+    var recurring: String? // daily, weekly, monthly
     
-    enum ListCodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case dueDate = "due_date"
+        case name
+        case body
+        case id
+        case completed
+        case recurring
     }
 }
 

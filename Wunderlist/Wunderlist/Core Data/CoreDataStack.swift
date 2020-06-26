@@ -33,16 +33,13 @@ class CoreDataStack: NSObject, PersistentStoreController {
         return container
     }
     func setUpResultsController() -> NSFetchedResultsController<ListEntry> {
-        guard let moc = mainContext as? NSManagedObjectContext else {
-            fatalError("Main Context error")
-        }
         let fetchRequest: NSFetchRequest<ListEntry> = ListEntry.fetchRequest()
         fetchRequest.sortDescriptors = [
             //sort by key here
-            NSSortDescriptor(key: "dueDate", ascending: false)]
+            NSSortDescriptor(key: "id", ascending: false)]
         let frc = NSFetchedResultsController(
             fetchRequest: fetchRequest,
-            managedObjectContext: moc,
+            managedObjectContext: mainContext,
             sectionNameKeyPath: nil,
             cacheName: nil)
         frc.delegate = self.delegate
