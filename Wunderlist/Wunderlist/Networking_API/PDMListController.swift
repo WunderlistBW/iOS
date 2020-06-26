@@ -17,9 +17,13 @@ class ListController {
     var listCount: Int {
         persistentStoreController.itemCount
     }
-    var lists: [ListRepresentation]? {
-        persistentStoreController.allItems as? [ListRepresentation]
-    }
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.dateFormat = "YYYY-MM-d HH:MM:ss"
+        return formatter
+    }()
+    var lists: [ListRepresentation]?
     var delegate: PersistentStoreControllerDelegate? {
         get {
             return persistentStoreController.delegate
@@ -76,8 +80,11 @@ class ListController {
             }
             print(data.prettyPrintedJSONString!)
             do {
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.dateDecodingStrategy = .formatted(self.dateFormatter)
                 let listRepresentations =
-                    try Array(JSONDecoder().decode([ListRepresentation].self, from: data))
+                    try Array(jsonDecoder.decode([ListRepresentation].self, from: data))
+                
                 try self.updateList(with: listRepresentations)
                 DispatchQueue.main.async {
                     completion(nil)
@@ -89,32 +96,35 @@ class ListController {
             }
         }.resume()
     }
-    private func updateList(with representation: [ListRepresentation]) throws {
-        let entriesWithId = representation.filter { $0.id != nil }
-        let identifiersToFetch = entriesWithId.compactMap { $0.id! }
-        let representationByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, entriesWithId))
-        var entriesToCreate = representationByID
+    private func updateList(with representations: [ListRepresentation]) throws {
+        var pulledId: [Int] = []
+        for representation in representations {
+            pulledId.append(representation.id)
+        }
+        let representationsByID = Dictionary(uniqueKeysWithValues: zip(pulledId, representations))
+        var entriesToCreate = representationsByID
         let fetchRequest: NSFetchRequest<ListEntry> = ListEntry.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id IN %@", identifiersToFetch)
-        let context = CoreDataStack.shared.container.newBackgroundContext()
-        context.perform {
+        fetchRequest.predicate = NSPredicate(format: "id IN %@", pulledId)
+        let context = CoreDataStack.shared.mainContext
+        
+        context.performAndWait {
             do {
                 let existingList = try context.fetch(fetchRequest)
-                for list in existingList {
-                    let id = list.id
-                    guard let representation = representationByID[id] else { continue }
-                    self.update(listEntry: list, with: representation)
-                    entriesToCreate.removeValue(forKey: id)
-                }
+                    for list in existingList {
+                        let id = Int(list.id)
+                        guard let representation = representationsByID[id] else { continue }
+                        self.update(listEntry: list, with: representation)
+                        entriesToCreate.removeValue(forKey: id)
+                    }
                 for representation in entriesToCreate.values {
                     ListEntry(listRepresentation: representation, context: context)
                 }
+                try CoreDataStack.shared.save(in: context)
             } catch {
                 print("Error fetching entries for UUIDs: \(error)")
             }
         }
-        try CoreDataStack.shared.save(in: context)
-    }    
+    }
     func deleteListFromServer(_ list: ListEntry, completion: @escaping CompletionHandler = { _ in}) {
         let listID = list.id
         let requestURL = databaseURL.appendingPathComponent("api/items/\(listID)")
@@ -136,7 +146,7 @@ class ListController {
         listEntry.recurring = representation.recurring
         listEntry.completed = representation.completed ?? false
         listEntry.body = representation.body
-        listEntry.id = representation.id ?? 0
+        listEntry.id = Int64(representation.id)
         listEntry.dueDate = representation.dueDate
     }
     func createListEntry(with name: String, body: String?, recurring: String, completed: Bool? = false, dueDate: String, id: Int64) throws {

@@ -13,6 +13,8 @@ class ListTableViewController: UITableViewController {
 
     // MARK: - Properties
     @IBOutlet weak var addButton: UIBarButtonItem!
+    
+    var coreDataStack = CoreDataStack.shared
     var neUserController = NEUserController.shared
     var listController = ListController()
     // MARK: - OUTLETS
@@ -25,6 +27,7 @@ class ListTableViewController: UITableViewController {
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
+        coreDataStack.delegate = self
         tableView.reloadData()
     }
     @IBAction func entryStatusTapped(_ sender: Any) {
@@ -59,13 +62,12 @@ class ListTableViewController: UITableViewController {
         return 1
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return listController.lists?.count ?? 0
-        return listController.listCount
+        return CoreDataStack.shared.fetchedResultsController.fetchedObjects?.count ?? 0
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
             as? ListCell else { return UITableViewCell() }
-        cell.listEntry = listController.getListEntry(at: indexPath)
+        cell.listEntry = CoreDataStack.shared.fetchedResultsController.object(at: indexPath)
         return cell
     }
     // MARK: - DELETE LIST ITEM FROM SERVER & TABLE VIEW (uncomment after delete func done)
@@ -73,15 +75,15 @@ class ListTableViewController: UITableViewController {
         #warning("WILL BREAK IF YOU TRY")
         if editingStyle == .delete {
             // Delete the row from the data source
-            let task = listController.getListEntry(at: indexPath)
+            let task = coreDataStack.fetchedResultsController.object(at: indexPath)
 //            let task = fetchedResultsController.object(at: indexPath)
-            listController.deleteListFromServer(task!) { result in
+            listController.deleteListFromServer(task) { result in
                 guard let _ = try? result.get() else {
                     return
                 }
                 DispatchQueue.main.async {
                     let context = CoreDataStack.shared.mainContext
-                    context.delete(task!)
+                    context.delete(task)
                     do {
                         try context.save()
                     } catch {
@@ -160,6 +162,7 @@ extension ListTableViewController: PersistentStoreControllerDelegate {
         @unknown default:
             break
         }
+        tableView.reloadData()
     }
 }
 

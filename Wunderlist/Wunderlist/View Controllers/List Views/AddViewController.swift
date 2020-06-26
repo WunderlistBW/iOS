@@ -77,9 +77,6 @@ class AddViewController: UIViewController {
         }
         guard let recurringString = recurring?.rawValue else { return }
 
-        let representation =  ListRepresentation(name: name, body: detailsTextView.text,
-                                                 id: userId, dueDate: date, completed: false,
-                                                 recurring: recurring.map { $0.rawValue })
         do {
         try listController?.createListEntry(with: name, body: body,
                                             recurring: recurringString,
@@ -94,9 +91,6 @@ class AddViewController: UIViewController {
         })
         present(alert, animated: true, completion: nil)
         #warning("New addition, remember to check if breaking app")
-//        DispatchQueue.main.async {
-//            self.navigationController?.popViewController(animated: true)
-//        }
     }
 //        navigationController?.popViewController(animated: true)
 //        guard let name = nameTextField.text,
