@@ -14,7 +14,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var entryDetailsTextView: UITextView!
     @IBOutlet weak var entryDatePicker: UIDatePicker!
     @IBOutlet weak var reminderSegmentControl: UISegmentedControl!
-    
+//    @IBOutlet weak var saveButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
@@ -22,10 +22,19 @@ class DetailViewController: UIViewController {
     }
     // MARK: - PROPERTIES
     var listController: ListController?
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.dateFormat = "YYYY-MM-d HH:MM:ss"
+        return formatter
+    }()
     var wasEdited = false
     var listEntry: ListEntry?
     // MARK: - ACTIONS
+    //actually an edit button
     @IBAction func saveButtonTapped(_ sender: Any) {
+        isEditing.toggle()
+        updateViews()
         self.dismiss(animated: true, completion: nil)
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -48,21 +57,26 @@ class DetailViewController: UIViewController {
 //            }
         }
     }
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        if editing { wasEdited = true }
-        entryTitleField.isUserInteractionEnabled = editing
-        entryDetailsTextView.isUserInteractionEnabled = editing
-        entryDatePicker.isUserInteractionEnabled = editing
-        navigationItem.hidesBackButton = editing
-    }
-    private func updateViews() {
+//    override func setEditing(_ editing: Bool, animated: Bool) {
+//        super.setEditing(editing, animated: animated)
+//        if editing { wasEdited = true }
+//        entryTitleField.isUserInteractionEnabled = editing
+//        entryDetailsTextView.isUserInteractionEnabled = editing
+//        entryDatePicker.isUserInteractionEnabled = editing
+//        navigationItem.hidesBackButton = editing
+//    }
+    func updateViews() {
+        guard let date = listEntry?.dueDate else { return }
+        let dateFromString = dateFormatter.date(from: date)
+        guard let formattedDate = dateFromString else { return }
+        
         guard let listEntry = listEntry else { return }
         entryTitleField.text = listEntry.name
+        entryDatePicker.date = formattedDate
         entryTitleField.isUserInteractionEnabled = isEditing
         entryDetailsTextView.isUserInteractionEnabled = isEditing
-        //entryDatePicker.date = listEntry.dueDate!
         entryDatePicker.isUserInteractionEnabled = isEditing
+        reminderSegmentControl.isUserInteractionEnabled = isEditing
     }
     /*
     // MARK: - Navigation

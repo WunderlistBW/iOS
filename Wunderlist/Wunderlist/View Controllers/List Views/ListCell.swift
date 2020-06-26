@@ -9,10 +9,8 @@
 import UIKit
 
 class ListCell: UITableViewCell {
-    
     var listEntryController = ListController()
     var isCompleted: Bool = false
-    
     // MARK: OUTLETS
     @IBOutlet weak var reminderName: UILabel!
     @IBOutlet weak var isCompleteButton: UIButton!
@@ -22,9 +20,8 @@ class ListCell: UITableViewCell {
         }
     }
     func updateViews() {
-         guard let task = listEntry else { return }
-        reminderName.text = task.name
-//        isCompleteButton.setBackgroundImage(UIImage(named: "alarm"), for: .normal) // this fails and crashes
+        guard let listEntry = listEntry else { return }
+        reminderName.text = listEntry.name
      }
     // MARK: - ACTIONS
     @IBAction func reminderTapped(_ sender: UIButton) {
