@@ -16,32 +16,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "705C1BC4-94B4-4D8F-BA25-4C889966F4AC"
+            uuid = "6EDDC8BD-9DE1-49EB-B3B4-ABA010073F6D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wunderlist/Networking_API/PDMListController.swift"
+            filePath = "Wunderlist/View Controllers/List Views/ListTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "updateList(with:)"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "controller(_:didChange:at:for:newIndexPath:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E48209C9-053F-4089-A0B5-BA2D213C09B6"
+            uuid = "AA13B2A2-7232-4B30-8648-58D1F2BE4250"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Wunderlist/Networking_API/PDMListController.swift"
+            filePath = "Wunderlist/View Controllers/List Views/ListTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "updateList(with:)"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "controller(_:didChange:at:for:newIndexPath:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

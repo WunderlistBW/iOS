@@ -85,10 +85,7 @@ class ListController {
                 let listRepresentations =
                     try Array(jsonDecoder.decode([ListRepresentation].self, from: data))
                 
-                for representation in listRepresentations {
-                try self.updateList(with: representation)
-                }
-                
+                try self.updateList(with: listRepresentations)
                 DispatchQueue.main.async {
                     completion(nil)
                 }
@@ -99,30 +96,34 @@ class ListController {
             }
         }.resume()
     }
-    private func updateList(with representation: ListRepresentation) throws {
-        
-        // TODO: I feel like this is on the right track?
-        // representation ID is nil ><
-        let getWithId = representation.id
+    private func updateList(with representations: [ListRepresentation]) throws {
+        var pulledId: [Int] = []
+        for representation in representations {
+            pulledId.append(representation.id)
+        }
+        let representationsByID = Dictionary(uniqueKeysWithValues: zip(pulledId, representations))
+        var entriesToCreate = representationsByID
         let fetchRequest: NSFetchRequest<ListEntry> = ListEntry.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id IN %@", getWithId)
+        fetchRequest.predicate = NSPredicate(format: "id IN %@", pulledId)
         let context = CoreDataStack.shared.mainContext
-        context.perform {
+        
+        context.performAndWait {
             do {
                 let existingList = try context.fetch(fetchRequest)
                     for list in existingList {
-                        let id = list.id
-                            if id == getWithId {
-                                self.update(listEntry: list, with: representation)
-                            } else {
-                                ListEntry(listRepresentation: representation, context: context)
-                            }
+                        let id = Int(list.id)
+                        guard let representation = representationsByID[id] else { continue }
+                        self.update(listEntry: list, with: representation)
+                        entriesToCreate.removeValue(forKey: id)
                     }
+                for representation in entriesToCreate.values {
+                    ListEntry(listRepresentation: representation, context: context)
+                }
+                try CoreDataStack.shared.save(in: context)
             } catch {
                 print("Error fetching entries for UUIDs: \(error)")
             }
         }
-        try CoreDataStack.shared.save(in: context)
     }
     func deleteListFromServer(_ list: ListEntry, completion: @escaping CompletionHandler = { _ in}) {
         let listID = list.id
