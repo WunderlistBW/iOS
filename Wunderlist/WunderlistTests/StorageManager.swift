@@ -36,7 +36,7 @@ class StorageManager {
 //    }
     */
     // MARK: - Actions -
-    func insertListEntry(name: String, dueDate: Date, listId: Int64, isComplete: Bool) -> ListEntry? {
+    func insertListEntry(name: String, dueDate: Date, listId: UUID, isComplete: Bool) -> ListEntry? {
         guard let listEntry = NSEntityDescription.insertNewObject(forEntityName: "ListEntry", into: backgroundContext) as? ListEntry else { return nil }
         listEntry.name = name
         listEntry.dueDate = dueDate
