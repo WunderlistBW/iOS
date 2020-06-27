@@ -86,7 +86,7 @@ class WunderlistTests: XCTestCase {
         for entry in 1...10 {
             XCTAssertNotNil(storageManager.insertListEntry(name: "newEntry\(entry)",
                                                            dueDate: Date() + TimeInterval(exactly: 1000)!,
-                                                           listId: UUID(),
+                                                           listId: Int64(entry),
                                                            isComplete: false))
         }
         storageManager.save()
@@ -99,7 +99,7 @@ class WunderlistTests: XCTestCase {
         XCTAssertEqual(emptyStore.count, 0)
         storageManager.insertListEntry(name: "testingEntry",
                                        dueDate: Date() + TimeInterval(exactly: 1000)!,
-                                       listId: UUID(),
+                                       listId: 6969420,
                                        isComplete: false)
         storageManager.save()
         let testContents = storageManager.fetch(name: "testingEntry")
@@ -113,7 +113,7 @@ class WunderlistTests: XCTestCase {
         XCTAssertEqual(emptyStore.count, 0)
         storageManager.insertListEntry(name: "testingEntry",
                                        dueDate: Date() + TimeInterval(exactly: 1000)!,
-                                       listId: UUID(),
+                                       listId: 6969420,
                                        isComplete: false)
         storageManager.save()
         let testContents = storageManager.fetchAll()
@@ -135,7 +135,7 @@ class WunderlistTests: XCTestCase {
         guard let storageManager = storageManager else { XCTFail("No storage manager present."); return }
         let completionTestEntry = storageManager.insertListEntry(name: "completionTest",
                                                                  dueDate: Date() + TimeInterval(interval),
-                                                                 listId: UUID(),
+                                                                 listId: 80085,
                                                                  isComplete: false)
         storageManager.save()
         let testContents = storageManager.fetchAll()

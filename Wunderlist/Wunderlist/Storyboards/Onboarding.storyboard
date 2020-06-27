@@ -144,11 +144,9 @@
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LYl-Zr-UtX">
                                                 <rect key="frame" x="0.0" y="42" width="180" height="34"/>
-                                                <accessibility key="accessibilityConfiguration" identifier="Onboarding.PasswordField">
-                                                    <accessibilityTraits key="traits" none="YES"/>
-                                                </accessibility>
+                                                <accessibility key="accessibilityConfiguration" identifier="Onboarding.PasswordField"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits"/>
                                                 <connections>
                                                     <action selector="textBeganEditing:" destination="9XI-7B-S3w" eventType="editingDidBegin" id="h9k-IO-WfU"/>
                                                     <action selector="textWasEdited:" destination="9XI-7B-S3w" eventType="editingDidEnd" id="QB7-MQ-3wb"/>

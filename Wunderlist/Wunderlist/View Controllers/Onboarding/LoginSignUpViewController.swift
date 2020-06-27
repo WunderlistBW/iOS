@@ -159,7 +159,6 @@ class LoginSignUpViewController: UIViewController {
         let options = UIAlertController(title: "Welcome!",
                                         message: "If you'd like you can help Wunderlist give you all the best featues by providing a little bit of info below:",
                                         preferredStyle: .alert)
-        options.accessibilityLabel = "Onboarding.UIAlert"
         options.addAction(getStarted)
         present(options, animated: true, completion: nil)
         if let username = usernameTextField.text, let password = passwordTextField.text{

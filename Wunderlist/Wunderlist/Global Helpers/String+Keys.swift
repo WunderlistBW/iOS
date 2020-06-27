@@ -21,8 +21,6 @@ extension String {
     static let loginSegue = "Login"
     // MARK: - Storyboard IDs -
     //Onboarding
-    ///Views
-    static let presentOptions = "Onboarding.UIAlert"
     ///Buttons
     static let signupButton = "Onboarding.SignUpButton"
     static let loginButton = "Onboarding.LoginButton"
@@ -38,15 +36,11 @@ extension String {
     ///Views
     static let listTableView = "Main.ListTable"
     static let createDatePicker = "Main.Create.DatePicker"
-    static let finishedAlert = "Main.Create.UIAlert"
     ///Buttons
     static let addButton = "Main.AddButton"
     static let createCancelButton = "Main.Create.CancelButton"
     static let createSaveButton = "Main.Create.SaveButton"
-    static let finishedButton = "Main.Create.FinishedButton"
-    static let saveEditButton = "Main.Edit.SaveEditButton"
     ///Text Fields
     static let createListTextField = "Main.Create.TextField"
-    ///Text Views
-    static let editDetailsTextView = "Main.Edit.DetailTextView"
+    
 }
