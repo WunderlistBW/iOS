@@ -13,8 +13,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var entryTitleField: UITextField!
     @IBOutlet weak var entryDetailsTextView: UITextView!
     @IBOutlet weak var entryDatePicker: UIDatePicker!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    
     @IBOutlet weak var reminderSegmentControl: UISegmentedControl!
 //    @IBOutlet weak var saveButton: UIButton!
     override func viewDidLoad() {
@@ -32,12 +30,6 @@ class DetailViewController: UIViewController {
     }()
     var wasEdited = false
     var listEntry: ListEntry?
-    //MARK: - Life Cycles
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setUpIdentifiers()
-    }
-    
     // MARK: - ACTIONS
     //actually an edit button
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -96,10 +88,4 @@ class DetailViewController: UIViewController {
     }
     */
 
-}
-
-extension DetailViewController {
-    private func setUpIdentifiers() {
-        self.saveButton.accessibilityIdentifier = "Main.Edit.SaveEditButton"
-    }
 }

@@ -11,6 +11,9 @@ import UIKit
 @testable import Wunderlist
 
 class WunderlistUITests: XCTestCase {
+    // MARK: - Properties -
+    
+    
     // MARK: - Methods -
     override func setUp() {
         let app = XCUIApplication()
@@ -19,162 +22,79 @@ class WunderlistUITests: XCTestCase {
         app.launch()
     }
     
-    
     // MARK: - Tests -
     func testNewUserSignup() {
         let app = XCUIApplication()
-        let signup = app.buttons[.signupButton]
+        app.activate()
+        let signupButton = app.buttons[.signupButton]
+        signupButton.tap()
         let userBox = app.textFields[.usernameTextField]
         let passBox = app.secureTextFields[.passwordTextField]
-        let submit = app.buttons[.submitButton]
-        let getStarted = app.alerts[.presentOptions].buttons[.getStartedButton]
-        let homeTable = app.tables[.listTableView]
-        
-        app.launch()
-        app.activate()
-        XCTAssertTrue(signup.exists)
-        signup.tap()
-        XCTAssertTrue(userBox.exists)
-        XCTAssertTrue(passBox.exists)
-        XCTAssertTrue(submit.exists)
         userBox.tap()
         userBox.typeText("NewUser123")
         passBox.tap()
         passBox.typeText("password")
-        submit.tap()
-        XCTAssertTrue(getStarted.exists)
-        getStarted.tap()
+        let submitButton = app.buttons[.submitButton]
+        submitButton.tap()
+        
+        let homeTable = app.tables[.listTableView]
         XCTAssertTrue(homeTable.exists)
     }
-    
-    func testPasswordIncorrect() {
-        let app = XCUIApplication()
-        let login = app.buttons[.loginButton]
-        let userBox = app.textFields[.usernameTextField]
-        let passBox = app.secureTextFields[.passwordTextField]
-        let submit = app.buttons[.submitButton]
-        let status = app.staticTexts[.statusLabel]
-        let homeTable = app.tables[.listTableView]
-        
-        app.launch()
-        app.activate()
-        login.tap()
-        userBox.tap()
-        userBox.typeText("NewUser123")
-        passBox.tap()
-        passBox.typeText("passwrd")
-        XCTAssertTrue(status.exists)
-        XCTAssertFalse(homeTable.exists)
-    }
-    
     func testUserLoginAndRememberMe() {
-        let app = XCUIApplication()
-        let login = app.buttons[.loginButton]
-        let userBox = app.textFields[.usernameTextField]
-        let passBox = app.secureTextFields[.passwordTextField]
-        let rememberMe = app.buttons[.rememberMeButton]
-        let submit = app.buttons[.submitButton]
-        let getStarted = app.alerts[.presentOptions].buttons[.getStartedButton]
-        let homeTable = app.tables[.listTableView]
-        
-        app.launch()
-        app.activate()
-        login.tap()
-        userBox.tap()
-        userBox.typeText("NewUser123")
-        passBox.tap()
-        passBox.typeText("password")
-        rememberMe.tap()
-        submit.tap()
-        XCTAssertTrue(getStarted.exists)
-        getStarted.tap()
-        XCTAssertTrue(homeTable.exists)
-        app.terminate()
-        app.launch()
-        app.activate()
-        login.tap()
-        XCTAssertNotNil(userBox.staticTexts)
-        XCTAssertNotNil(passBox.staticTexts)
-        submit.tap()
-        getStarted.tap()
-        XCTAssertTrue(homeTable.exists)
+        //launch app
+        //tap login
+        //enter text in text boxes
+        //tap remember me
+        //tap submit
+        //test you're on home view
+        //close app
+        //launch app
+        //tap login
+        //test if testboxes have text autfilled
+        //tap submit
+        //test if back at home view
     }
 
-    
+    func testPasswordIncorrect() {
+        //launch app
+        //tap login
+        //enter text in text boxes, password incorrect
+        //test if still on login screen and status bar displays correct message
+    }
 
     func testCreateListEntry() {
-        let app = XCUIApplication()
-        let login = app.buttons[.loginButton]
-        let userBox = app.textFields[.usernameTextField]
-        let passBox = app.secureTextFields[.passwordTextField]
-        let submit = app.buttons[.submitButton]
-        let homeTable = app.tables[.listTableView]
-        let add = app.buttons[.addButton]
-        let save = app.buttons[.createSaveButton]
-        let cancel = app.buttons[.createCancelButton]
-        let listField = app.textFields[.createListTextField]
-        let picker = app.datePickers[.createDatePicker]
-        let finished = app.alerts[.finishedAlert].buttons[.finishedButton]
-
-        app.launch()
-        app.activate()
-        login.tap()
-        userBox.tap()
-        userBox.typeText("NewUser123")
-        passBox.tap()
-        passBox.typeText("password")
-        submit.tap()
-        XCTAssertTrue(homeTable.exists)
-        XCTAssertTrue(add.exists)
-        add.tap()
-        XCTAssertTrue(cancel.exists)
-        XCTAssertTrue(save.exists)
-        XCTAssertTrue(picker.exists)
-        cancel.tap()
-        XCTAssertFalse(picker.exists)
-        add.tap()
-        listField.tap()
-        listField.typeText("My New To-Do")
-        picker.adjust(toNormalizedSliderPosition: 5)
-        save.tap()
-        finished.tap()
-        XCTAssertTrue(homeTable.exists)
-        XCTAssertTrue(homeTable.cells.count > 0)
+        //launch app
+        //tap signup
+        //enter text in text boxes
+        //tap submit
+        
+        //tap add button
+        //tap cancel
+        //test at home tableview
+        //test no new list
+        
+        //tap add button
+        //enter text in text field
+        //select date from picker
+        //tap save
+        //tap finished
+        //test at home tableview
+        //test new list entry is available
+        //test UI element in tableview is in right mode for new entry
     }
 
-    func testEditListEntry() {
-        let app = XCUIApplication()
-        let login = app.buttons[.loginButton]
-        let userBox = app.textFields[.usernameTextField]
-        let passBox = app.secureTextFields[.passwordTextField]
-        let submit = app.buttons[.submitButton]
-        let homeTable = app.tables[.listTableView]
-        let add = app.buttons[.addButton]
-        let save = app.buttons[.createSaveButton]
-        let listField = app.textFields[.createListTextField]
-        let picker = app.datePickers[.createDatePicker]
-        let finished = app.alerts[.finishedAlert].buttons[.finishedButton]
-        let details = app.textViews[.editDetailsTextView]
-        let saveEdit = app.buttons[.saveEditButton]
-        
-        app.launch()
-        app.activate()
-        login.tap()
-        userBox.tap()
-        userBox.typeText("NewUser123")
-        passBox.tap()
-        passBox.typeText("password")
-        submit.tap()
-        add.tap()
-        listField.tap()
-        listField.typeText("My Noo To-Do")
-        picker.adjust(toNormalizedSliderPosition: 5)
-        save.tap()
-        finished.tap()
-        homeTable.tap()
-        details.tap()
-        details.typeText("Some Details")
-        saveEdit.tap()
-        XCTAssertTrue(homeTable.exists)
+    func testDeleteListEntry() {
+        //launch app
+        //tap signup
+        //enter text in text boxes
+        //tap submit
+        //tap add button
+        //enter text in text field
+        //select date from picker
+        //tap save
+        //tap finished
+        //test new list entry is available
+        //slide to delete
+        //test new list entry is no longer present
     }
 }
